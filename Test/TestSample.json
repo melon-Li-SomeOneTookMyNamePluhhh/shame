@@ -1,0 +1,23 @@
+[{"room1":
+{"description":  "",
+  "items":
+    {"key":
+    {"type": "item",
+      "name": "small key",
+      "property":  "none",
+      "damage":  1,
+      "special": "KEY",
+      "onground_description": "on the cold stone ground lies a small key, it doesn't look rusted",
+      "pickup_description":"you picked up the key",
+      "obtained_description": "the key glitters in your hand. It feels...smaller than expected. But surely it can be used to open something?",
+      "solved_description":  ""},
+    "chest":
+    {"type":  "chest",
+    "name": "large chest",
+    "property":  "none",
+    "special":  "CHEST",
+    "onground_description": "there is a large chest in the left corner of the room. It has a giant lock on it which surprisingly, has a small keyhole",
+    "pickup_description": "you tried to pickup the chest, but its too heavy",
+    "obtained_description": ""}}
+},
+  "battles": [] }]

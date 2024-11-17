@@ -1,8 +1,8 @@
 package Player;
 
 public class Player {
-    private String location; // The name of the location/item in the room
-    private int currRoom; // The current room number
+    private String location; // The name of the location/item in the Room.room
+    private int currRoom; // The current Room.room number
     private String holding; // The item currently being held
     private int health; // Health of the player
     private int damage; // Damage the player can deal
@@ -12,7 +12,7 @@ public class Player {
         this.health = health;
         this.damage = damage;
         this.location = ""; // Start with no specific location
-        this.currRoom = 0; // Default starting room
+        this.currRoom = 0; // Default starting Room.room
         this.holding = ""; // Start with no item in hand
     }
 
