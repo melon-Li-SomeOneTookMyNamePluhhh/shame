@@ -1,6 +1,6 @@
 package Enemy;
 
-public class Grass extends Enemy.Enemy {
+public class Grass extends Enemy {
     private boolean usedSpecialAbility = false;
 
     public Grass(String name, String description) {
