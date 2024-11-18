@@ -10,23 +10,22 @@ public class Fire extends Enemy {
     @Override
     public void useSpecialAbility() {
         if (health < 3 && !usedSpecialAbility) {
-            System.out.println(name + " activates its special ability! All attacks are now critical strikes.");
+            System.out.println(name + " activates its special ability! All normal attacks become critical strikes.");
             usedSpecialAbility = true;
+        } else {
+            System.out.println(name + " cannot use its special ability.");
         }
     }
 
-    @Override
-    public void damage(int amount) {
+    public void action() {
         if (health < 3 && !usedSpecialAbility) {
-            useSpecialAbility(); // auto add damage(its special ability)
+            useSpecialAbility();
         }
 
-        // check status
         if (usedSpecialAbility) {
-            amount += 2; // critical strikes
-            System.out.println(name + " is critically vulnerable! Damage increased by 2.");
+            attackList.criticalStrike();
+        } else {
+            attackList.normalAttack();
         }
-
-        super.damage(amount); // normal attack
     }
 }
