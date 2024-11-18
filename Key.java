@@ -3,6 +3,12 @@ public class Key extends Item{
     String element = "Regular";
     private boolean Used = false; //has the key been used or not
 
+    // Constructor for Key that calls the Item constructor
+    public Key(String name, String description) {
+        // Call the constructor of Item class with parameters
+        super(name, description, "Key"); // Pass values to the superclass constructor
+    }
+
     public boolean getUsed(){
         return Used;
     }
