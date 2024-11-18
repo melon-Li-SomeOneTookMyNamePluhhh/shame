@@ -1,5 +1,12 @@
 public class Exit extends Item{
     private Boolean Locked = true;
+
+    // Constructor for Exit that calls the Item constructor
+    public Exit(String name, String description) {
+        // Call the constructor of Item class with parameters
+        super(name, description, "Exit"); // Pass values to the superclass constructor
+    }
+
     @Override
     public void Interact() {
         // TODO: we can use this code once we have a game with currentplayer as a global variable
