@@ -4,6 +4,12 @@ public abstract class Item {
     String description;
     String type;
 
+    // This is a constructor for Item; it cannot be directly instantiated but can be used by concrete subclasses.
+    public Item(String name, String description, String type) {
+        this.name = name;
+        this.description = description;
+        this.type = type;
+    }
 
     // Abstract method to interact with the item
     public abstract void Interact();
