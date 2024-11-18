@@ -37,4 +37,13 @@ public abstract class Enemy {
 
     // Abstract method for special ability
     public abstract void useSpecialAbility();
+
+    // Damage method
+    public void damage(int amount) {
+        health -= amount;
+        if (health < 0) {
+            health = 0; // Prevent health from being negative
+        }
+        System.out.println(name + " takes " + amount + " damage. Current health: " + health);
+    }
 }

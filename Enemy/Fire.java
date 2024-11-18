@@ -1,9 +1,8 @@
 package Enemy;
 
 public class Fire extends Enemy {
-    private boolean usedSpecialAbility = false;// 标志位：是否使用过特殊能力
+    private boolean usedSpecialAbility = false;
 
-    // Constructor
     public Fire(String name, String description) {
         super(name, description, new AttackList());
     }
@@ -11,18 +10,23 @@ public class Fire extends Enemy {
     @Override
     public void useSpecialAbility() {
         if (health < 3 && !usedSpecialAbility) {
-            System.out.println(name + " activates its special ability! Critical strikes are now enabled.");
+            System.out.println(name + " activates its special ability! All attacks are now critical strikes.");
             usedSpecialAbility = true;
-        } else {
-            System.out.println(name + " cannot use its special ability.");
         }
     }
 
-    public void attack() {
-        if (usedSpecialAbility) {
-            attackList.criticalStrike(); // 暴击攻击
-        } else {
-            attackList.normalAttack(); // 普通攻击
+    @Override
+    public void damage(int amount) {
+        if (health < 3 && !usedSpecialAbility) {
+            useSpecialAbility(); // auto add damage(its special ability)
         }
+
+        // check status
+        if (usedSpecialAbility) {
+            amount += 2; // critical strikes
+            System.out.println(name + " is critically vulnerable! Damage increased by 2.");
+        }
+
+        super.damage(amount); // normal attack
     }
 }
