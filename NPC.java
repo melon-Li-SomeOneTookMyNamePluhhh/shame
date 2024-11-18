@@ -3,6 +3,15 @@ import java.util.Scanner;
 public class NPC extends Item {
     String Riddle;
     String Speech;
+
+    // Constructor for NPC that calls the Item constructor
+    public NPC(String name, String description, String Riddle, String Speech) {
+        // Call the constructor of Item class with parameters
+        super(name, description, "NPC"); // Pass values to the superclass constructor
+        this.Riddle = Riddle;
+        this.Speech = Speech;
+    }
+
     @Override
     public void Interact() {
         // Create a Scanner object to read input from the terminal
