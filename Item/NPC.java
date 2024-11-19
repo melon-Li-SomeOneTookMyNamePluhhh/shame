@@ -54,8 +54,7 @@ public class NPC extends Item {
     }
 
     @Override
-    public Item pickup() {
+    public void pickup() {
         System.out.println("What are you doing? Put me down at once!");
-        return null;
     }
 }
