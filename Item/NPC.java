@@ -7,9 +7,9 @@ public class NPC extends Item {
     String Speech;
 
     // Constructor for Item.NPC that calls the Item.Item constructor
-    public NPC(String name, String description, String floorDescription, int damage, String element, String Riddle, String Speech) {
+    public NPC(String name, String description, String floorDescription, String Riddle, String Speech) {
         // Call the constructor of Item.Item class with parameters
-        super(name, description, floorDescription,"NPC", damage, element); // Pass values to the superclass constructor
+        super(name, description, floorDescription,"NPC"); // Pass values to the superclass constructor
         this.Riddle = Riddle;
         this.Speech = Speech;
     }
@@ -54,7 +54,8 @@ public class NPC extends Item {
     }
 
     @Override
-    public void pickup() {
+    public Item pickup() {
         System.out.println("What are you doing? Put me down at once!");
+        return null;
     }
 }
