@@ -4,19 +4,19 @@ public class Exit extends Item{
     private Boolean locked = true;
 
     // Constructor for Item.Exit that calls the Item.Item constructor
-    public Exit(String name, String description, String floorDescription, int damage) {
+    public Exit(String name, String description, String floorDescription) {
         // Call the constructor of Item.Item class with parameters
-        super(name, name, description, floorDescription, damage, "Item.Exit"); // Pass values to the superclass constructor
+        super(name, description, floorDescription, "Exit"); // Pass values to the superclass constructor
     }
 
     @Override
     public void Interact(Item location) {
         // TODO: we can use this code once we have a game with current player as a global variable
         if (this.locked) {
-            System.out.println("you tried to pick the lock with {} but it didn't work");
+            System.out.println("you tried to pick the lock but it didn't work");
         }
         else {
-            System.out.println("the door is already opened, there is no point to pick the lock");
+            System.out.println("the door is already opened, there is no point trying to pick the lock");
         }
     }
 
@@ -31,7 +31,7 @@ public class Exit extends Item{
         }
     }
 
-    public boolean isLocked() {
+    public boolean getLocked() {
         return locked;
     }
     public void setLocked(boolean lock) {
