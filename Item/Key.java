@@ -11,14 +11,20 @@ public class Key extends Item{
     }
 
     @Override
-    public void Interact(Item location) {
-        // TODO: we can use this code once we have a game with currentplayer as a global variable and a location() method for all items.
-        if (location.getName() == "exit" && location.getLocked() == true){
+    public void Interact(Item player_location) {
+        // TODO: We should have a game with the current player as a global variable. A current player will have a location.
+        if (player_location.gettype() == "Exit" && player_location.getLocked() == true && this.getused() == false){
           location.setLocked(false);
           System.out.println("You have unlocked the exit");
         }
+        else if (player_location.gettype() == "Exit" && player_location.getLocked() == true && this.getused() == true){
+                System.out.println("You are using the wrong key for this exit.");
+        }
+        else if (player_location.gettype() == "Exit" && player_location.getLocked() == false){
+                System.out.println("The exit you are at is already unlocked!");
+        }
         else {
-          System.out.println("you tried to poke the key into thin air, nothing happens");
+          System.out.println("You are not standing at an exit!");
         }
 
     }
