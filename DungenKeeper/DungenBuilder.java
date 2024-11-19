@@ -1,20 +1,29 @@
 package DungenKeeper;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DungenBuilder {
-    private LinkedList<Room> levels;
+
+    private List<Room> levels;
+    private int currentLevel;
 
     public DungenBuilder() {
-        this.levels = new LinkedList<Room>();
+        this.levels = new ArrayList<>();
+        this.currentLevel = 0;
     }
 
     public void addLevel(Room room) {
         levels.add(room);
     }
 
-    public LinkedList<Room> getLevels() {
-        return levels;
+    public Room getLevels() {
+        return levels.get(currentLevel);
     }
+
+    public void nextLevel() {
+        this.currentLevel += 1;
+    }
+
 
 }
