@@ -1,0 +1,24 @@
+[{"room1":
+{"description":  "this is a room description, it should only be shown once",
+  "items":
+  {"key":
+  {"type": "item",
+    "name": "key",
+    "property":  "none",
+    "damage":  1,
+    "special": "KEY",
+    "onground_description": "this is an onground description",
+    "pickup_description":"you picked up the key",
+    "obtained_description": "the key glitters in your hand. It feels...smaller than expected. But surely it can be used to open something?"},
+    "chest":
+    {"type":  "chest",
+      "name": "chest",
+      "property":  "none",
+      "damage": 0,
+      "special":  "CHEST",
+      "onground_description": "there is a large chest in the left corner of the room. It has a giant lock on it which surprisingly, has a small keyhole",
+      "pickup_description": "you tried to pickup the chest, but its too heavy",
+      "solved_description": "you put the small key into the lock, the lock opened with a click sound",
+      "rewards": []}}
+},
+  "battles": [] }]
