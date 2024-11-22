@@ -23,6 +23,7 @@ public class DungenBuilder {
 
     public void addPlayer(int bagsize, int health, int damage) {
         this.player = new Player(bagsize, health, damage,this.getLevels());
+        getLevels().enter();
     }
 
     public Player getPlayer() {
@@ -35,7 +36,12 @@ public class DungenBuilder {
 
     public void nextLevel() {
         this.currentLevel += 1;
-        getLevels();
+        if (this.currentLevel >= levels.size()) {
+            System.out.println("No more levels!");
+            return;
+        }
+        player.setCurrRoom(getLevels());
+        getLevels().enter();
     }
 
 
