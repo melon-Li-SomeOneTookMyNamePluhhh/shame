@@ -24,16 +24,16 @@ public class Main {
         room2.addItem(torch);
         room2.addItem(spiderweb);
         dungen.addLevel(room2);
-        Player player = new Player(10, 5, 1, dungen.getLevels());
+        dungen.addPlayer(10, 5, 1);
         room1.enter();
         room1.viewRoom();
-        player.pickUp("key");
-        player.walkTo("key");
-        player.pickUp("kkkkkkkkkkkkkkkkkkkkk");
-        player.pickUp("key");
+        dungen.getPlayer().pickUp("key");
+        dungen.getPlayer().walkTo("key");
+        dungen.getPlayer().pickUp("kkkkkkkkkkkkkkkkkkkkk");
+        dungen.getPlayer().pickUp("key");
         room1.viewRoom();
-        player.walkTo("gate");
-        player.pickUp("gate");
+        dungen.getPlayer().walkTo("gate");
+        dungen.getPlayer().pickUp("gate");
 //        player.putInBag();
 //        player.pickUp("exit"); // expect to not able to pick up
 //        player.inspectBag(); // expected to see key i.e name of item instead of item discription
