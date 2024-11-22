@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         DungenBuilder dungen = new DungenBuilder();
         Key key = new Key("key", "this is a key", "a ket lies on the floor", 1, "regular");
-        Exit gate = new Exit("gate", "", "there is a heavy gate infront of you", 0);
+        Exit gate = new Exit("gate", "", "there is a heavy gate infront of you");
         Room room1 = new Room("this is the first room");
         room1.addItem(key);
         room1.addItem(gate);
@@ -19,7 +19,7 @@ public class Main {
         Key torch = new Key("torch", "this is a torch, it has the element of fire",
                 "a torch hangs on the wall, it is still burning", 3, "fire");
         Exit spiderweb = new Exit("spiderweb", "",
-                "the exit of the room is blocked by a lot of spiderweb, better get rid of it before passing", 0);
+                "the exit of the room is blocked by a lot of spiderweb, better get rid of it before passing");
         Room room2 = new Room("this is the second room");
         room2.addItem(torch);
         room2.addItem(spiderweb);
@@ -33,8 +33,7 @@ public class Main {
         player.pickUp("key");
         room1.viewRoom();
         player.walkTo("gate");
-        player.walkTo("exit");
-        player.pickUp("exit");
+        player.pickUp("gate");
 //        player.putInBag();
 //        player.pickUp("exit"); // expect to not able to pick up
 //        player.inspectBag(); // expected to see key i.e name of item instead of item discription
