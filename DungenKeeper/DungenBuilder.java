@@ -22,7 +22,7 @@ public class DungenBuilder {
     }
 
     public void addPlayer(int bagsize, int health, int damage) {
-        this.player = new Player(bagsize, health, damage,this.getLevels());
+        this.player = new Player(bagsize, health, damage, this.getLevels());
         getLevels().enter();
     }
 
