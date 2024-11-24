@@ -19,6 +19,7 @@ public class DungenBuilder {
 
     public void addLevel(Room room) {
         levels.add(room);
+        room.setDungen(this);
     }
 
     public void addPlayer(int bagsize, int health, int damage) {

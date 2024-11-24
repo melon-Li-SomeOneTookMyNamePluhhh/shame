@@ -5,6 +5,7 @@ import DungenKeeper.Room;
 public class Exit extends Item{
     private Boolean locked = true;
     private Room whichRoom;
+    // I would love to get rid of this attribute
 
     // Constructor for Item.Exit that calls the Item.Item constructor
     public Exit(String name, String description, String floorDescription) {
@@ -14,12 +15,23 @@ public class Exit extends Item{
     }
 
     @Override
-    public void Interact(Item location) {
-        if (this.locked) {
+    public void interact(Item location) {
+        if (this.locked && location.getType() != "Key") {
             System.out.println("you tried to pick the lock but it didn't work");
         }
         else {
-            System.out.println("the door is already opened, there is no point trying to pick the lock");
+            System.out.println("the door is already opened");
+        }
+    }
+
+    @Override
+    public void interact() {
+        if (this.locked) {
+            System.out.println("the door is still blocked and you cannot pass");
+        }
+        else {
+            System.out.println("You walk into the door and leave the room.");
+            whichRoom.leave();
         }
     }
 
@@ -28,16 +40,6 @@ public class Exit extends Item{
     }
 
     // it is possible that player interacts sth with no other items
-    public void Interact() {
-
-        if (this.locked) {
-            System.out.println("the door is still locked and you cannot pass");
-        }
-        else {
-            System.out.println("You walk into the door and leave the room.");
-            whichRoom.leave();
-        }
-    }
 
     public boolean getLocked() {
         return locked;

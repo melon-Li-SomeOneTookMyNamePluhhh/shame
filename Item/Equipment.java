@@ -13,8 +13,8 @@ public class Equipment extends Item {
     }
 
     @Override
-    public void Interact(Item location) {
-        System.out.println("This is a piece of equipment.");
+    public void interact(Item location) {
+        return;
     }
 
 
