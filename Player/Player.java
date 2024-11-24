@@ -3,6 +3,8 @@ package Player;
 import DungenKeeper.Room;
 import Item.Item;
 
+import java.util.List;
+
 public class Player {
     private Item location; // The name of the location/item in the Room.room
     private Room currRoom; // The current Room.room number
@@ -91,24 +93,74 @@ public class Player {
             System.out.println("there is nothing around you to pickup!");
             return;
         }
-        // you can only pick up the correct item
-        if (this.location.getName().equals(itemName)) {
-            this.holding = this.currRoom.pickUp(itemName);
-            this.location = null;
-            return;
+        this.holding = this.location;
+        this.location = null;
+        System.out.println("you pick up " + this.holding);
         }
-        else {
-            System.out.println("you did not find " + itemName + " around you");
-            return;
+
+    // Puts the currently held item into the inventory if there is space. If the player is not holding anything,
+    // or if the inventory is full, it displays an appropriate message.
+    public void putInBag(){
+        if(this.holding == null) {
+            System.out.println("You have nothing to put in the inventory");
+        }
+        else{
+            if(inventory.getNumItemsInside() < inventory.getBagSize()){
+                inventory.addItem(holding);
+                holding = null;
+            }
+            else{
+                System.out.println("Your inventory is full");
+            }
         }
     }
 
-    // what else to implement:
-    // interact
-    // drop
-    // inspect bag
-    // put in bag
-    // get item from bag
+    // Drops the currently held item, making the player no longer hold any item.
+    public void drop(){
+        if (this.holding == null){
+            System.out.println("You have nothing to drop");
+        }
+        else {
+            this.location = holding;
+            holding = null;
+        }
+    }
 
+    // Retrieves an item from the player's bag and places it into their hand.
+    public void retrieveFromBag(String itemName) {
+        // Check if the player is already holding an item
+        if (holding != null) {
+            System.out.println("You are already holding something. You need to drop it first.");
+            return;
+        }
+
+        // Attempt to remove the specified item from the inventory
+        Item retrievedItem = inventory.removeItem(itemName); // Assuming Inventory has a removeItem method
+
+        // If the item exists in the bag, set it as the player's held item
+        if (retrievedItem != null) {
+            System.out.println("You took " + itemName + " out of your bag.");
+            holding = retrievedItem;
+        } else {
+            // Item not found in the bag
+            System.out.println("The item " + itemName + " is not in your bag.");
+        }
+    }
+
+    public void inspectBag() {
+        // Get the list of items from the inventory
+        List<Item> items = this.inventory.getItemsInside(); // Assuming inventory has getItemsInside method
+
+        // Check if the bag is empty
+        if (items.isEmpty()) {
+            System.out.println("Your bag is empty.");
+        } else {
+            System.out.println("Items in your bag:");
+            // Loop through the list of items and print their details
+            for (Item item : items) {
+                System.out.println("- " + item.getName() + ": " + item.getDescription()); // Assuming Item has getName and getDescription methods
+            }
+        }
+    }
 }
 
