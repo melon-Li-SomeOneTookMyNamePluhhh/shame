@@ -26,20 +26,22 @@ public class Room {
     }
 
     public void leave(){
+
         this.dungen.nextLevel();
     }
 
     public void addItem(Item item){
+
         this.items.add(item);
     }
 
     public void addExit(Exit item){
         this.items.add(item);
         item.setRoom(this);
-
     }
 
     public void addBattleTrigger(Item item){
+
         this.battleTriggers.add(item);
     }
 
