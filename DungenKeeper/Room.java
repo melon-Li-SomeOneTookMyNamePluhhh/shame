@@ -38,6 +38,7 @@ public class Room {
     public void addExit(Exit item){
         this.items.add(item);
         item.setRoom(this);
+        // I would love to get rid of this method
     }
 
     public void addBattleTrigger(Item item){

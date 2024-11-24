@@ -15,8 +15,8 @@ public class Main {
         Equipment sword = new Equipment("sword", "this is a sword, it has the element of earth", "a sword is stuck on the wall", 3, "earth");
         Room room1 = new Room("this is the first room");
         room1.addItem(key);
-        room1.addItem(gate);
         room1.addItem(sword);
+        room1.addExit(gate);
         dungen.addLevel(room1);
         Key torch = new Key("torch", "this is a torch, it has the element of fire",
                 "a torch hangs on the wall, it is still burning", 3, "fire");
@@ -27,12 +27,12 @@ public class Main {
         room2.addItem(spiderweb);
         dungen.addLevel(room2);
         dungen.addPlayer(10, 5, 1);
-        room1.viewRoom();
-        dungen.getPlayer().pickUp("key");
-        dungen.getPlayer().walkTo("key");
-        dungen.getPlayer().pickUp("kkkkkkkkkkkkkkkkkkkkk");
-        dungen.getPlayer().pickUp("key");
-        room1.viewRoom();
+        room1.viewRoom(); // expected to see key, sword and exit
+        dungen.getPlayer().pickUp("key"); // expected to see unable to pickup key
+        dungen.getPlayer().walkTo("key"); // expected to see walk to key
+        dungen.getPlayer().pickUp("kkkk"); // expected to see unable to pickup kkkk
+        dungen.getPlayer().pickUp("key"); // expected to see pickup key
+        room1.viewRoom(); // expected to see sword and gate
         dungen.getPlayer().walkTo("gate");
         dungen.getPlayer().pickUp("gate");
         dungen.getPlayer().putInBag(); //expect to put key in bag
@@ -40,8 +40,8 @@ public class Main {
         dungen.getPlayer().inspectBag(); // expected to see key i.e name of item instead of item discription
         dungen.getPlayer().getFromBag("key"); // expect to have key equipped and removed from bag
         dungen.getPlayer().inspectBag();// expect to see no item in bag!
-        dungen.getPlayer().interact("key"); // expect to see player hit them self with the key
-        dungen.getPlayer().interact("exit"); // expect to see player trying to open exit but fails
+        dungen.getPlayer().interact("key"); // expect to see player bite the key and hurt
+        dungen.getPlayer().interact("gate"); // expect to see player trying to open exit but fails
         dungen.getPlayer().walkTo("sword"); // expect to see player walk to sword
         dungen.getPlayer().putInBag(); // expect to see player put key in bag
         dungen.getPlayer().pickUp("sword"); // expect to see player pick up sword
@@ -49,12 +49,16 @@ public class Main {
         dungen.getPlayer().putInBag(); // expect to see player put sword in bag
         dungen.getPlayer().inspectBag(); // expect to see sword and key
         dungen.getPlayer().walkTo("gate");
-        dungen.getPlayer().interact("sword", "gate"); // expect to see sword failed to pick the gate
-        dungen.getPlayer().putInBag(); //expect to see player put sword in bag        dungen.getPlayer.inspectBag(); // expected to see sword and key in bag
-        dungen.getPlayer().interact("key", "exit"); // expect to see there isn't item key in players hand
+        dungen.getPlayer().interact("sword", "gate"); // expect to see nothing in your hand
+        dungen.getPlayer().getFromBag("sword"); // expected to see player get sword from bag
+        dungen.getPlayer().inspectBag(); // expected to see key in bag
+        dungen.getPlayer().interact("sword", "gate"); //exected to see try pick the gate and fails
+        dungen.getPlayer().interact("key", "exit"); // expect to see player holding sword instead of key
+        dungen.getPlayer().putInBag(); // expect to have sword put in bag
         dungen.getPlayer().getFromBag("key"); //expect to have key equipped
         dungen.getPlayer().getFromBag("sword"); //expect to not get sword due to already holding
-        dungen.getPlayer().interact("exit"); //expect to see player leave from exit, have room set to room2
-
+        dungen.getPlayer().interact("key", "gate"); // expect to open exit
+        dungen.getPlayer().interact("gate"); //expect to see player leave from exit, have room set to room2
+        // success if see room 2 description and torch + spider web
     }
 }

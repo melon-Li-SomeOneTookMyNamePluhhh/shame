@@ -170,24 +170,52 @@ public void pickUp(String itemName){
 
     // template code for restoring health and some funny event
     public void interact(String whatItem){
+        if (holding == null && location == null){
+            System.out.println("You have nothing in your hand or standing beside anything to interact");
+            return;
+        }
+        // interacting with the item in hand only, (eat it).
+        // you can eat none health restore food just for fun!
+        if (holding != null && holding.getName().equals(whatItem)) {
+            System.out.println("looking at the " + whatItem + " you decides to take a bite");
+            if (holding.getDamage() >= 0){
+                System.out.println("this is a bad decision");
+                System.out.println("you lost " + holding.getDamage() + " health");
+                this.health -= holding.getDamage();
+            } else if (holding.getDamage() < 0) {
+                System.out.println("you healed " + -1* holding.getDamage() + " health");
+                this.health -= holding.getDamage();
+            }
+            return;
+        }
+
+        if (location != null && location.getName().equals(whatItem)) {
+            location.interact();
+            return;
+        }
+
+        System.out.println("you are not holding " + whatItem + " or standing next to it");
+        return;
+    }
+
+    // implement this later
+    public void interact(String holdingWhat, String itemAtLocation){
         if (holding == null){
             System.out.println("You have nothing in your hand to interact with");
             return;
         }
-        System.out.println("looking at the " + whatItem + " you decides to take a bite");
-        if (holding.getDamage() >= 0){
-            System.out.println("this is a bad decision");
-            System.out.println("you lost " + holding.getDamage() + " health");
-            this.health -= holding.getDamage();
-        } else if (holding.getDamage() < 0) {
-            System.out.println("you healed " + -1* holding.getDamage() + " health");
-            this.health -= holding.getDamage();
+        if (holdingWhat != this.holding.getName()){
+            System.out.println("you are holding " + this.holding.getName() + " instead of " + holdingWhat);
+            return;
         }
-    }
+        if (this.location == null){
+            System.out.println("You have nothing to interact with");
+            return;
+        }
+        System.out.println("you tried to interact " + holdingWhat + " with " + itemAtLocation);
+        this.holding.interact(this.location);
+        this.location.interact(this.holding);
 
-    // implement this later
-    public void interact(String holdingWhat, String withWhat){
-        System.out.println("you tried to interact " + holdingWhat + " with " + withWhat);
     }
 
 
