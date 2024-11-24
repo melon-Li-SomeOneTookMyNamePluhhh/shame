@@ -36,15 +36,15 @@ public class Inventory {
 
     // Remove item
     public Item removeItem(String itemName) {
-        for (int i = 0; i < itemsInside.size(); i++) {
-            Item item = itemsInside.get(i);
-            if (item.getName().equals(itemName)) {
-                itemsInside.remove(i);
-                return item;
-            }
+        Item itemToRemove = findItem(itemName);
+        if (itemToRemove != null) {
+            itemsInside.remove(itemToRemove);
+            return itemToRemove;
         }
-        return null; // 如果未找到对应的Item，返回null
+        System.out.println("can not find\"" + itemName + "\"in bag");
+        return null;
     }
+
 
     public Item findItem(String itemName){
         for (Item item : itemsInside){
@@ -52,6 +52,6 @@ public class Inventory {
                 return item;
             }
         }
-        return null; // 如果未找到对应的Item，返回null
+        return null;
     }
 }
