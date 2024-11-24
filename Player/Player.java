@@ -3,6 +3,8 @@ package Player;
 import DungenKeeper.Room;
 import Item.Item;
 
+import java.util.List;
+
 public class Player {
     private Item location; // The name of the location/item in the Room.room
     private Room currRoom; // The current Room.room number
@@ -80,35 +82,114 @@ public class Player {
     }
 
 //this requires fixing: can pick up unpickable items such as exit and npc
-    public void pickUp(String itemName){
-        // you can only pick up the item when your hands are empty
-        if (this.holding != null){
-            System.out.println("you cant pickup item when you are holding stuff");
-            return;
+public void pickUp(String itemName){
+    // you can only pick up the item when your hands are empty
+    if (this.holding != null){
+        System.out.println("you cant pickup item when you are holding stuff");
+        return;
+    }
+    // you can only pick up the item if you are standing next to it
+    if (this.location == null){
+        System.out.println("there is nothing around you to pickup!");
+        return;
+    }
+    // you can only pick up the correct item
+    if (this.location.getName().equals(itemName)) {
+        this.holding = this.currRoom.pickUp(itemName);
+        this.location = null;
+        return;
+    }
+    else {
+        System.out.println("you did not find " + itemName + " around you");
+        return;
+    }
+}
+    // Puts the currently held item into the inventory if there is space. If the player is not holding anything,
+    // or if the inventory is full, it displays an appropriate message.
+    public void putInBag(){
+        if(this.holding == null) {
+            System.out.println("You have nothing to put in the inventory");
         }
-        // you can only pick up the item if you are standing next to it
-        if (this.location == null){
-            System.out.println("there is nothing around you to pickup!");
-            return;
-        }
-        // you can only pick up the correct item
-        if (this.location.getName().equals(itemName)) {
-            this.holding = this.currRoom.pickUp(itemName);
-            this.location = null;
-            return;
-        }
-        else {
-            System.out.println("you did not find " + itemName + " around you");
-            return;
+        else{
+            if(inventory.getNumItemsInside() < inventory.getBagSize()){
+                inventory.addItem(holding);
+                System.out.println("you put " + holding.getName() + " in your bag");
+                holding = null;
+            }
+            else{
+                System.out.println("Your inventory is full");
+            }
         }
     }
 
-    // what else to implement:
-    // interact
-    // drop
-    // inspect bag
-    // put in bag
-    // get item from bag
+    // Drops the currently held item, making the player no longer hold any item.
+    public void drop(){
+        if (this.holding == null){
+            System.out.println("You have nothing to drop");
+        }
+        else {
+            this.location = holding;
+            holding = null;
+        }
+    }
+
+    // Retrieves an item from the player's bag and places it into their hand.
+    public void getFromBag(String itemName) {
+        // Check if the player is already holding an item
+        if (holding != null) {
+            System.out.println("You are already holding something. You need to put it in bag or drop it first.");
+            return;
+        }
+        // Attempt to remove the specified item from the inventory
+        Item retrievedItem = inventory.removeItem(itemName); // Assuming Inventory has a removeItem method
+        // If the item exists in the bag, set it as the player's held item
+        if (retrievedItem != null) {
+            System.out.println("You took " + itemName + " out of your bag.");
+            holding = retrievedItem;
+        } else {
+            // Item not found in the bag
+            System.out.println("The item " + itemName + " is not in your bag.");
+        }
+    }
+
+    public void inspectBag() {
+        // Get the list of items from the inventory
+        List<Item> items = this.inventory.getItemsInside(); // Assuming inventory has getItemsInside method
+
+        // Check if the bag is empty
+        if (items.isEmpty()) {
+            System.out.println("Your bag is empty.");
+        } else {
+            System.out.println("Items in your bag:");
+            // Loop through the list of items and print their details
+            for (Item item : items) {
+                System.out.println("- " + item.getName() + ": " + item.getDescription()); // Assuming Item has getName and getDescription methods
+            }
+        }
+    }
+
+    // template code for restoring health and some funny event
+    public void interact(String whatItem){
+        if (holding == null){
+            System.out.println("You have nothing in your hand to interact with");
+            return;
+        }
+        System.out.println("looking at the " + whatItem + " you decides to take a bite");
+        if (holding.getDamage() >= 0){
+            System.out.println("this is a bad decision");
+            System.out.println("you lost " + holding.getDamage() + " health");
+            this.health -= holding.getDamage();
+        } else if (holding.getDamage() < 0) {
+            System.out.println("you healed " + -1* holding.getDamage() + " health");
+            this.health -= holding.getDamage();
+        }
+    }
+
+    // implement this later
+    public void interact(String holdingWhat, String withWhat){
+        System.out.println("you tried to interact " + holdingWhat + " with " + withWhat);
+    }
+
 
 }
 

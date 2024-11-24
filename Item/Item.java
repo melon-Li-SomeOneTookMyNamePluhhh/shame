@@ -6,6 +6,7 @@ public abstract class Item {
     private String floorDescription;
     private String type;
     private boolean locked;
+    private int damage;
 
     // This is a constructor for Item; it cannot be directly instantiated but can be used by concrete subclasses.
     public Item(String name, String description, String floorDescription, String type) {
@@ -46,6 +47,10 @@ public abstract class Item {
 
     public String getType() {
         return type;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     public void setLocked(boolean key) {
