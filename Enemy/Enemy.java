@@ -38,3 +38,4 @@ public abstract class Enemy {
     // Abstract method for special ability
     public abstract void useSpecialAbility();
 }
+

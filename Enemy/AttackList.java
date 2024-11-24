@@ -13,3 +13,4 @@ public class AttackList {
         System.out.println("Defense! Enemy absorbs 3 damage from the attack.");
     }
 }
+
