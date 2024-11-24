@@ -35,24 +35,26 @@ public class Main {
         room1.viewRoom();
         dungen.getPlayer().walkTo("gate");
         dungen.getPlayer().pickUp("gate");
-//        dungen.getplayer().putInBag(); //expect to put ey
-//        dungen.getPlayer().pickUp("exit"); // expect to not able to pick up
-//        dungen.getPlayer().inspectBag(); // expected to see key i.e name of item instead of item discription
-//        dungen.getPlayer().getFromBag("key"); // expect to have key equipped and removed from bag
-//        dungen.getPlayer().interact("key"); // expect to see key getting pocked into thin air
-//        dungen.getPlayer().interact("exit"); // expect to see player trying to open exit but fails
-//        dungen.getPlayer().walkTo("sword"); // expect to see player walk to sword
-//        dungen.getPlayer().putInBag(); // expect to see player to key in bag
-//        dungen.getPlayer().pickUp("sword"); // expect to see player pick up sword
-//        dungen.getPlayer().walkTo("sword"); // expect to see cannot walk to sword
-//        dungen.getPlayer().walkTo("gate");
-//        dungen.getPlayer().interact("sword", "gate"); expect to see sword failed to pick the gate
-//        dungen.getPlayer().putInBag(); expect to see player put sword in bag
-//        dungen.getPlayer.inspectBag(); // expected to see sword and key in bag
-//        dungen.getplayer().interact("ket", "exit"); // expect to see there isn't item key in players hand
-//        dungen.getplayer().getFromBag("key"); //expect to have key equipped
-//        dungen.getplayer().getFromBag("sword); //expect to not get sword due to already holding
-//        dungen.getplayer().interact("exit"); //expect to see player leave from exit, have room set to room2
+        dungen.getPlayer().putInBag(); //expect to put key in bag
+        dungen.getPlayer().pickUp("gate"); // expect to not able to pick up
+        dungen.getPlayer().inspectBag(); // expected to see key i.e name of item instead of item discription
+        dungen.getPlayer().getFromBag("key"); // expect to have key equipped and removed from bag
+        dungen.getPlayer().inspectBag();// expect to see no item in bag!
+        dungen.getPlayer().interact("key"); // expect to see player hit them self with the key
+        dungen.getPlayer().interact("exit"); // expect to see player trying to open exit but fails
+        dungen.getPlayer().walkTo("sword"); // expect to see player walk to sword
+        dungen.getPlayer().putInBag(); // expect to see player put key in bag
+        dungen.getPlayer().pickUp("sword"); // expect to see player pick up sword
+        dungen.getPlayer().walkTo("sword"); // expect to see cannot walk to sword
+        dungen.getPlayer().putInBag(); // expect to see player put sword in bag
+        dungen.getPlayer().inspectBag(); // expect to see sword and key
+        dungen.getPlayer().walkTo("gate");
+        dungen.getPlayer().interact("sword", "gate"); // expect to see sword failed to pick the gate
+        dungen.getPlayer().putInBag(); //expect to see player put sword in bag        dungen.getPlayer.inspectBag(); // expected to see sword and key in bag
+        dungen.getPlayer().interact("key", "exit"); // expect to see there isn't item key in players hand
+        dungen.getPlayer().getFromBag("key"); //expect to have key equipped
+        dungen.getPlayer().getFromBag("sword"); //expect to not get sword due to already holding
+        dungen.getPlayer().interact("exit"); //expect to see player leave from exit, have room set to room2
 
     }
 }

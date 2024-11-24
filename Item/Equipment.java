@@ -20,7 +20,7 @@ public class Equipment extends Item {
 
     @Override
     public Item pickup() {
-        System.out.println("You pickup" + this.getName());
+        System.out.println("You pickup " + this.getName());
         return this;
     }
 }

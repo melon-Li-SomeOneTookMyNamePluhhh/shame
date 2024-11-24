@@ -82,22 +82,28 @@ public class Player {
     }
 
 //this requires fixing: can pick up unpickable items such as exit and npc
-    public void pickUp(String itemName){
-        // you can only pick up the item when your hands are empty
-        if (this.holding != null){
-            System.out.println("you cant pickup item when you are holding stuff");
-            return;
-        }
-        // you can only pick up the item if you are standing next to it
-        if (this.location == null){
-            System.out.println("there is nothing around you to pickup!");
-            return;
-        }
-        this.holding = this.location;
+public void pickUp(String itemName){
+    // you can only pick up the item when your hands are empty
+    if (this.holding != null){
+        System.out.println("you cant pickup item when you are holding stuff");
+        return;
+    }
+    // you can only pick up the item if you are standing next to it
+    if (this.location == null){
+        System.out.println("there is nothing around you to pickup!");
+        return;
+    }
+    // you can only pick up the correct item
+    if (this.location.getName().equals(itemName)) {
+        this.holding = this.currRoom.pickUp(itemName);
         this.location = null;
-        System.out.println("you pick up " + this.holding);
-        }
-
+        return;
+    }
+    else {
+        System.out.println("you did not find " + itemName + " around you");
+        return;
+    }
+}
     // Puts the currently held item into the inventory if there is space. If the player is not holding anything,
     // or if the inventory is full, it displays an appropriate message.
     public void putInBag(){
@@ -107,6 +113,7 @@ public class Player {
         else{
             if(inventory.getNumItemsInside() < inventory.getBagSize()){
                 inventory.addItem(holding);
+                System.out.println("you put " + holding.getName() + " in your bag");
                 holding = null;
             }
             else{
@@ -127,16 +134,14 @@ public class Player {
     }
 
     // Retrieves an item from the player's bag and places it into their hand.
-    public void retrieveFromBag(String itemName) {
+    public void getFromBag(String itemName) {
         // Check if the player is already holding an item
         if (holding != null) {
-            System.out.println("You are already holding something. You need to drop it first.");
+            System.out.println("You are already holding something. You need to put it in bag or drop it first.");
             return;
         }
-
         // Attempt to remove the specified item from the inventory
         Item retrievedItem = inventory.removeItem(itemName); // Assuming Inventory has a removeItem method
-
         // If the item exists in the bag, set it as the player's held item
         if (retrievedItem != null) {
             System.out.println("You took " + itemName + " out of your bag.");
@@ -162,5 +167,29 @@ public class Player {
             }
         }
     }
+
+    // template code for restoring health and some funny event
+    public void interact(String whatItem){
+        if (holding == null){
+            System.out.println("You have nothing in your hand to interact with");
+            return;
+        }
+        System.out.println("looking at the " + whatItem + " you decides to take a bite");
+        if (holding.getDamage() >= 0){
+            System.out.println("this is a bad decision");
+            System.out.println("you lost " + holding.getDamage() + " health");
+            this.health -= holding.getDamage();
+        } else if (holding.getDamage() < 0) {
+            System.out.println("you healed " + -1* holding.getDamage() + " health");
+            this.health -= holding.getDamage();
+        }
+    }
+
+    // implement this later
+    public void interact(String holdingWhat, String withWhat){
+        System.out.println("you tried to interact " + holdingWhat + " with " + withWhat);
+    }
+
+
 }
 

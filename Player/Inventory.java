@@ -32,11 +32,19 @@ public class Inventory {
 
     // Remove item
     public Item removeItem(String itemName) {
+        if(itemsInside.isEmpty()) {
+            System.out.println("you have nothing in your bag!");
+            return null;
+        }
+        // cannot iterate through empty list, must remain. Room does not need to worry
+        // as there is always exit in room
         Item i = null;
         for (Item item : itemsInside) {
             if (item.getName().equals(itemName)) {
                 i = item;
                 itemsInside.remove(item);
+                return item;
+                // return item once it is found instead of keep iterating
             }
         }
         return i;
