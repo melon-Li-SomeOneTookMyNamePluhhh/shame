@@ -1,5 +1,7 @@
 package Item;
 
+import GUI.GUIUtility;
+
 public class Equipment extends Item {
     int damage;
     String element;
@@ -14,6 +16,6 @@ public class Equipment extends Item {
 
     @Override
     public void Interact(Item location) {
-        System.out.println("This is a piece of equipment.");
+        GUIUtility.displayOutput("This is a piece of equipment.");
     }
 }

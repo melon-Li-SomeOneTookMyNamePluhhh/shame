@@ -27,6 +27,14 @@ public class Room {
         this.items.add(item);
     }
 
+    public String getDescription() {
+        StringBuilder desc = new StringBuilder(description + "\nItems in the room:\n");
+        for (Item item : items) {
+            desc.append("- ").append(item.getName()).append(": ").append(item.getDescription()).append("\n");
+        }
+        return desc.toString();
+    }
+
     public void addBattleTrigger(Item item){
         this.battleTriggers.add(item);
     }

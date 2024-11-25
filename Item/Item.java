@@ -1,5 +1,7 @@
 package Item;
 
+import GUI.GUIUtility;
+
 // MAKE THIS INTO INTERFACE!!!!!!!!!!!!!!!!!!!!!!!!!!
 // Define an abstract class called Item.Item (Not an interface because we need instance variables)
 public abstract class Item {
@@ -40,7 +42,7 @@ public abstract class Item {
 
     // Regular method to inspect the item (has a body)
     public void Inspect() {
-        System.out.println("Inspecting the item: " + name + ": " + description + ".");
+        GUIUtility.displayOutput("Inspecting the item: " + name + ": " + description + ".");
     }
 
     public String getName() {

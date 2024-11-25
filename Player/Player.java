@@ -1,6 +1,7 @@
 package Player;
 
 import DungenKeeper.Room;
+import GUI.GUIUtility;
 import Item.Item;
 
 public class Player {
@@ -70,10 +71,10 @@ public class Player {
 
     public void walkTo(String itemName){
         if (this.currRoom.hasItem(itemName) == null){
-            System.out.println("you cant walk to that destination as it doesnt exist");
+            GUIUtility.displayOutput("you cant walk to that destination as it doesnt exist");
             return;
         }else{
-            System.out.println("you walked to " + itemName);
+            GUIUtility.displayOutput("you walked to " + itemName);
             this.location = this.currRoom.hasItem(itemName);
             return;
         }
@@ -83,12 +84,12 @@ public class Player {
     public void pickUp(String itemName){
         // you can only pick up the item when your hands are empty
         if (this.holding != null){
-            System.out.println("you cant pickup item when you are holding stuff");
+            GUIUtility.displayOutput("you cant pickup item when you are holding stuff");
             return;
         }
         // you can only pick up the item if you are standing next to it
         if (this.location == null){
-            System.out.println("there is nothing around you to pickup!");
+            GUIUtility.displayOutput("there is nothing around you to pickup!");
             return;
         }
         // you can only pick up the correct item
@@ -98,10 +99,13 @@ public class Player {
             return;
         }
         else {
-            System.out.println("you did not find " + itemName + " around you");
+            GUIUtility.displayOutput("you did not find " + itemName + " around you");
             return;
         }
     }
+
+    }
+
 
     // what else to implement:
     // interact
@@ -110,5 +114,4 @@ public class Player {
     // put in bag
     // get item from bag
 
-}
 

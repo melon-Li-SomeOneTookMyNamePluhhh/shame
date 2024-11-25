@@ -1,5 +1,7 @@
 package Enemy;
 
+import GUI.GUIUtility;
+
 public class Grass extends Enemy {
     private boolean usedSpecialAbility = false;
 
@@ -11,10 +13,10 @@ public class Grass extends Enemy {
     public void useSpecialAbility() {
         if (!usedSpecialAbility && health < 5) {
             health += 3;
-            System.out.println("GrassEnemy heals itself! Gains 3 health. Current health: " + health);
+            GUIUtility.displayOutput("GrassEnemy heals itself! Gains 3 health. Current health: " + health);
             usedSpecialAbility = true;
         } else {
-            System.out.println("Special ability cannot be used.");
+            GUIUtility.displayOutput("Special ability cannot be used.");
         }
     }
 }

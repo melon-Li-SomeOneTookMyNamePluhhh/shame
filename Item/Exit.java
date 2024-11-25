@@ -1,5 +1,7 @@
 package Item;
 
+import GUI.GUIUtility;
+
 public class Exit extends Item{
     private Boolean locked = true;
 
@@ -13,10 +15,10 @@ public class Exit extends Item{
     public void Interact(Item location) {
         // TODO: we can use this code once we have a game with current player as a global variable
         if (this.locked) {
-            System.out.println("you tried to pick the lock with {} but it didn't work");
+            GUIUtility.displayOutput("you tried to pick the lock with {} but it didn't work");
         }
         else {
-            System.out.println("the door is already opened, there is no point to pick the lock");
+            GUIUtility.displayOutput("the door is already opened, there is no point to pick the lock");
         }
     }
 
@@ -24,10 +26,10 @@ public class Exit extends Item{
     public void Interact() {
         // TODO: we can use this code once we have a game with current player as a global variable
         if (this.locked) {
-            System.out.println("the door is still locked and you cannot pass");
+            GUIUtility.displayOutput("the door is still locked and you cannot pass");
         }
         else {
-            System.out.println("You walk into the door and leave the room.");
+            GUIUtility.displayOutput("You walk into the door and leave the room.");
         }
     }
 
@@ -40,7 +42,7 @@ public class Exit extends Item{
 
     @Override
     public Item pickup() {
-        System.out.println("You can't just lift the exit, silly!");
+        GUIUtility.displayOutput("You can't just lift the exit, silly!");
         return null;
     }
 }

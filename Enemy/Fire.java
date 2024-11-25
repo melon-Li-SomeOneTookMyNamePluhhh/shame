@@ -1,5 +1,7 @@
 package Enemy;
 
+import GUI.GUIUtility;
+
 public class Fire extends Enemy {
     private boolean usedSpecialAbility = false;
 
@@ -10,10 +12,10 @@ public class Fire extends Enemy {
     @Override
     public void useSpecialAbility() {
         if (health < 3 && !usedSpecialAbility) {
-            System.out.println(name + " activates its special ability! All normal attacks become critical strikes.");
+            GUIUtility.displayOutput(name + " activates its special ability! All normal attacks become critical strikes.");
             usedSpecialAbility = true;
         } else {
-            System.out.println(name + " cannot use its special ability.");
+            GUIUtility.displayOutput(name + " cannot use its special ability.");
         }
     }
 

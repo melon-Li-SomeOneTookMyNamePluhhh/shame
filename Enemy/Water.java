@@ -1,5 +1,6 @@
 package Enemy;
 
+import GUI.GUIUtility;
 import Player.Player;
 
 public class Water extends Enemy {
@@ -12,7 +13,7 @@ public class Water extends Enemy {
     @Override
     public void useSpecialAbility() {
         if (health < 5 && !usedSpecialAbility) {
-            System.out.println(name + " activates its water shield!");
+            GUIUtility.displayOutput(name + " activates its water shield!");
             usedSpecialAbility = true;
         }
     }
