@@ -15,10 +15,12 @@ public class GUIUtility {
 
     /**
      * Displays a pop-up input dialog to get user input, mimicking Scanner input.
-     * @param prompt The prompt message to display.
+     *
+     * @param prompt  The prompt message to display.
+     * @param options
      * @return The user's input as a String.
      */
-    public static String getInput(String prompt) {
+    public static String getInput(String prompt, String[] options) {
         return JOptionPane.showInputDialog(null, prompt, "Input", JOptionPane.QUESTION_MESSAGE);
     }
 

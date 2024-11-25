@@ -31,6 +31,9 @@ public class Player {
         this.location = location;
     }
 
+    public Inventory getInventory() {return inventory;}
+    public void setInventory(Inventory inventory) {this.inventory = inventory;}
+
     // Room-related methods
     public Room getCurrRoom() {
         return currRoom;
