@@ -1,5 +1,7 @@
 package Item;
 
+import GUI.GUIUtility;
+
 public class Key extends Item{
     int damage = 1;
     String element = "Regular";
@@ -14,6 +16,7 @@ public class Key extends Item{
     }
 
     @Override
+
     public void interact(Item player_location) {
         if (player_location.getType() == "Exit" && used) {
             System.out.println(this.getName() + " does not match the" + player_location.getName());

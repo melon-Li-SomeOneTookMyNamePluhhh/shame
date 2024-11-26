@@ -84,29 +84,29 @@ public class Player {
         }
     }
 
-//this requires fixing: can pick up unpickable items such as exit and npc
-public void pickUp(String itemName){
-    // you can only pick up the item when your hands are empty
-    if (this.holding != null){
-        System.out.println("you cant pickup item when you are holding stuff");
-        return;
+    //this requires fixing: can pick up unpickable items such as exit and npc
+    public void pickUp(String itemName){
+        // you can only pick up the item when your hands are empty
+        if (this.holding != null){
+            System.out.println("you cant pickup item when you are holding stuff");
+            return;
+        }
+        // you can only pick up the item if you are standing next to it
+        if (this.location == null){
+            System.out.println("there is nothing around you to pickup!");
+            return;
+        }
+        // you can only pick up the correct item
+        if (this.location.getName().equals(itemName)) {
+            this.holding = this.currRoom.pickUp(itemName);
+            this.location = null;
+            return;
+        }
+        else {
+            System.out.println("you did not find " + itemName + " around you");
+            return;
+        }
     }
-    // you can only pick up the item if you are standing next to it
-    if (this.location == null){
-        System.out.println("there is nothing around you to pickup!");
-        return;
-    }
-    // you can only pick up the correct item
-    if (this.location.getName().equals(itemName)) {
-        this.holding = this.currRoom.pickUp(itemName);
-        this.location = null;
-        return;
-    }
-    else {
-        System.out.println("you did not find " + itemName + " around you");
-        return;
-    }
-}
     // Puts the currently held item into the inventory if there is space. If the player is not holding anything,
     // or if the inventory is full, it displays an appropriate message.
     public void putInBag(){
