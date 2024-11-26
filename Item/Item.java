@@ -7,6 +7,7 @@ public abstract class Item {
     private String type;
     private boolean locked;
     private int damage;
+    private String element;
 
     // This is a constructor for Item; it cannot be directly instantiated but can be used by concrete subclasses.
     public Item(String name, String description, String floorDescription, String type) {
@@ -17,6 +18,9 @@ public abstract class Item {
         this.type = type;
     }
 
+    public String getElement() {
+        return element;
+    }
     // Abstract method to interact with the item
     public abstract void interact(Item location);
 
