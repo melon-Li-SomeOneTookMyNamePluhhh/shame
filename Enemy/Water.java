@@ -1,5 +1,7 @@
 package Enemy;
 
+import GUI.GUIUtility;
+import Player.Player;
 public class Water extends Enemy {
     private boolean damageReduced = false; // Tracks if player's damage is reduced
 
@@ -9,10 +11,11 @@ public class Water extends Enemy {
 
     @Override
     public void useSpecialAbility() {
-        System.out.println(name + " activated its water shield, reducing player's damage.");
-        usedSpecialAbility = true;
-        damageReduced = true;
-        // Note: Implement the actual damage reduction logic in your Battle system
+        if (health < 5 && !usedSpecialAbility) {
+            GUIUtility.displayOutput(name + " activates its water shield!");
+            usedSpecialAbility = true;
+            damageReduced = true;
+        }
     }
 
     @Override

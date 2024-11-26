@@ -8,6 +8,10 @@ public abstract class Enemy {
     protected int health;
     protected int damage; // Damage dealt in the latest attack
     protected AttackList attackList;
+    protected String element;
+
+    // Constructor
+    public Enemy(String name, String description, AttackList attackList, int damage, String element) {
     protected Random random;
     protected final String type; // Fixed type attribute
     protected boolean usedSpecialAbility = false; // Tracks if special ability has been used
@@ -31,6 +35,23 @@ public abstract class Enemy {
     public int getDamage() { return damage; }
     public String getType() { return type; }
 
+    public void setName(String name) {this.name = name;}
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public String getElement() {
+        return element;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getHealth() {
+        return health;
+    }
     // Abstract method for special ability
     public abstract void useSpecialAbility();
 

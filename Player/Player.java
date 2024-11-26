@@ -215,9 +215,3 @@ public void pickUp(String itemName){
         System.out.println("you tried to interact " + holdingWhat + " with " + itemAtLocation);
         this.holding.interact(this.location);
         this.location.interact(this.holding);
-
-    }
-
-
-}
-

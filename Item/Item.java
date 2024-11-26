@@ -1,5 +1,6 @@
 package Item;
 
+import GUI.GUIUtility;
 public abstract class Item {
     private String name;
     private String description;
@@ -24,6 +25,10 @@ public abstract class Item {
         System.out.println("you stare at " + name + " blankly. Nothing happens");
     }
 
+    // Regular method to inspect the item (has a body)
+    public void Inspect() {
+        GUIUtility.displayOutput("Inspecting the item: " + name + ": " + description + ".");
+    }
     // Regular method to pick up the item
     // this method should to regularly overrided such that awkward moment of you picked up exit will not happen
     public abstract Item pickup();
