@@ -14,10 +14,12 @@ public class Inventory {
     }
 
     public int getBagSize() {
+
         return bagSize;
     }
 
     public int getNumItemsInside() {
+
         return itemsInside.size();
     }
 
