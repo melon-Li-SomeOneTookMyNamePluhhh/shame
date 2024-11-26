@@ -24,34 +24,31 @@ public class Inventory {
     }
 
     public List<Item> getItemsInside() {
-
         return itemsInside;
     }
 
     // Add item
     public void addItem(Item item) {
-
         itemsInside.add(item);
     }
 
     // Remove item
     public Item removeItem(String itemName) {
-        Item itemToRemove = findItem(itemName);
-        if (itemToRemove != null) {
-            itemsInside.remove(itemToRemove);
-            return itemToRemove;
+        if(itemsInside.isEmpty()) {
+            System.out.println("you have nothing in your bag!");
+            return null;
         }
-        System.out.println("can not find\"" + itemName + "\"in bag");
-        return null;
-    }
-
-
-    public Item findItem(String itemName){
-        for (Item item : itemsInside){
-            if (item.getName().equals(itemName)){
+        // cannot iterate through empty list, must remain. Room does not need to worry
+        // as there is always exit in room
+        Item i = null;
+        for (Item item : itemsInside) {
+            if (item.getName().equals(itemName)) {
+                i = item;
+                itemsInside.remove(item);
                 return item;
+                // return item once it is found instead of keep iterating
             }
         }
-        return null;
+        return i;
     }
 }
