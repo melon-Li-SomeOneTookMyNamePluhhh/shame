@@ -1,5 +1,6 @@
 package DungenKeeper;
 import Item.Item;
+import Item.Exit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ public class Room {
     private List<Item> items; // items inside the room
     private List<Item> battleTriggers; // items inside the room that triggers battle
     private String description; // the rooms description, only print once when player enters the room
+    private DungenBuilder dungen;
 
 
     public Room(String description) {
@@ -23,8 +25,20 @@ public class Room {
         viewRoom();
     }
 
+    public void leave(){
+
+        this.dungen.nextLevel();
+    }
+
     public void addItem(Item item){
+
         this.items.add(item);
+    }
+
+    public void addExit(Exit item){
+        this.items.add(item);
+        item.setRoom(this);
+        // I would love to get rid of this method
     }
 
     public String getDescription() {
@@ -36,7 +50,12 @@ public class Room {
     }
 
     public void addBattleTrigger(Item item){
+
         this.battleTriggers.add(item);
+    }
+
+    public void setDungen(DungenBuilder dungen){
+        this.dungen = dungen;
     }
 
     // return item if the room has this item
@@ -70,6 +89,8 @@ public class Room {
             return true;
         }
         return false;
+
     }
+
 
 }
