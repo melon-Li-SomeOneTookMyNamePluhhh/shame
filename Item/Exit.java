@@ -1,6 +1,5 @@
 package Item;
 
-import GUI.GUIUtility;
 import DungenKeeper.Room;
 
 public class Exit extends Item{
@@ -16,7 +15,6 @@ public class Exit extends Item{
     }
 
     @Override
-    public void Interact(Item location) {
     public void interact(Item location) {
         if (this.locked && location.getType() != "Key") {
             System.out.println("you tried to pick the lock but it didn't work");
@@ -52,7 +50,7 @@ public class Exit extends Item{
 
     @Override
     public Item pickup() {
-        GUIUtility.displayOutput("You can't just lift the exit, silly!");
+        System.out.println("You can't just lift the exit, silly!");
         return null;
     }
 }
