@@ -1,19 +1,21 @@
+package Item;
+
 import java.util.Scanner;
 
 public class NPC extends Item {
     String Riddle;
     String Speech;
 
-    // Constructor for NPC that calls the Item constructor
-    public NPC(String name, String description, String Riddle, String Speech) {
-        // Call the constructor of Item class with parameters
-        super(name, description, "NPC"); // Pass values to the superclass constructor
+    // Constructor for Item.NPC that calls the Item.Item constructor
+    public NPC(String name, String description, String floorDescription, String Riddle, String Speech) {
+        // Call the constructor of Item.Item class with parameters
+        super(name, description, floorDescription,"NPC"); // Pass values to the superclass constructor
         this.Riddle = Riddle;
         this.Speech = Speech;
     }
 
     @Override
-    public void Interact() {
+    public void Interact(Item location) {
         // Create a Scanner object to read input from the terminal
         Scanner scanner = new Scanner(System.in);
 
@@ -37,7 +39,7 @@ public class NPC extends Item {
                 break;
 
             case "exit":
-                // Exit the interaction
+                // Item.Exit the interaction
                 System.out.println("Goodbye!");
                 break;
 
@@ -52,7 +54,8 @@ public class NPC extends Item {
     }
 
     @Override
-    public void Pickup() {
+    public Item pickup() {
         System.out.println("What are you doing? Put me down at once!");
+        return null;
     }
 }
