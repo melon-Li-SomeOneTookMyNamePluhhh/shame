@@ -1,5 +1,7 @@
 package Enemy;
 
+import GUI.GUIUtility;
+
 public class Fire extends Enemy {
     private boolean convertedToCritical = false; // Tracks if normal attacks are converted
 
@@ -9,9 +11,13 @@ public class Fire extends Enemy {
 
     @Override
     public void useSpecialAbility() {
-        System.out.println(name + " activated its special ability! All normal attacks are now critical strikes.");
-        usedSpecialAbility = true;
-        convertedToCritical = true;
+        if (health < 3 && !usedSpecialAbility) {
+            GUIUtility.displayOutput(name + " activates its special ability! All normal attacks become critical strikes.");
+            usedSpecialAbility = true;
+            convertedToCritical = true;
+        } else {
+            GUIUtility.displayOutput(name + " cannot use its special ability.");
+        }
     }
 
     @Override
