@@ -1,11 +1,14 @@
 package Item;
 
+import GUI.GUIUtility;
 public abstract class Item {
     private String name;
     private String description;
     private String floorDescription;
     private String type;
     private boolean locked;
+    private int damage;
+    private String element;
 
     // This is a constructor for Item; it cannot be directly instantiated but can be used by concrete subclasses.
     public Item(String name, String description, String floorDescription, String type) {
@@ -16,17 +19,23 @@ public abstract class Item {
         this.type = type;
     }
 
+    public String getElement() {
+        return element;
+    }
     // Abstract method to interact with the item
-    public abstract void Interact(Item location);
+    public abstract void interact(Item location);
 
-    // Regular method to pick up the item
-    // this method should to regularly overrided such that awkward moment of you picked up exit will not happen
-    public abstract Item pickup();
+    public void interact(){
+        System.out.println("you stare at " + name + " blankly. Nothing happens");
+    }
 
     // Regular method to inspect the item (has a body)
     public void Inspect() {
-        System.out.println("Inspecting the item: " + name + ": " + description + ".");
+        GUIUtility.displayOutput("Inspecting the item: " + name + ": " + description + ".");
     }
+    // Regular method to pick up the item
+    // this method should to regularly overrided such that awkward moment of you picked up exit will not happen
+    public abstract Item pickup();
 
     public String getName() {
         return name;
@@ -47,6 +56,8 @@ public abstract class Item {
     public String getType() {
         return type;
     }
+
+    public int getDamage() {return damage;}
 
     public void setLocked(boolean key) {
         this.locked = key;
