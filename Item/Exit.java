@@ -16,7 +16,6 @@ public class Exit extends Item{
     }
 
     @Override
-    public void Interact(Item location) {
     public void interact(Item location) {
         if (this.locked && location.getType() != "Key") {
             System.out.println("you tried to pick the lock but it didn't work");

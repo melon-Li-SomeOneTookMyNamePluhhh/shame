@@ -3,31 +3,37 @@ package Item;
 import GUI.GUIUtility;
 
 public class Equipment extends Item {
-    static int damage;
-    static String element;
+    private int damage; // Instance field for damage
+    private String element; // Instance field for element
 
-    // Constructor for Item.Equipment that calls the Item.Item constructor and has default damage and element
+    // Constructor for Equipment that calls the Item constructor
     public Equipment(String name, String description, String floorDescription, int damage, String element) {
-        // Call the constructor of Item.Item class with parameters
+        // Call the constructor of the Item class with parameters
         super(name, description, floorDescription, "Equipment"); // Pass values to the superclass constructor
-        this.damage = damage;
-        this.element = element;
+        this.damage = damage; // Initialize damage
+        this.element = element; // Initialize element
     }
 
-    public static int getDamage() {
+    // Getter for damage
+    public int getDamage() {
         return damage;
     }
 
-    public static String getElement() {return element;}
+    // Getter for element
+    public String getElement() {
+        return element;
+    }
+
+    // Implement the abstract method interact(Item)
     @Override
-    public void Interact(Item location) {
+    public void interact(Item location) {
         GUIUtility.displayOutput("This is a piece of equipment.");
     }
 
-
+    // Override the pickup method
     @Override
     public Item pickup() {
-        System.out.println("You pickup " + this.getName());
+        System.out.println("You picked up " + this.getName());
         return this;
     }
 }
