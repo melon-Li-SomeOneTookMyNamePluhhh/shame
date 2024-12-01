@@ -1,5 +1,7 @@
 package DungenKeeper;
 
+import Battle.Battle;
+import Enemy.Enemy;
 import Player.Player;
 
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ public class DungenBuilder {
     private List<Room> levels;
     private int currentLevel;
     private Player player;
+    private Battle fights;
 
     public DungenBuilder() {
         this.levels = new ArrayList<>();
@@ -45,5 +48,14 @@ public class DungenBuilder {
         getLevels().enter();
     }
 
+    public void fight(Enemy enemy) {
+        System.out.println("you are ambushed by " + enemy.getName());
+        Battle battle = new Battle(this.player, enemy);
+        this.fights = battle;
+    }
+
+    public Battle getFights(){
+        return this.fights;
+    }
 
 }

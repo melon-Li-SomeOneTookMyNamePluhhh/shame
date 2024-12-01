@@ -5,7 +5,7 @@ import GUI.GUIUtility;
 public class Grass extends Enemy {
 
     public Grass(String name, String description) {
-        super(name, description, new AttackList(), "Grass"); // Set type to "Grass"
+        super(name, description, "Grass"); // Set type to "Grass"
     }
 
     @Override
