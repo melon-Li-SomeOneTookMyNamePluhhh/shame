@@ -194,5 +194,16 @@ public class inputBoundary implements inputBoundaryInterface {
         player.getHolding().interact(player.getLocation());
         player.getLocation().interact(player.getHolding());
     }
+
+
+    /**
+     * Checks if a battle should be triggered for the specified item in the player's current room.
+     *
+     * @param item The {@code Item} to check for a potential battle.
+     * @return {@code true} if a battle is triggered for the specified item, {@code false} otherwise.
+     */
+    public boolean checkBattle(Item item){
+        return player.getCurrRoom().checkBattle(item);
+    }
 }
 

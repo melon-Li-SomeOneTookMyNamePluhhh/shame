@@ -51,5 +51,13 @@ public interface inputBoundaryInterface {
      * @param itemAtLocation The name of the item at the player's location.
      */
     void interact(String holdingWhat, String itemAtLocation);
+
+    /**
+     * Determines whether a battle should be triggered for the specified item.
+     *
+     * @param item The {@code Item} to evaluate for a potential battle.
+     * @return {@code true} if a battle is triggered for the specified item, {@code false} otherwise.
+     */
+    boolean checkBattle(Item item);
 }
 
