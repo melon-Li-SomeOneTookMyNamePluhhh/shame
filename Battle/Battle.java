@@ -16,7 +16,7 @@ public class Battle {
     private Enemy enemy;
     private boolean specialUsed;
 
-    public Battle(Player player, Enemy enemy, String description) {
+    public Battle(Player player, Enemy enemy) {
         this.player = player;
         this.enemy = enemy;
         this.specialUsed = false;

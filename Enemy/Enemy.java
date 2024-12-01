@@ -13,11 +13,11 @@ public abstract class Enemy {
     protected boolean usedSpecialAbility = false; // Tracks if special ability has been used
 
     // Constructor
-    public Enemy(String name, String description, AttackList attackList, String type) {
+    public Enemy(String name, String description, String type) {
         this.name = name;
         this.description = description;
         this.health = 15; // Default health
-        this.attackList = attackList;
+        this.attackList = new AttackList();
         this.random = new Random();
         this.type = type;
         this.damage = 0; // Initialize damage

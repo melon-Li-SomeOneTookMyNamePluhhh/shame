@@ -80,8 +80,15 @@ public class Player {
         }else{
             System.out.println("you walked to " + itemName);
             this.location = this.currRoom.hasItem(itemName);
+            if (checkBattle(this.currRoom.hasItem(itemName))){
+                this.currRoom.launchBattle(this.currRoom.hasItem(itemName));
+            }
             return;
         }
+    }
+
+    public boolean checkBattle(Item item){
+        return this.currRoom.checkBattle(item);
     }
 
     //this requires fixing: can pick up unpickable items such as exit and npc

@@ -1,5 +1,9 @@
 import DungenKeeper.DungenBuilder;
 import DungenKeeper.Room;
+import Enemy.Enemy;
+import Enemy.Fire;
+import Enemy.Water;
+import Enemy.Grass;
 import Item.Equipment;
 import Item.Exit;
 import Item.Key;
@@ -33,10 +37,11 @@ public class Main {
                 "a torch hangs on the wall, it is still burning", 3, "fire");
         Exit spiderweb = new Exit("spiderweb", "",
                 "the exit of the room is blocked by a lot of spiderweb, better get rid of it before passing");
-
+        Enemy spider = new Grass("spider", "this is a spider");
         Room room2 = new Room("this is the second room");
         room2.addItem(torch);
-        room2.addItem(spiderweb);
+        room2.addExit(spiderweb);
+        room2.addBattleTrigger(spiderweb, spider);
         dungen.addLevel(room2);
 
         dungen.addPlayer(10, 5, 1);
@@ -82,5 +87,11 @@ public class Main {
         // Check if transitioned to Room 2
         GUIUtility.displayOutput(room2.getDescription());
         room2.viewRoom();
+        dungen.getPlayer().walkTo("torch");
+        dungen.getPlayer().putInBag();
+        dungen.getPlayer().pickUp("torch");
+        dungen.getPlayer().walkTo("spiderweb");
+        dungen.getFights().askForEquipment();
+
     }
 }

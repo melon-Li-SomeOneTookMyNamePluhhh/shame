@@ -6,7 +6,7 @@ public class Water extends Enemy {
     private boolean damageReduced = false; // Tracks if player's damage is reduced
 
     public Water(String name, String description) {
-        super(name, description, new AttackList(), "Water"); // Set type to "Water"
+        super(name, description, "Water"); // Set type to "Water"
     }
 
     @Override

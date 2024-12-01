@@ -1,4 +1,5 @@
 package DungenKeeper;
+import Enemy.Enemy;
 import Item.Item;
 import Item.Exit;
 
@@ -9,6 +10,7 @@ public class Room {
 
     private List<Item> items; // items inside the room
     private List<Item> battleTriggers; // items inside the room that triggers battle
+    private List<Enemy> battleEnemys;
     private String description; // the rooms description, only print once when player enters the room
     private DungenBuilder dungen;
 
@@ -16,6 +18,7 @@ public class Room {
     public Room(String description) {
         this.items = new ArrayList();
         this.battleTriggers = new ArrayList();
+        this.battleEnemys = new ArrayList();
         this.description = description;
     }
 
@@ -49,9 +52,14 @@ public class Room {
         return desc.toString();
     }
 
-    public void addBattleTrigger(Item item){
-
+    public void addBattleTrigger(Item item, Enemy enemy){
         this.battleTriggers.add(item);
+        this.battleEnemys.add(enemy);
+    }
+
+    public void launchBattle(Item item){
+        this.battleTriggers.remove(item);
+        this.dungen.fight(this.battleEnemys.remove(0));
     }
 
     public void setDungen(DungenBuilder dungen){
