@@ -50,9 +50,12 @@ public class RiddleFetcher {
                 return; // Exit if there's an issue processing the response
             }
 
-            // Extract and print the riddle
-            String riddle = root.path("riddle").asText(); // Assumes 'riddle' is the key
-            String answer = root.path("answer").asText(); // Assumes 'answer' is the key
+            // Since the response is an array, we need to access the first element
+            JsonNode firstRiddle = root.get(0); // Get the first riddle object
+
+            // Extract the question and answer
+            String riddle = firstRiddle.path("question").asText(); // Use "question" instead of "riddle"
+            String answer = firstRiddle.path("answer").asText(); // Use "answer" as is
             System.out.println("Riddle: " + riddle);
             System.out.println("Answer: " + answer);
 
