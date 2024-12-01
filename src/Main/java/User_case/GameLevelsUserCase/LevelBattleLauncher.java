@@ -1,6 +1,6 @@
-package java.User_case.GameLevels;
+package User_case.GameLevelsUserCase;
 
-import java.Entity.GameLevelList;
+import Entity.GameLevelList;
 
 public class LevelBattleLauncher {
     private GameLevelList gameLevel;

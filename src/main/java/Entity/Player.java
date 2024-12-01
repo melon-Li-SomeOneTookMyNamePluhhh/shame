@@ -65,4 +65,5 @@ public class Player {
     public void setDamage(int damage) {
         this.damage = damage;
     }
+
 }

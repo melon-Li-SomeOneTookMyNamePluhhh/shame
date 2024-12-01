@@ -1,12 +1,13 @@
-package java.User_case.GameLevels;
+package User_case.GameLevelsUserCase;
 
-import java.Entity.GameLevelList;
-import java.Entity.Room;
+import Entity.GameLevelList;
+import Entity.Player;
+import Entity.Room;
 
-public class LevelManager {
+public class LevelAdder {
     private GameLevelList levels;
 
-    public LevelManager(GameLevelList levels) {
+    public LevelAdder(GameLevelList levels) {
         this.levels = levels;
     }
 

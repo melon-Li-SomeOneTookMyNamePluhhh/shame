@@ -1,4 +1,4 @@
-package java.Entity;
+package Entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class Room {
 
     public String getDescription(){return this.description;}
 
-    public GameLevelList getGmeLevel(){return this.dungen;}
+    public GameLevelList getGameLevel(){return this.dungen;}
 
 
     public void setItems(List<Item> items){this.items = items;}
@@ -36,6 +36,6 @@ public class Room {
 
     public void setDescription(String description){this.description = description;}
 
-    public void setGameLevel(GameLevelList){this.dungen = dungen;}
+    public void setGameLevel(GameLevelList dungen){this.dungen = this.dungen;}
 
 }

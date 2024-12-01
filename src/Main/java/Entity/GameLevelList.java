@@ -1,6 +1,6 @@
-package java.Entity;
+package Entity;
 
-import Entity.RoomInfo;
+import Entity.Room;
 import Entity.Player;
 
 

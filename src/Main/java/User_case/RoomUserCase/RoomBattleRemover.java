@@ -1,6 +1,6 @@
-package java.User_case.Room;
+package User_case.RoomUserCase;
 
-import java.Entity.Room;
+import Entity.Room;
 
 public class RoomBattleRemover {
     private Room room;
@@ -9,7 +9,9 @@ public class RoomBattleRemover {
         this.room = room;
     }
     
-    public void removeBattle(Item item) {
+    public Enemy removeBattle(Item item) {
+
         room.getBattleTriggers().remove(item);
+        return room.getBattleEnemys().remove(0);
     }
 }

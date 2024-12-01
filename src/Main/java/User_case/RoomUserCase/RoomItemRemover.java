@@ -1,6 +1,6 @@
-package java.User_case.Room;
+package User_case.RoomUserCase;
 
-import java.Entity.Room;
+import Entity.Room;
 
 public class RoomItemRemover {
     private Room room;

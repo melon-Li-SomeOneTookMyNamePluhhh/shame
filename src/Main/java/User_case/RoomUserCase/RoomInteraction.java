@@ -1,6 +1,7 @@
-package java.User_case.Room;
+package User_case.RoomUserCase;
 
-import java.Entity.Room;
+import Entity.Room;
+
 
 public class RoomInteraction {
     private Room room;
@@ -34,7 +35,7 @@ public class RoomInteraction {
 
     public Item findItem(String itemName){roomItemFinder.findItem(itemName);}
 
-    public void removeBattle(Item item){roomBattleRemover.removeBattle(item);}
+    public Enemy removeBattle(Item item){roomBattleRemover.removeBattle(item);}
 
     public boolean checkBattle(Item item){roomBattleAdder.checkBattle(item);}
     
