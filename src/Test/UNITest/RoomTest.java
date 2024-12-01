@@ -1,4 +1,4 @@
-package Test;
+package src.Test.UNITest;
 
 public class RoomTest {
     private static void buildRoom(){
