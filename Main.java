@@ -32,7 +32,7 @@ public class Main {
         Key torch = new Key("torch", "this is a torch, it has the element of fire",
                 "a torch hangs on the wall, it is still burning", 3, "fire");
         Exit spiderweb = new Exit("spiderweb", "", "the exit of the room is blocked by a lot of spiderweb, better get rid of it " +
-                        "before passing", 0);
+                        "before passing");
       
         Room room2 = new Room("this is the second room");
         room2.addItem(torch);
