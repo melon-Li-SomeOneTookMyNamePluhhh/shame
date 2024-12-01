@@ -38,7 +38,7 @@ public class Inventory {
             System.out.println("you have nothing in your bag!");
             return null;
         }
-        // cannot iterate through empty list, must remain. Room does not need to worry
+        // cannot iterate through empty list, must remain. java.User_case.Room does not need to worry
         // as there is always exit in room
         Item i = null;
         for (Item item : itemsInside) {
