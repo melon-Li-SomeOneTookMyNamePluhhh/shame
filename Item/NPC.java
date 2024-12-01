@@ -27,7 +27,7 @@ public class NPC extends Item {
 
         // Assign the fetched riddle and answer to the fields
         this.Riddle = riddleData[0];  // riddle
-        this.Answer = riddleData[1];  // answer
+        this.Answer = riddleData[1].trim().toLowerCase();  // answer
 
         this.Speech = Speech;
     }
@@ -47,8 +47,26 @@ public class NPC extends Item {
         // Handle different options based on the input
         switch (userInput) {
             case "riddle":
-                // Call a method to give the riddle (this would be a placeholder)
-                GUIUtility.displayOutput("Here is your riddle: " + Riddle);
+                boolean correctAnswer = false;  // To track if the user answers correctly
+                while (!correctAnswer) {
+                    // Give the riddle and prompt the user for their answer
+                    GUIUtility.displayOutput("Here is your riddle: " + Riddle + " Give your answer or type 'exit' to exit.");
+                    String userAnswer = scanner.nextLine().trim().toLowerCase();  // Read the answer input
+
+                    if (userAnswer.equals("exit")) {
+                        GUIUtility.displayOutput("Goodbye!");
+                        return;  // Exit the interaction
+                    }
+
+                    // Check if the user's answer is correct
+                    if (userAnswer.equals(this.Answer)) {
+                        GUIUtility.displayOutput("Correct! Good job!");
+                        correctAnswer = true;  // Exit the loop since the answer is correct
+                    } else {
+                        GUIUtility.displayOutput("Your answer is incorrect. Guess again!");
+                    }
+                }
+
                 break;
 
             case "speech":
@@ -77,5 +95,6 @@ public class NPC extends Item {
         return null;
     }
 }
+
 
 
