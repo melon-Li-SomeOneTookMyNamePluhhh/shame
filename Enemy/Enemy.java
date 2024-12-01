@@ -82,4 +82,3 @@ public abstract class Enemy {
     // Determines whether to use a special ability (implemented by subclasses)
     protected abstract boolean shouldUseSpecialAbility();
 }
-
