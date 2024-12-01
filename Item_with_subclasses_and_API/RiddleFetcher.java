@@ -11,7 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class RiddleFetcher {
 
-    private static final String API_KEY = "your_api_key_here";
+    private static final String API_KEY = "lj0hDTdEved2xF7Vy5vIeg==o8Q4z17dIbKgLkyT";
 
     // Method to fetch the riddle and answer
     public static String[] fetchRiddleAndAnswer() {
