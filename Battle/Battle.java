@@ -65,7 +65,7 @@ public class Battle {
      * @param item  The player's chosen item.
      * @param enemy The enemy being fought.
      */
-    public void compareElement(Item item, Enemy enemy) {
+    public void compareElement(Equipment item, Enemy enemy) {
         String playerElement = item.getElement().toLowerCase();
         String enemyElement = enemy.getType().toLowerCase();
 
