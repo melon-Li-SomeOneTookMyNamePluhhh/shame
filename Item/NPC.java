@@ -1,18 +1,34 @@
 package Item;
 
+import Item_with_subclasses_and_API.RiddleFetcher;
 import GUI.GUIUtility;
-
 import java.util.Scanner;
 
 public class NPC extends Item {
     String Riddle;
     String Speech;
+    String Answer;
 
     // Constructor for Item.NPC that calls the Item.Item constructor
-    public NPC(String name, String description, String floorDescription, String Riddle, String Speech) {
+    public NPC(String name, String description, String floorDescription, String Riddle, String Answer, String Speech) {
         // Call the constructor of Item.Item class with parameters
         super(name, description, floorDescription,"NPC"); // Pass values to the superclass constructor
         this.Riddle = Riddle;
+        this.Answer = Answer;
+        this.Speech = Speech;
+    }
+    // Overloaded constructor that gets the riddle directly from the api call
+    public NPC(String name, String description, String floorDescription, String Speech) {
+        // Call the constructor of Item.Item class with parameters
+        super(name, description, floorDescription,"NPC"); // Pass values to the superclass constructor
+
+        // Get the riddle and answer from RiddleFetcher
+        String[] riddleData = RiddleFetcher.fetchRiddleAndAnswer();
+
+        // Assign the fetched riddle and answer to the fields
+        this.Riddle = riddleData[0];  // riddle
+        this.Answer = riddleData[1].trim().toLowerCase();  // answer
+
         this.Speech = Speech;
     }
 
@@ -31,8 +47,26 @@ public class NPC extends Item {
         // Handle different options based on the input
         switch (userInput) {
             case "riddle":
-                // Call a method to give the riddle (this would be a placeholder)
-                GUIUtility.displayOutput("Here is your riddle: " + Riddle);
+                boolean correctAnswer = false;  // To track if the user answers correctly
+                while (!correctAnswer) {
+                    // Give the riddle and prompt the user for their answer
+                    GUIUtility.displayOutput("Here is your riddle: " + Riddle + " Give your answer or type 'exit' to exit.");
+                    String userAnswer = scanner.nextLine().trim().toLowerCase();  // Read the answer input
+
+                    if (userAnswer.equals("exit")) {
+                        GUIUtility.displayOutput("Goodbye!");
+                        return;  // Exit the interaction
+                    }
+
+                    // Check if the user's answer is correct
+                    if (userAnswer.equals(this.Answer)) {
+                        GUIUtility.displayOutput("Correct! Good job!");
+                        correctAnswer = true;  // Exit the loop since the answer is correct
+                    } else {
+                        GUIUtility.displayOutput("Your answer is incorrect. Guess again!");
+                    }
+                }
+
                 break;
 
             case "speech":
@@ -61,3 +95,6 @@ public class NPC extends Item {
         return null;
     }
 }
+
+
+

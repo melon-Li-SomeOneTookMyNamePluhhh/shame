@@ -28,6 +28,9 @@ public class Player {
         return location;
     }
 
+    public Inventory getInventory(){
+        return inventory;}
+
     public void setLocation(Item location) {
         this.location = location;
     }
@@ -70,26 +73,33 @@ public class Player {
 
     // these method might need to be put somewhere else
 
-    public void walkTo(String itemName) {
-        if (this.currRoom.hasItem(itemName) == null) {
+    public void walkTo(String itemName){
+        if (this.currRoom.hasItem(itemName) == null){
             System.out.println("you cant walk to that destination as it doesnt exist");
             return;
-        } else {
+        }else{
             System.out.println("you walked to " + itemName);
             this.location = this.currRoom.hasItem(itemName);
+            if (checkBattle(this.currRoom.hasItem(itemName))){
+                this.currRoom.launchBattle(this.currRoom.hasItem(itemName));
+            }
             return;
         }
     }
 
+    public boolean checkBattle(Item item){
+        return this.currRoom.checkBattle(item);
+    }
+
     //this requires fixing: can pick up unpickable items such as exit and npc
-    public void pickUp(String itemName) {
+    public void pickUp(String itemName){
         // you can only pick up the item when your hands are empty
-        if (this.holding != null) {
+        if (this.holding != null){
             System.out.println("you cant pickup item when you are holding stuff");
             return;
         }
         // you can only pick up the item if you are standing next to it
-        if (this.location == null) {
+        if (this.location == null){
             System.out.println("there is nothing around you to pickup!");
             return;
         }
@@ -98,33 +108,36 @@ public class Player {
             this.holding = this.currRoom.pickUp(itemName);
             this.location = null;
             return;
-        } else {
+        }
+        else {
             System.out.println("you did not find " + itemName + " around you");
             return;
         }
     }
-
     // Puts the currently held item into the inventory if there is space. If the player is not holding anything,
     // or if the inventory is full, it displays an appropriate message.
-    public void putInBag() {
-        if (this.holding == null) {
+    public void putInBag(){
+        if(this.holding == null) {
             System.out.println("You have nothing to put in the inventory");
-        } else {
-            if (inventory.getNumItemsInside() < inventory.getBagSize()) {
+        }
+        else{
+            if(inventory.getNumItemsInside() < inventory.getBagSize()){
                 inventory.addItem(holding);
                 System.out.println("you put " + holding.getName() + " in your bag");
                 holding = null;
-            } else {
+            }
+            else{
                 System.out.println("Your inventory is full");
             }
         }
     }
 
     // Drops the currently held item, making the player no longer hold any item.
-    public void drop() {
-        if (this.holding == null) {
+    public void drop(){
+        if (this.holding == null){
             System.out.println("You have nothing to drop");
-        } else {
+        }
+        else {
             this.location = holding;
             holding = null;
         }
@@ -166,8 +179,8 @@ public class Player {
     }
 
     // template code for restoring health and some funny event
-    public void interact(String whatItem) {
-        if (holding == null && location == null) {
+    public void interact(String whatItem){
+        if (holding == null && location == null){
             System.out.println("You have nothing in your hand or standing beside anything to interact");
             return;
         }
@@ -175,12 +188,12 @@ public class Player {
         // you can eat none health restore food just for fun!
         if (holding != null && holding.getName().equals(whatItem)) {
             System.out.println("looking at the " + whatItem + " you decides to take a bite");
-            if (holding.getDamage() >= 0) {
+            if (holding.getDamage() >= 0){
                 System.out.println("this is a bad decision");
                 System.out.println("you lost " + holding.getDamage() + " health");
                 this.health -= holding.getDamage();
             } else if (holding.getDamage() < 0) {
-                System.out.println("you healed " + -1 * holding.getDamage() + " health");
+                System.out.println("you healed " + -1* holding.getDamage() + " health");
                 this.health -= holding.getDamage();
             }
             return;
@@ -196,21 +209,23 @@ public class Player {
     }
 
     // implement this later
-    public void interact(String holdingWhat, String itemAtLocation) {
-        if (holding == null) {
+    public void interact(String holdingWhat, String itemAtLocation){
+        if (holding == null){
             System.out.println("You have nothing in your hand to interact with");
             return;
         }
-        if (holdingWhat != this.holding.getName()) {
+        if (holdingWhat != this.holding.getName()){
             System.out.println("you are holding " + this.holding.getName() + " instead of " + holdingWhat);
             return;
         }
-        if (this.location == null) {
+        if (this.location == null){
             System.out.println("You have nothing to interact with");
             return;
         }
         System.out.println("you tried to interact " + holdingWhat + " with " + itemAtLocation);
         this.holding.interact(this.location);
+        this.location.interact(this.holding);
 
     }
+
 }

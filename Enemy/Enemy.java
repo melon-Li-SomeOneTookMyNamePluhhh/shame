@@ -7,45 +7,32 @@ public abstract class Enemy {
     protected String description;
     protected int health;
     protected int damage; // Damage dealt in the latest attack
-    protected AttackList attackList; // Ensure this class/interface is defined
-    protected String element;
-    protected Random random; // Declare at the class level
+    protected AttackList attackList;
+    protected Random random;
     protected final String type; // Fixed type attribute
     protected boolean usedSpecialAbility = false; // Tracks if special ability has been used
 
     // Constructor
-    public Enemy(String name, String description, AttackList attackList, String type) {
+    public Enemy(String name, String description, String type) {
         this.name = name;
         this.description = description;
         this.health = 15; // Default health
-        this.attackList = attackList;
-        this.random = new Random(); // Initialize random
-        this.type = type; // Assign the final type attribute
+        this.attackList = new AttackList();
+        this.random = new Random();
+        this.type = type;
         this.damage = 0; // Initialize damage
     }
 
-    // Getters and Setters
+    // Getters
     public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-
     public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
-
     public int getHealth() { return health; }
     public void setHealth(int health) { this.health = health; }
-
     public int getDamage() { return damage; }
-
     public String getType() { return type; }
-
-    public String getElement() { return element; }
-    public void setElement(String element) { this.element = element; }
 
     // Abstract method for special ability
     public abstract void useSpecialAbility();
-
-    // Determines whether to use a special ability (implemented by subclasses)
-    protected abstract boolean shouldUseSpecialAbility();
 
     // Randomly selects an attack type
     protected String getRandomAttack() {
@@ -91,4 +78,7 @@ public abstract class Enemy {
             }
         }
     }
+
+    // Determines whether to use a special ability (implemented by subclasses)
+    protected abstract boolean shouldUseSpecialAbility();
 }

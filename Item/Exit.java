@@ -1,6 +1,5 @@
 package Item;
 
-import GUI.GUIUtility;
 import DungenKeeper.Room;
 
 public class Exit extends Item{
@@ -51,7 +50,7 @@ public class Exit extends Item{
 
     @Override
     public Item pickup() {
-        GUIUtility.displayOutput("You can't just lift the exit, silly!");
+        System.out.println("You can't just lift the exit, silly!");
         return null;
     }
 }

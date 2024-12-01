@@ -6,7 +6,7 @@ public class Fire extends Enemy {
     private boolean convertedToCritical = false; // Tracks if normal attacks are converted
 
     public Fire(String name, String description) {
-        super(name, description, new AttackList(), "Fire"); // Set type to "Fire"
+        super(name, description, "Fire"); // Set type to "Fire"
     }
 
     @Override
