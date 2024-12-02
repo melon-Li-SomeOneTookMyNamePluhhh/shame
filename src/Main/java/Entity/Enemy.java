@@ -6,28 +6,25 @@ public abstract class Enemy {
     protected String name;
     protected String description;
     protected int health;
-    protected AttackList attackList; // protected 属性
+    protected AttackList attackList;
     protected Random random;
-    protected final String type; // 固定的类型属性
+    protected final String type; // element
     protected boolean usedSpecialAbility = false;
+    protected int damage; // Damage dealt in the latest attack
 
-    // 构造函数
     public Enemy(String name, String description, String type) {
         this.name = name;
         this.description = description;
-        this.health = 15; // 默认生命值
+        this.health = 15;
         this.attackList = new AttackList();
         this.random = new Random();
         this.type = type;
     }
 
-    // 抽象方法：特殊能力
     public abstract void useSpecialAbility();
 
-    // 抽象方法：是否使用特殊技能
     protected abstract boolean shouldUseSpecialAbility();
 
-    // 随机选择攻击类型的方法（protected 改为通过 public getter）
     protected String getRandomAttack() {
         int choice = random.nextInt(3); // 0: normal, 1: critical, 2: defense
         switch (choice) {
@@ -38,7 +35,7 @@ public abstract class Enemy {
         }
     }
 
-    // Getter 方法，用于访问 protected 成员
+    // Getter method
     public String getName() { return name; }
 
     public int getHealth() { return health; }
@@ -58,6 +55,7 @@ public abstract class Enemy {
     public AttackList getAttackList() {
         return attackList;
     }
-}
 
+    public int getDamage() { return damage; }
+}
 
