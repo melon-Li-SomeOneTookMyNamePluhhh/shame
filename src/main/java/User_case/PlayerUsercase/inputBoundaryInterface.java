@@ -35,10 +35,6 @@ public interface inputBoundaryInterface {
      */
     void getFromBag(String itemName);
 
-    /**
-     * Drops the item currently held by the player at their current location.
-     */
-    void drop();
 
     /**
      * Places the currently held item into the player's bag if there is space.

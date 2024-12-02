@@ -84,15 +84,13 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
         if (player.getHolding() != null && player.getHolding().getName().equals(whatItem)) {
             outputBoundary.displayMessage("Looking at the " + whatItem + ", you decide to take a bite.");
             outputBoundary.displayMessage("This is a bad decision.");
-            outputBoundary.displayMessage("You lost " + new ItemInputBoundary(player.getHolding(),
-                    new ItemOutputBoundary()).getDamage() + " health.");
-            player.setHealth(player.getHealth() -
-                    new ItemInputBoundary(player.getHolding(), new ItemOutputBoundary()).getDamage());
+            outputBoundary.displayMessage("You lost " + player.getHolding().getDamage() + " health.");
+            player.setHealth(player.getHealth() - player.getHolding().getDamage());
             return;
         }
 
         if (player.getLocation() != null && player.getLocation().getName().equals(whatItem)) {
-            player.getLocation().interact();
+            outputBoundary.displayMessage("you are not standing next to anything to interact with");
             return;
         }
 
@@ -181,8 +179,8 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
         }
 
         outputBoundary.displayMessage("You tried to interact " + holdingWhat + " with " + itemAtLocation + ".");
-        player.getHolding().interact(player.getLocation());
-        player.getLocation().interact(player.getHolding());
+        new ItemInputBoundary(player.getHolding(), new ItemOutputBoundary()).interact(player.getLocation());
+        new ItemInputBoundary(player.getLocation(), new ItemOutputBoundary()).interact(player.getHolding());
     }
 
 }

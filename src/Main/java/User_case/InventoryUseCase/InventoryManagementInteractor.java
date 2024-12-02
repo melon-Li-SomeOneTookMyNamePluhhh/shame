@@ -2,20 +2,21 @@ package User_case.InventoryUseCase;
 
 import Entity.Inventory;
 import Entity.Item;
+import java.util.List;
 
 /**
  * The InventoryManagementInteractor class extends InventoryInputBoundary and
  * provides concrete implementations of inventory operations with user feedback.
  */
-public class InventoryManagementInteractor extends InventoryInputBoundary {
+public class InventoryManagementInteractor {
+    private Inventory inventory;
     private final InventoryOutputBoundaryInterface outputBoundary;
 
     public InventoryManagementInteractor(Inventory inventory, InventoryOutputBoundaryInterface outputBoundary) {
-        super(inventory); // 调用父类构造函数来初始化库存
+        this.inventory = inventory; // 调用父类构造函数来初始化库存
         this.outputBoundary = outputBoundary;
     }
 
-    @Override
     public void addItem(Item item) {
         if (inventory.getNumItemsInside() < inventory.getBagSize()) {
             inventory.addItemInternal(item);
@@ -25,25 +26,32 @@ public class InventoryManagementInteractor extends InventoryInputBoundary {
         }
     }
 
-    @Override
-    public void removeItem(String itemName) {
+    public Item removeItem(String itemName) {
         if (inventory.getNumItemsInside() == 0) {
             outputBoundary.presentRemoveItem("Cannot remove item. Inventory is empty.");
-            return;
+            return null;
         }
 
-        Item removedItem = inventory.removeItemInternal(itemName);
-        if (removedItem == null) {
-            outputBoundary.presentRemoveItem("Item " + itemName + " not found in the inventory.");
-        } else {
-            outputBoundary.presentRemoveItem("Item " + itemName + " has been removed from the inventory.");
+        List<Item> items = inventory.getItemsInside();
+        for (Item item : items) {
+            if (item.getName().equals(itemName)) {
+                inventory.removeItemInternal(item);
+                outputBoundary.presentRemoveItem("Item " + itemName + " has been removed from the inventory.");
+                return item; // 找到物品后立即返回
+            }
         }
+
+        outputBoundary.presentRemoveItem("Item " + itemName + " not found in the inventory.");
+        return null;
     }
 
-    public void inspectBag() {
+    public List<Item> inspectBag() {
         List<Item> items = inventory.getItemsInside();
         outputBoundary.presentInventoryContents(items);
+        return items;
     }
 }
+
+
 
 

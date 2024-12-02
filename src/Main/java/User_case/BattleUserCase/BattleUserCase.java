@@ -3,6 +3,7 @@ package User_case.BattleUserCase;
 import Entity.Battle;
 import Entity.Enemy;
 import Entity.Player;
+import Entity.Item;
 import Frameworks_and_drivers.GUIUtility;
 import User_case.EnemyUseCase.EnemyInputBoundary;
 
@@ -43,13 +44,13 @@ public class BattleUserCase implements BattleInputBoundaryInterface{
     }
 
     @Override
-    public void compareElement(Player player, Equipment equipment, Enemy enemy) {
+    public void compareElement(Player player, Item equipment, Enemy enemy) {
         if (equipment == null || enemy == null) {
             outputBoundary.displayMessage("Element comparison failed.");
             return;
         }
 
-        String playerElement = equipment.getElement().toLowerCase();
+        String playerElement = Item.getElement().toLowerCase();
         String enemyElement = enemy.getType().toLowerCase();
         double multiplier = switch (playerElement) {
             case "fire" -> enemyElement.equals("grass") ? 1.2 : enemyElement.equals("water") ? 0.8 : 1.0;

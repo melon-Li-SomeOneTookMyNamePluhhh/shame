@@ -5,9 +5,9 @@ public class Exit extends Item{
     private Room whichRoom;
 
     // Constructor for Item.Exit that calls the Item.Item constructor
-    public Exit(String name, String description, String floorDescription) {
+    public Exit(String name, String description, String floorDescription, String element) {
         // Call the constructor of Item.Item class with parameters
-        super(name, description, floorDescription, "Exit"); // Pass values to the superclass constructor
+        super(name, description, floorDescription, "Exit", element); // Pass values to the superclass constructor
         this.whichRoom = null;
     }
 
