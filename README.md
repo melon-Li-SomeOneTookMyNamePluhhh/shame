@@ -1,5 +1,5 @@
 # The lord of the magic ring
-**Authors**: Zhenyu Liu // Yujun Lu // Cynthia Liu // dongqi(Hans) Li //Calvin Ji
+**Authors**: Zhenyu Liu // Yujun Lu // Cynthia Liu // Dongqi(Hans) Li //Calvin Ji
 
 **Summary of the project**: Frodo's Magic Ring Adventure is an engaging role-playing game where players take on the role
 of Frodo in an adventurous quest to find the magic ring. The game offers a unique blend of exploration, battles, and 
@@ -33,7 +33,6 @@ Bearer.
 _System Requirements_: Windows or macOS.
 _Download_: Visit our GitHub repository and clone the project.
 bash
-复制代码
 git clone https://github.com/yourusername/frodos-magic-ring-adventure.git
 Dependencies:
 Install the required Java version (Java 11 or higher).
@@ -41,7 +40,6 @@ Ensure all necessary libraries and packages are installed.
 Run the Game:
 Navigate to the project directory in the terminal and run:
 bash
-复制代码
 java -jar FrodoMagicRingAdventure.jar
 Common Issues:
 Game not running: Check the Java version to ensure compatibility.
@@ -81,7 +79,6 @@ If you are interested in contributing to this project, please follow these steps
 Fork the Project: Click the "Fork" button on the GitHub project page.
 Create a New Branch:
 bash
-复制代码
 git checkout -b feature/your-feature
 Commit Changes: Ensure that your commit descriptions are clear and concise.
 Create a Pull Request: Submit your changes and wait for review.
