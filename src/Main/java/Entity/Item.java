@@ -43,4 +43,6 @@ public abstract class Item {
         this.locked = key;
     }
 
+    public int getDamage() {return 0;}
+
 }

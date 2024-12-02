@@ -3,13 +3,14 @@ package User_case.Items_Usercase;
 import Entity.Item;
 import Entity.Key;
 
-public class KeyInputBoundary implements KeyInputBoundaryInterface {
+public class KeyInputBoundary extends ItemInputBoundary implements KeyInputBoundaryInterface {
 
     private Key key; // Key object to be interacted with
     private KeyOutputBoundaryInterface OutputBoundary;
 
     // Constructor that takes an NPC object
     public KeyInputBoundary(Key key, KeyOutputBoundaryInterface OutputBoundary) {
+        super(key, OutputBoundary);
         this.key = key;
         this.OutputBoundary = OutputBoundary;
     }

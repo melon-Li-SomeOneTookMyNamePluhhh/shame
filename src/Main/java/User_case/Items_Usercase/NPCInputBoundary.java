@@ -4,12 +4,13 @@ import Entity.Item;
 import Entity.NPC;
 import java.util.Scanner;
 
-public class NPCInputBoundary implements NPCInputBoundaryInterface {
+public class NPCInputBoundary extends ItemInputBoundary implements NPCInputBoundaryInterface {
 
     private NPC npc; // NPC object to be interacted with
     private NPCOutputBoundaryInterface OutputBoundary;
     // Constructor that takes an NPC object
     public NPCInputBoundary(NPC npc, NPCOutputBoundaryInterface OutputBoundary) {
+        super(npc, OutputBoundary);
         this.npc = npc;
        this.OutputBoundary = OutputBoundary;
     }

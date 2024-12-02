@@ -2,14 +2,16 @@ package User_case.Items_Usercase;
 import Entity.Item;
 import Entity.Exit;
 import Entity.Key;
+import DungenKeeper.Room;
 
-public class ExitInputBoundary implements ExitInputBoundaryInterface{
+public class ExitInputBoundary extends ItemInputBoundary implements ExitInputBoundaryInterface{
 
     private Exit exit; // Exit object to be interacted with
     private ExitOutputBoundaryInterface OutputBoundary;
 
     // Constructor that takes an NPC object
     public ExitInputBoundary(Exit exit, ExitOutputBoundaryInterface OutputBoundary) {
+        super(exit, OutputBoundary);
         this.exit = exit;
         this.OutputBoundary = OutputBoundary;
     }

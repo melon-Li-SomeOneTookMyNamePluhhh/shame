@@ -11,7 +11,7 @@ public class Equipment extends Item {
         this.damage = damage;
         this.element = element;
     }
-
+    @Override
     public int getDamage() {return damage;}
 
     public String getElement() {
