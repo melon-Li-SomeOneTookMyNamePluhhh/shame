@@ -1,4 +1,4 @@
-package app;
+package src.Main.app;
 
 import Entity.Fire;
 import Entity.Grass;
@@ -22,7 +22,7 @@ import User_case.TicTacToe.PlayerMoveUseCase;
 import interface_adaptor.GameGUI;
 import interface_adaptor.GUIPresenter;
 import User_case.GUI.UserActionInteractor;
-import User_case.GameLevelsUserCase.LevelInteraction;
+import User_case.GameLevelsUserCase.LevelInteractor;
 import User_case.RoomUserCase.RoomInteraction;
 import interface_adaptor.Tictactoe.TicTacToeController;
 import interface_adaptor.Tictactoe.TicTacToePresenter;
@@ -50,7 +50,7 @@ public class AppBuilder {
     public AppBuilder addTrainingRoom() {
         Key key = new Key("mail_box", "There is a key in the mail_box!", "a key lies on the floor", 1, "regular");
         Exit gate = new Exit("gate", "The exit is covered by a thick spider web", "There is a heavy gate in " +
-                "front of you.");
+                "front of you.","regular");
         Equipment sword = new Equipment("Dragonfang Sword",
                 "A weapon bestowed upon warriors chosen by the Dragon Clan. It holds the power of the dragon!",
                 "A sword is stuck on the wall", 4, null);
@@ -61,7 +61,7 @@ public class AppBuilder {
         roomInteractor.addItem(sword);
         roomInteractor.addItem(gate);
 
-        LevelInteraction levelInteractor = new LevelInteraction(dungen);
+        LevelInteractor levelInteractor = new LevelInteractor(dungen);
         levelInteractor.addLevel(room1);
 
         return this;
@@ -77,21 +77,30 @@ public class AppBuilder {
                 "An ancient soul guardian. He ravages the mortal realm with blazing fire.");
         Equipment FlameDragonBow = new Equipment("Flame Dragon Bow","A legendary weapon bestowed by the Flame Dragon " +
                 "itself, each bow is engulfed in roaring flames. When fired, it burns as fiercely as the dragon's " +
-                "breath.",3,"fire");
-        NPC Jack = new NPC();
+                "breath.","on the floor",3,"fire");
+        NPC Jack = new NPC("Jack","An elderly scavenger","by the side of the forest",
+                "One man’s scrap is another’s treasure. What will your story leave behind, traveler?");
+        Equipment wandofwater = new Equipment("Wand of Water","A crystal wand etched with glowing " +
+                "blue runes, it channels the tranquil yet powerful essence of water, controlling tides and unleashing " +
+                "elemental waves.","on the grass",4,"water");
         Grass Clover = new Grass ("Clover","is a sly manipulator who thrives on deception, using charm " +
                 "and lies to exploit others for personal gain. Marked by a twisted four-leaf clover, they leave " +
                 "betrayal and chaos wherever they go.");
         Exit spiderweb = new Exit("spiderweb", "",
-                "The exit of the room is blocked by a spider web. Better get rid of it before passing.");
+                "The exit of the room is blocked by a spider web. Better get rid of it before passing.",
+                "regular");
 
 
         Room room2 = new Room("This is the training forest for beginners!.");
-        room2.addItem(torch);
-        room2.addExit(spiderweb);
-        room2.addBattleTrigger(spiderweb, GhostRider);
-
-        dungen.addLevel(room2);
+        RoomInteraction roomInteractor = new RoomInteraction(room2);
+        roomInteractor.addItem(FlameDragonBow);
+        roomInteractor.addItem(Jack);
+        roomInteractor.addBattle(FlameDragonBow, GhostRider);
+        roomInteractor.addItem(wandofwater);
+        roomInteractor.addBattle(wandofwater, Clover);
+        roomInteractor.addItem(spiderweb);
+        LevelInteractor levelInteractor = new LevelInteractor(dungen);
+        levelInteractor.addLevel(room2);
 
         return this;
     }
@@ -103,21 +112,31 @@ public class AppBuilder {
      */
     public AppBuilder lastHorizonValley() {
         ticTacToeRule();
-        startTicTacToeGame();
-        Equipment ElfStaff = new Equipment("Elf Staff","A treasured artifact of the Elf Tribe, it wields the power to " +
-                "command all flora in the world and unleashes immense vitality.",5,"grass");
-        NPC Hobbit = new NPC();
+        //startTicTacToeGame();
+        Equipment ElfStaff = new Equipment("Elf Staff","A treasured artifact of the Elf Tribe, it " +
+                "wields the power to " + "command all flora in the world and unleashes immense vitality.",
+                "on the floor",5,"grass");
+        NPC Hobbit = new NPC("Hobbit","a small, humble creature of remarkable resilience and courage," +
+                " known for their love of peace, good food, and quiet life, yet capable of great heroism and " +
+                "resourcefulness when called to adventure.","on the street","Even the smallest of us " +
+                "can carry the heaviest burdens, for it’s not strength that defines a hero, but the courage to take " +
+                "the first step");
         Water FrostWyrm = new Water ("Frost Wyrm", "Possesses immense power to control aquatic " +
                 "creatures, and has long terrorized these waters, harming many innocent fishermen as well as brave" +
                 " warriors seeking the magic ring.");
-        Item magic_ring = new magic_ring ("Magic Ring", "");
+        Key magic_ring = new Key ("Magic Ring", "forged in the Elemental Nexus, radiates a shifting " +
+                "glow of fiery red, verdant green, and oceanic blue, granting its bearer immense power to balance " +
+                "the forces of nature.","on the floor",2,"regular");
 
         Room room3 = new Room("Now let’s go to the final adventure to the last horizon valley to chase your " +
                 "magic ring!");
-        room3.addItem(magic_ring);
-        room3.addBattleTrigger(magic_ring, FrostWyrm);
-
-        dungen.addLevel(room3);
+        RoomInteraction roomInteractor = new RoomInteraction(room3);
+        roomInteractor.addItem(ElfStaff);
+        roomInteractor.addItem(Hobbit);
+        roomInteractor.addItem(magic_ring);
+        roomInteractor.addBattle(magic_ring, FrostWyrm);
+        LevelInteractor levelInteractor = new LevelInteractor(dungen);
+        levelInteractor.addLevel(room3);
 
         return this;
     }
@@ -128,7 +147,8 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder setupPlayerAndGUI() {
-        Room startingRoom = dungen.getFirstLevel();
+        LevelInteractor levelInteractor = new LevelInteractor(dungen);
+        Room startingRoom = dungen.getLevels().get(0);
 
         // Initialize the player
         player = new Player(5, 15, 2, startingRoom);
@@ -168,38 +188,38 @@ public class AppBuilder {
         GUIUtility.displayOutput("The game is ready. Begin your adventure!");
     }
 
-    private void startTicTacToeGame() {
-        // Initialize the Tic Tac Toe game components
-        TicTacToeBoard board = new TicTacToeBoard();
-        TicTacToeView view = new TicTacToeCLIView();
-        TicTacToePresenter presenter = new TicTacToePresenter(view);
-        PlayerMoveUseCase useCase = new PlayerMoveUseCase(board, presenter);
-        BotMoveUseCase botUseCase = new BotMoveUseCase(board, presenter);
-        TicTacToeController controller = new TicTacToeController(useCase, botUseCase);
-        Scanner scanner = new Scanner(System.in);
-
-        // Start the Tic Tac Toe game
-        System.out.println("To exit the game at any time, type '9'. To start, type any other number.");
-        int userCommand = scanner.nextInt();
-
-        while (userCommand != 9) {
-            view.displayBoard(board.getBoard());
-            System.out.println("Player " + board.getCurrentPlayer() + ", enter your move by typing the row then a space then column number. Your options are 0, 1, or 2.");
-            int row = scanner.nextInt();
-            int col = scanner.nextInt();
-            controller.makeMove(row, col);
-            if (board.checkWin() != '-' || board.isFull()) {
-                break;
-            }
-            userCommand = row;
-        }
-
-        view.displayBoard(board.getBoard());
-        char winner = board.checkWin();
-        if (winner != '-') {
-            view.displayWinner(winner);
-        } else {
-            view.displayWinner('D'); // Draw
-        }
-    }
+//    private void startTicTacToeGame() {
+//        // Initialize the Tic Tac Toe game components
+//        TicTacToeBoard board = new TicTacToeBoard();
+//        TicTacToeView view = new TicTacToeCLIView();
+//        TicTacToePresenter presenter = new TicTacToePresenter(view);
+//        PlayerMoveUseCase useCase = new PlayerMoveUseCase(board, presenter);
+//        BotMoveUseCase botUseCase = new BotMoveUseCase(board, presenter);
+//        TicTacToeController controller = new TicTacToeController(useCase, botUseCase);
+//        Scanner scanner = new Scanner(System.in);
+//
+//        // Start the Tic Tac Toe game
+//        System.out.println("To exit the game at any time, type '9'. To start, type any other number.");
+//        int userCommand = scanner.nextInt();
+//
+//        while (userCommand != 9) {
+//            view.displayBoard(board.getBoard());
+//            System.out.println("Player " + board.getCurrentPlayer() + ", enter your move by typing the row then a space then column number. Your options are 0, 1, or 2.");
+//            int row = scanner.nextInt();
+//            int col = scanner.nextInt();
+//            controller.makeMove(row, col);
+//            if (board.checkWin() != '-' || board.isFull()) {
+//                break;
+//            }
+//            userCommand = row;
+//        }
+//
+//        view.displayBoard(board.getBoard());
+//        char winner = board.checkWin();
+//        if (winner != '-') {
+//            view.displayWinner(winner);
+//        } else {
+//            view.displayWinner('D'); // Draw
+//        }
+//    }
 }
