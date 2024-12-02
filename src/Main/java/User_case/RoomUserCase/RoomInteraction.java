@@ -8,20 +8,18 @@ import Entity.Item;
 public class RoomInteraction{
     private Room room;
     private RoomItemAdder roomItemAdder;
-    private RoomItemRemover roomItemRemover;
     private RoomItemFinder roomItemFinder;
     private RoomBattleAdder roomBattleAdder;
     private RoomBattleRemover roomBattleRemover;
+    private RoomPickUp roomPickUp;
     private RoomBattleChecker roomBattleChecker;
     private RoomViewer roomViewer;
 
     public RoomInteraction(Room room) {
         this.room = room;
         roomItemAdder = new RoomItemAdder(room);
-        roomItemRemover = new RoomItemRemover(room);
         roomItemFinder = new RoomItemFinder(room);
         roomBattleAdder = new RoomBattleAdder(room);
-        roomItemRemover = new RoomItemRemover(room);
         roomBattleChecker = new RoomBattleChecker(room);
         roomViewer = new RoomViewer(room);
 
@@ -33,9 +31,9 @@ public class RoomInteraction{
 
     public void addBattle(Item item, Enemy enemy){roomBattleAdder.addBattle(item, enemy);}
 
-    public void removeItem(String itemName){roomItemRemover.removeItem(itemName);}
-
     public Item findItem(String itemName){return roomItemFinder.findItem(itemName);}
+
+    public Item pickUp(String itemName){return roomPickUp.pickUp(itemName);}
 
     public Enemy removeBattle(Item item){return roomBattleRemover.removeBattle(item);}
 
