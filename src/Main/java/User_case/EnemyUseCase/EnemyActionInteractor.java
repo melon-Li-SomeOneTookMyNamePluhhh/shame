@@ -1,7 +1,6 @@
 package User_case.EnemyUseCase;
 
 import Entity.Enemy;
-import User_case.EnemyUseCase.EnemyOutputBoundary;
 
 /**
  * The EnemyActionInteractor class extends EnemyInputBoundary and provides concrete
@@ -21,6 +20,7 @@ public class EnemyActionInteractor extends EnemyInputBoundary {
         if (enemy.shouldUseSpecialAbilityPublic()) {
             enemy.useSpecialAbility();
             outputBoundary.presentAttack(getEnemyName() + " used its special ability.");
+            return enemy.getDamage();
         } else {
             String attackType = getRandomAttack();
             int damage = 0;

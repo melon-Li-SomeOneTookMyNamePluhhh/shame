@@ -22,6 +22,7 @@ public class EnemyInputBoundary implements EnemyInputBoundaryInterface {
         // This method should be overridden by subclasses or specific use case classes.
         // Placeholder implementation.
         System.out.println("Performing a generic action.");
+        return 0;
     }
 
     // You can add shared methods here that subclasses may need

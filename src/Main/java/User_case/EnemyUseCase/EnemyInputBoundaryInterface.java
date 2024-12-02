@@ -8,5 +8,5 @@ public interface EnemyInputBoundaryInterface {
     /**
      * Perform an action, such as attacking or using a special ability.
      */
-    void performAction();
+    int performAction();
 }
