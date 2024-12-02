@@ -92,29 +92,33 @@ public class Battle {
                 "\nYour damage is now: " + newDamage);
     }
 
+
     /**
      * Executes a single round of battle between the player and the enemy.
-     * During this round, both the player and the enemy deal damage to each other,
-     * and their health is updated accordingly. The method checks if either the player
-     * or the enemy has been defeated after the exchange.
+     * Each round updates health and checks for the end of the battle.
      */
-
     public void battleRound() {
-        // Check if the player and enemy are still alive
-        while (player.getHealth() <= 0 || enemy.getHealth() <= 0) {
-            player.setHealth(player.getHealth() - enemy.getDamage());
+        // Loop while both player and enemy are alive
+        while (player.getHealth() > 0 && enemy.getHealth() > 0) {
+            // Enemy attacks player
+            int enemyDamage = enemy.performAction();
+            player.setHealth(player.getHealth() - enemyDamage);
+
+            // Player attacks enemy
             enemy.setHealth(enemy.getHealth() - player.getDamage());
 
             // Display updated health
-            System.out.println("Your remaining health: " + player.getHealth());
-            System.out.println("Enemy's remaining health: " + enemy.getHealth());
-        }
+            GUIUtility.displayOutput("Your remaining health: " + player.getHealth());
+            GUIUtility.displayOutput(enemy.getName() + "'s remaining health: " + enemy.getHealth());
 
-        // Check if the battle is over
-        if (player.getHealth() <= 0) {
-            System.out.println("You have been defeated!");
-        } else if (enemy.getHealth() <= 0) {
-            System.out.println("You have defeated the enemy!");
+            // Check if anyone is defeated
+            if (player.getHealth() <= 0) {
+                GUIUtility.displayOutput("You have been defeated!");
+                return;
+            } else if (enemy.getHealth() <= 0) {
+                GUIUtility.displayOutput("You have defeated the enemy!");
+                return;
+            }
         }
     }
 }
