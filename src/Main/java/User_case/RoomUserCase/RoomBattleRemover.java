@@ -1,6 +1,8 @@
 package User_case.RoomUserCase;
 
 import Entity.Room;
+import Entity.Item;
+import Entity.Enemy;
 
 public class RoomBattleRemover {
     private Room room;

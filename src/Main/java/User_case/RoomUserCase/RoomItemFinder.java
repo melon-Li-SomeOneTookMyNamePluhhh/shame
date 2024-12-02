@@ -1,6 +1,7 @@
 package User_case.RoomUserCase;
 
 import Entity.Room;
+import Entity.Item;
 
 // find an item in the room based on string
 public class RoomItemFinder {

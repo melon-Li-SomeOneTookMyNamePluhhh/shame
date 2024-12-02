@@ -2,7 +2,11 @@ package User_case.PlayerUsercase;
 
 import Entity.Player;
 import Entity.Item;
-import User_case.GameLevelsUserCase.LevelInteraction;
+import User_case.GameLevelsUserCase.LevelInteractor;
+import User_case.InventoryUseCase.InventoryManagementInteractor;
+import User_case.InventoryUseCase.InventoryOutputBoundary;
+import User_case.Items_Usercase.ItemInputBoundary;
+import User_case.Items_Usercase.ItemOutputBoundary;
 import User_case.RoomUserCase.RoomInteraction;
 
 import java.util.List;
@@ -32,7 +36,7 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
     @Override
     public void walkTo(String itemName) {
         RoomInteraction roomInteractor = new RoomInteraction(this.player.getCurrRoom());
-        LevelInteraction levelInteractor = new LevelInteraction(this.player.getCurrRoom().getGameLevel());
+        LevelInteractor levelInteractor = new LevelInteractor(this.player.getCurrRoom().getGameLevel());
         if ( roomInteractor.findItem(itemName) == null) {
             outputBoundary.displayMessage("You can't walk to that destination as it doesn't exist.");
             return;
@@ -59,7 +63,7 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
             return;
         }
         if (player.getLocation().getName().equals(itemName)) {
-            player.setHolding(player.getCurrRoom().pickUp(itemName));
+            player.setHolding(new RoomInteraction(player.getCurrRoom()).pickUp(itemName));
             player.setLocation(null);
         } else {
             outputBoundary.displayMessage("You did not find " + itemName + " around you.");
@@ -79,14 +83,11 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
 
         if (player.getHolding() != null && player.getHolding().getName().equals(whatItem)) {
             outputBoundary.displayMessage("Looking at the " + whatItem + ", you decide to take a bite.");
-            if (player.getHolding().getDamage() >= 0) {
-                outputBoundary.displayMessage("This is a bad decision.");
-                outputBoundary.displayMessage("You lost " + player.getHolding().getDamage() + " health.");
-                player.setHealth(player.getHealth() - player.getHolding().getDamage());
-            } else if (player.getHolding().getDamage() < 0) {
-                outputBoundary.displayMessage("You healed " + -1 * player.getHolding().getDamage() + " health.");
-                player.setHealth(player.getHealth() - player.getHolding().getDamage());
-            }
+            outputBoundary.displayMessage("This is a bad decision.");
+            outputBoundary.displayMessage("You lost " + new ItemInputBoundary(player.getHolding(),
+                    new ItemOutputBoundary()).getDamage() + " health.");
+            player.setHealth(player.getHealth() -
+                    new ItemInputBoundary(player.getHolding(), new ItemOutputBoundary()).getDamage());
             return;
         }
 
@@ -121,25 +122,12 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
             outputBoundary.displayMessage("You are already holding something. Put it in your bag or drop it first.");
             return;
         }
-        Item retrievedItem = player.getInventory().removeItem(itemName);
+        Item retrievedItem = new InventoryManagementInteractor(player.getInventory(), new InventoryOutputBoundary()).removeItem(itemName);
         if (retrievedItem != null) {
             outputBoundary.displayMessage("You took " + itemName + " out of your bag.");
             player.setHolding(retrievedItem);
         } else {
             outputBoundary.displayMessage("The item " + itemName + " is not in your bag.");
-        }
-    }
-
-    /**
-     * Drops the item currently held by the player at their current location.
-     */
-    @Override
-    public void drop() {
-        if (player.getHolding() == null) {
-            outputBoundary.displayMessage("You have nothing to drop.");
-        } else {
-            player.setLocation(player.getHolding());
-            player.setHolding(null);
         }
     }
 
@@ -151,7 +139,7 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
             outputBoundary.displayMessage("You have nothing to put in the inventory.");
         } else {
             if (player.getInventory().getNumItemsInside() < player.getInventory().getBagSize()) {
-                player.getInventory().addItem(player.getHolding());
+                new InventoryManagementInteractor(player.getInventory(), new InventoryOutputBoundary()).addItem(player.getHolding());
                 outputBoundary.displayMessage("You put " + player.getHolding().getName() + " in your bag.");
                 player.setHolding(null);
             } else {
