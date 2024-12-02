@@ -1,9 +1,6 @@
 package User_case.BattleUserCase;
 
-import Entity.Battle;
-import Entity.Enemy;
-import Entity.Player;
-import Entity.Item;
+import Entity.*;
 import Frameworks_and_drivers.GUIUtility;
 import User_case.EnemyUseCase.EnemyInputBoundary;
 
@@ -12,6 +9,7 @@ import java.util.List;
 public class BattleUserCase implements BattleInputBoundaryInterface{
     private Battle battle;
     private final BattleOutputBoundary outputBoundary;
+    private Item item;
 
     public BattleUserCase(Battle battle, BattleOutputBoundary outputBoundary) {
         this.battle = battle;
@@ -27,7 +25,9 @@ public class BattleUserCase implements BattleInputBoundaryInterface{
         }
 
         String[] options = itemsInBag.stream().map(Item::getName).toArray(String[]::new);
-        String chosenItemName = (String) GUIUtility.getInput("Choose an item from your bag:", options);
+        String chosenItemName = (String) GUIUtility.getInput("Choose an item from your bag:"); // this method only takes in
+        // a string, not a string and a String[] (options). If you want to include options you will have to change the
+        // function so that it also takes a String[].
 
         if (chosenItemName == null) {
             outputBoundary.displayMessage("No item selected.");
@@ -44,13 +44,21 @@ public class BattleUserCase implements BattleInputBoundaryInterface{
     }
 
     @Override
+    public void compareElement(Player player, Equipment equipment, Enemy enemy) {
+        // Implement compareElement becuase it is in BattleInputBoundryInterface
+        // and you need to implement this; otherwise, remove the compareElement
+        // method from the interface or else you will have to make this class abstract.
+    }
+
+    //This is not an overidding method so I removed the @Overriding
     public void compareElement(Player player, Item equipment, Enemy enemy) {
         if (equipment == null || enemy == null) {
             outputBoundary.displayMessage("Element comparison failed.");
             return;
         }
-
-        String playerElement = Item.getElement().toLowerCase();
+        //getElement() is not a static method. You cannot call it without instatiating an instance of item first.
+        // I have instatiated an instance of Item called item on line 12.
+        String playerElement = item.getElement().toLowerCase();
         String enemyElement = enemy.getType().toLowerCase();
         double multiplier = switch (playerElement) {
             case "fire" -> enemyElement.equals("grass") ? 1.2 : enemyElement.equals("water") ? 0.8 : 1.0;
