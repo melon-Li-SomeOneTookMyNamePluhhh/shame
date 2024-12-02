@@ -5,13 +5,13 @@ import Entity.Player;
 import Entity.Room;
 import Entity.Enemy;
 
-public class LevelInteraction {
+public class LevelInteractor{
     private GameLevelList levels;
     private LevelAdder levelAdder;
     private LevelCompleteManager levelCompleteManager;
     private LevelBattleLauncher levelBattleLauncher;
 
-    public LevelInteraction(GameLevelList levels) {
+    public LevelInteractor(GameLevelList levels) {
 
         this.levels = levels;
         this.levelAdder = new LevelAdder(levels);
