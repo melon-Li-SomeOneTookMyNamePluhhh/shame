@@ -25,6 +25,9 @@ public class Exit extends Item{
     public void setLocked(boolean lock) {
         this.locked = lock;
     }
+    public Room getwhichRoom(){
+        return whichRoom;
+    }
 
 }
 // input boundary methods  by creating private item item, private exit exit
