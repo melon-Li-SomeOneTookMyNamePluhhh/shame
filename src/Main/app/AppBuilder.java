@@ -1,4 +1,4 @@
-package src.Main.app;
+package app;
 
 import Entity.*;
 import Entity.TicTacToe.TicTacToeBoard;
@@ -101,6 +101,14 @@ public class AppBuilder {
                 + "2. attack it with your sword – Strike the web with all your might, ready for whatever might emerge.\n"
                 + "3. use the key in your hand – Perhaps this key is meant for the door hidden beyond the web.\n\n"
                 + "What will you do?", actionRepositor.getValidActions());
+
+        if ("clean the spiderweb".equals(action7)) {
+            String action8 = guiUtility.getValidInput("Try opening the door by entering 'use key to open the door'", actionRepositor.getValidActions());
+            actionRepository.handleAction(action8);
+        } else if ("attack it with your sword".equals(action7)) {
+            String action9 = guiUtility.getValidInput("Try opening the door by entering 'use key to open the door'", actionRepositor.getValidActions());
+            actionRepository.handleAction(action9);
+        }
 
         actionRepository.handleAction(action7);
 

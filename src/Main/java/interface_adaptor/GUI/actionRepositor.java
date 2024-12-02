@@ -34,6 +34,9 @@ public class actionRepositor {
         validActions.add("dragon fang sword");
         validActions.add("use the key in your hand");
         validActions.add("walk to the spiderweb");
+        validActions.add("attack it with your sword");
+        validActions.add("pick up key");
+
     }
 
     // Instance method to return all valid actions
@@ -84,15 +87,19 @@ public class actionRepositor {
                 playerInputBoundary.getFromBag(in);
                 break;
             case "clean the spiderweb":
-                System.out.println("You carefully pull at the sticky threads, feeling the resistance of the web as it clings stubbornly to the door. After a few tense moments, the door is clear, revealing an ornate handle. The way forward is open!");
+                System.out.println("You carefully pull at the sticky threads, feeling the resistance of the web as it clings stubbornly to the door. After a few tense moments, the door is clear, revealing an ornate handle. The way forward is open! But the door is still locked");
                 break;
             case "attack it with your sword":
-                System.out.println("You swing your sword with determination, slicing through the thick webbing. The web starts to break apart, but the force of your attack leaves your sword slightly dull. The way forward is now open.");
+                System.out.println("You swing your sword with determination, slicing through the thick webbing. The web starts to break apart, but the force of your attack leaves your sword slightly dull. The way forward is now open. But the door is still locked");
                 break;
             case "use the key in your hand":
                 System.out.println("You push open the door through the thick, poisonous spiderweb. The venom in the web seeps into your skin, and you feel a sharp pain coursing through your body. Your health decreases by 2.");
                 playerInputBoundary.interact("spiderweb"); // Deduct 2 health points
                 break;
+            case "use key to open the door":
+                System.out.println("Congratulations! You have opened the door and successfully made your way out!");
+                break;
+
 
             case "key":
                 break;
