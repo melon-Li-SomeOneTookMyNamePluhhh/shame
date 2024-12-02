@@ -46,8 +46,8 @@ public class ActionRepository {
                 User_case.PlayerUsercase.inputBoundaryInterface.getFromBag(in);
                 return "You retrieved an item from your bag.";
             case "inspectbag":
-                User_case.PlayerUsercase.inputBoundaryInterface.inspectBag();
-                break;
+                User_case.PlayerUsercase.PlayerInputBoundary.inspectBag();
+                return "There are no items in you bag.";
             case "use the key to open the door":
                 User_case.PlayerUsercase.inputBoundaryInterface.interact("key", "exit");
                 return "You interacted with the environment.";
