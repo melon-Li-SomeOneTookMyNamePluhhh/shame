@@ -38,8 +38,8 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
         RoomInteraction roomInteractor = new RoomInteraction(this.player.getCurrRoom());
         LevelInteractor levelInteractor = new LevelInteractor(this.player.getCurrRoom().getGameLevel());
         if ( roomInteractor.findItem(itemName) == null) {
-            outputBoundary.displayMessage("You can't walk to that destination as it doesn't exist.");
-            return;
+             outputBoundary.displayMessage("You can't walk to that destination as it doesn't exist.");
+             return;
         }
         outputBoundary.displayMessage("You walked to " + itemName);
         player.setLocation(roomInteractor.findItem(itemName));
@@ -58,10 +58,10 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
             outputBoundary.displayMessage("You can't pick up an item when you are holding something.");
             return;
         }
-        if (player.getLocation() == null) {
-            outputBoundary.displayMessage("There is nothing around you to pick up!");
-            return;
-        }
+        // if (player.getLocation() == null) {
+            // outputBoundary.displayMessage("There is nothing around you to pick up!");
+            // return;
+        //}
         if (player.getLocation().getName().equals(itemName)) {
             player.setHolding(new RoomInteraction(player.getCurrRoom()).pickUp(itemName));
             player.setLocation(null);
