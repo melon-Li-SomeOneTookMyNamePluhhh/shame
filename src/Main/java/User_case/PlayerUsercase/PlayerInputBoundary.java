@@ -90,7 +90,7 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
         }
 
         if (player.getLocation() != null && player.getLocation().getName().equals(whatItem)) {
-            new ItemInputBoundary(player.getLocation(), new ItemOutputBoundary()).interact();
+            outputBoundary.displayMessage("you are not standing next to anything to interact with");
             return;
         }
 
