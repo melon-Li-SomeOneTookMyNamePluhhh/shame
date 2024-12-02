@@ -18,7 +18,7 @@ public class EnemyInputBoundary implements EnemyInputBoundaryInterface {
     }
 
     @Override
-    public void performAction() {
+    public int performAction() {
         // This method should be overridden by subclasses or specific use case classes.
         // Placeholder implementation.
         System.out.println("Performing a generic action.");
