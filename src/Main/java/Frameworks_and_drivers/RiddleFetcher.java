@@ -1,4 +1,4 @@
-package Item_with_subclasses_and_API;
+package Frameworks_and_drivers;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -7,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class RiddleFetcher {
 
