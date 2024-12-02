@@ -6,8 +6,8 @@ import Item.Item;
 import java.util.List;
 
 public class Player {
-    private Item location; // The name of the location/item in the Room.room
-    private Room currRoom; // The current Room.room number
+    private Item location; // The name of the location/item in the java.User_case.Room.room
+    private Room currRoom; // The current java.User_case.Room.room number
     private Item holding; // The item currently being held
     private int health; // Health of the player
     private int damage; // Damage the player can deal
@@ -19,7 +19,7 @@ public class Player {
         this.health = health;
         this.damage = damage;
         this.location = null; // Start with no specific location
-        this.currRoom = room; // Default starting Room.room
+        this.currRoom = room; // Default starting java.User_case.Room.room
         this.holding = null; // Start with no item in hand
     }
 
@@ -35,7 +35,7 @@ public class Player {
         this.location = location;
     }
 
-    // Room-related methods
+    // java.User_case.Room-related methods
     public Room getCurrRoom() {
         return currRoom;
     }

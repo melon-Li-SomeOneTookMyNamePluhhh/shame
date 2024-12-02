@@ -46,7 +46,7 @@ public class Main {
 
         dungen.addPlayer(10, 5, 1);
 
-        // Room 1 interactions using GUI
+        // java.User_case.Room 1 interactions using GUI
         GUIUtility.displayOutput(room1.getDescription());
         room1.viewRoom();
 
@@ -84,7 +84,7 @@ public class Main {
         dungen.getPlayer().interact("key", "gate");
         dungen.getPlayer().interact("gate");
 
-        // Check if transitioned to Room 2
+        // Check if transitioned to java.User_case.Room 2
         GUIUtility.displayOutput(room2.getDescription());
         room2.viewRoom();
         dungen.getPlayer().walkTo("torch");

@@ -4,6 +4,8 @@ import Entity.Player;
 import Entity.Item;
 import Entity.Room;
 import Entity.Inventory;
+import User_case.GameLevelsUserCase.LevelInteraction;
+import User_case.RoomUserCase.RoomInteraction;
 
 import java.util.List;
 
@@ -31,14 +33,16 @@ public class inputBoundary implements inputBoundaryInterface {
      */
     @Override
     public void walkTo(String itemName) {
-        if (player.getCurrRoom().hasItem(itemName) == null) {
+        RoomInteraction roomInteractor = new RoomInteraction(this.player.getCurrRoom());
+        LevelInteraction levelInteractor = new LevelInteraction(this.player.getCurrRoom().getGameLevel());
+        if ( roomInteractor.findItem(itemName) == null) {
             outputBoundary.displayMessage("You can't walk to that destination as it doesn't exist.");
             return;
         }
         outputBoundary.displayMessage("You walked to " + itemName);
-        player.setLocation(player.getCurrRoom().hasItem(itemName));
-        if (checkBattle(player.getCurrRoom().hasItem(itemName))) {
-            player.getCurrRoom().launchBattle(player.getCurrRoom().hasItem(itemName));
+        player.setLocation(roomInteractor.findItem(itemName));
+        if (roomInteractor.checkBattle(player.getLocation())) {
+            levelInteractor.launchBattle(roomInteractor.removeBattle(player.getLocation()));
         }
     }
 
@@ -195,15 +199,5 @@ public class inputBoundary implements inputBoundaryInterface {
         player.getLocation().interact(player.getHolding());
     }
 
-
-    /**
-     * Checks if a battle should be triggered for the specified item in the player's current room.
-     *
-     * @param item The {@code Item} to check for a potential battle.
-     * @return {@code true} if a battle is triggered for the specified item, {@code false} otherwise.
-     */
-    public boolean checkBattle(Item item){
-        return player.getCurrRoom().checkBattle(item);
-    }
 }
 
