@@ -166,6 +166,7 @@ public class AppBuilder {
         actionRepository.handleAction(action1);
         // trigger battle skip
         // API skip
+        guiUtility.displayOutput("After solving it, you feel a strange sensation and decide to move forward.");
         String action2 = guiUtility.getValidInput("Try getting your sword from your bag by entering 'dragon " +
                 "fang sword'", actionRepositor.getValidActions());
         actionRepository.handleAction(action2);
