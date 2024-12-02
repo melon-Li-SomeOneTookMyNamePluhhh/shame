@@ -10,6 +10,7 @@ public class Main {
         appBuilder
                 .addTrainingRoom()
                 .addTrainingForest()
+                .lastHorizonValley()
                 .setupPlayerAndGUI()
                 .startGame()
                 .run();
