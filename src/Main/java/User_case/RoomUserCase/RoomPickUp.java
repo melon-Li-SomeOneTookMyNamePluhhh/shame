@@ -1,18 +1,20 @@
 package User_case.RoomUserCase;
 
-import Entity.Room;
 import Entity.Item;
+import Entity.Room;
+import User_case.Items_Usercase.ItemInputBoundary;
 
-public class RoomItemRemover {
+public class RoomPickUp {
     private Room room;
 
-    public RoomItemRemover(Room room) {
+    public RoomPickUp(Room room) {
+
         this.room = room;
     }
 
-    public Item removeItem(String itemName){
+    public Item pickUp(String itemName){
         for (Item item: this.room.getItems()){
-            if (item.getName().equals(itemName)){
+            if (item.getName().equals(itemName) && new ItemInputBoundary(item).pickUp() != null){
                 this.room.getItems().remove(item);
                 return item;
             }
