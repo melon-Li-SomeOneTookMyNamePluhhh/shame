@@ -8,17 +8,15 @@ public interface inputBoundaryInterface {
 
     /**
      * Moves the player to the specified item's location in the current room.
-     *
      * @param itemName The name of the item the player wants to walk to.
      */
-    static void walkTo(String itemName) {}
+    void walkTo(String itemName);
 
     /**
      * Picks up the specified item if the player is able to do so.
-     *
      * @param itemName The name of the item the player wants to pick up.
      */
-    static void pickUp(String itemName) {}
+    void pickUp(String itemName);
 
     /**
      * Interacts with a specified item that the player is holding or near.
@@ -29,32 +27,26 @@ public interface inputBoundaryInterface {
     /**
      * Inspects the contents of the player's bag and lists the items inside.
      */
-    static void inspectBag() {}
+    void inspectBag();
 
     /**
      * Retrieves an item from the player's bag and places it into their hand.
-     *
      * @param itemName The name of the item the player wants to take out of the bag.
      */
-    static void getFromBag(String itemName) {}
+    void getFromBag(String itemName);
 
-    /**
-     * Drops the item currently held by the player at their current location.
-     */
-    static void drop() {}
 
     /**
      * Places the currently held item into the player's bag if there is space.
      */
-    static void putInBag() {}
+    void putInBag();
 
     /**
      * Interacts with an item the player is holding and another item at the player's location.
-     *
-     * @param holdingWhat    The name of the item the player is holding.
+     * @param holdingWhat The name of the item the player is holding.
      * @param itemAtLocation The name of the item at the player's location.
      */
-    static void interact(String holdingWhat, String itemAtLocation) {}
+    void interact(String holdingWhat, String itemAtLocation);
 
 }
 

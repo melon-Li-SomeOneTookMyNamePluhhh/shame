@@ -1,4 +1,4 @@
-package src.Main.app;
+package app;
 
 import Entity.Fire;
 import Entity.Grass;
@@ -10,13 +10,12 @@ import Entity.Equipment;
 import Entity.Exit;
 import Entity.Key;
 import Entity.NPC;
-import Entity.TicTacToe.
 
 import Frameworks_and_drivers.GUIUtility;
 
 import Frameworks_and_drivers.Tictactoe.TicTacToeCLIView;
 import Frameworks_and_drivers.Tictactoe.TicTacToeView;
-import Item.NPC;
+import Entity.NPC;
 import User_case.TicTacToe.BotMoveUseCase;
 import User_case.TicTacToe.PlayerMoveInputBoundary;
 import User_case.TicTacToe.PlayerMoveUseCase;

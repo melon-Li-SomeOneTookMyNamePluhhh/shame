@@ -25,11 +25,11 @@ public class Inventory {
     }
 
     // 添加和移除物品的方法移到用例层处理
-    void addItemInternal(Item item) {
+    public void addItemInternal(Item item) {
         itemsInside.add(item);
     }
 
-    void removeItemInternal(Item item) {
+    public void removeItemInternal(Item item) {
         itemsInside.remove(item);
     }
 }

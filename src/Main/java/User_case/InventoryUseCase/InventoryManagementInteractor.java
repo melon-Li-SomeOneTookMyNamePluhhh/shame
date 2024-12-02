@@ -8,15 +8,15 @@ import java.util.List;
  * The InventoryManagementInteractor class extends InventoryInputBoundary and
  * provides concrete implementations of inventory operations with user feedback.
  */
-public class InventoryManagementInteractor extends InventoryInputBoundary {
+public class InventoryManagementInteractor {
+    private Inventory inventory;
     private final InventoryOutputBoundaryInterface outputBoundary;
 
     public InventoryManagementInteractor(Inventory inventory, InventoryOutputBoundaryInterface outputBoundary) {
-        super(inventory); // 调用父类构造函数来初始化库存
+        this.inventory = inventory; // 调用父类构造函数来初始化库存
         this.outputBoundary = outputBoundary;
     }
 
-    @Override
     public void addItem(Item item) {
         if (inventory.getNumItemsInside() < inventory.getBagSize()) {
             inventory.addItemInternal(item);
@@ -26,7 +26,6 @@ public class InventoryManagementInteractor extends InventoryInputBoundary {
         }
     }
 
-    @Override
     public Item removeItem(String itemName) {
         if (inventory.getNumItemsInside() == 0) {
             outputBoundary.presentRemoveItem("Cannot remove item. Inventory is empty.");
@@ -36,7 +35,7 @@ public class InventoryManagementInteractor extends InventoryInputBoundary {
         List<Item> items = inventory.getItemsInside();
         for (Item item : items) {
             if (item.getName().equals(itemName)) {
-                items.remove(item);
+                inventory.removeItemInternal(item);
                 outputBoundary.presentRemoveItem("Item " + itemName + " has been removed from the inventory.");
                 return item; // 找到物品后立即返回
             }
@@ -46,7 +45,6 @@ public class InventoryManagementInteractor extends InventoryInputBoundary {
         return null;
     }
 
-    @Override
     public List<Item> inspectBag() {
         List<Item> items = inventory.getItemsInside();
         outputBoundary.presentInventoryContents(items);
