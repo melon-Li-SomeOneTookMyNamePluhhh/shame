@@ -1,37 +1,42 @@
-package GUI;
+package interface_adaptor;
+
+import interface_adaptor.UserInputControlle;
+import Entity.Player;
+import interface_adaptor.GUIPresenter;
+import User_case.GUI.GUIInputBoundry;
+import User_case.GUI.GUIOutputBoundry;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import Player. Player;
 
-
-public class GameGUI extends JFrame {
+/**
+ * GameGUI serves as the GUI interface, part of the Interface Adapters layer.
+ */
+public class GameGUI extends JFrame implements GUIOutputBoundry {
     private Player player;
-    private JTextArea gameOutput; // To display system messages
-    private JTextField userInput; // To get user input
-    private JLabel healthLabel; // Display player's health
-    private JLabel damageLabel; // Display player's damage
+    private JTextArea gameOutput;
+    private JTextField userInput;
+    private JLabel healthLabel;
+    private final UserInputControlle controller;
 
-    public GameGUI(Player player) {
+    public GameGUI(Player player, GUIInputBoundry interactor) {
         this.player = player;
+        this.controller = new UserInputControlle(interactor);
         initializeGUI();
     }
 
     private void initializeGUI() {
-        setTitle("Text-Based Adventure Game");
+        setTitle("The Lord of Magic Ring!");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLayout(new BorderLayout());
 
         // Top Panel: Display player's stats
-        JPanel statsPanel = new JPanel();
-        statsPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        JPanel statsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         healthLabel = new JLabel("Health: " + player.getHealth());
-        damageLabel = new JLabel("Damage: " + player.getDamage());
         statsPanel.add(healthLabel);
-        statsPanel.add(damageLabel);
         add(statsPanel, BorderLayout.NORTH);
 
         // Center Panel: Game Output
@@ -43,8 +48,7 @@ public class GameGUI extends JFrame {
         add(scrollPane, BorderLayout.CENTER);
 
         // Bottom Panel: User Input
-        JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new BorderLayout());
+        JPanel inputPanel = new JPanel(new BorderLayout());
         userInput = new JTextField();
         JButton submitButton = new JButton("Submit");
         inputPanel.add(userInput, BorderLayout.CENTER);
@@ -55,28 +59,26 @@ public class GameGUI extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                handleUserInput(userInput.getText());
-                userInput.setText(""); // Clear input field
+                String input = userInput.getText().trim().toLowerCase();
+                userInput.setText("");
+                controller.handleInput(input);
             }
         });
 
         setVisible(true);
     }
 
-    // Update stats
-    public void updateStats() {
-        healthLabel.setText("Health: " + player.getHealth());
-        damageLabel.setText("Damage: " + player.getDamage());
+    public void setInputBoundary(GUIInputBoundry interactor) {
+        controller.setInputBoundary(interactor); // Public method to set interactor
     }
 
-    // Display output in the text area
-    public void displayOutput(String message) {
+    @Override
+    public void displayResult(String message) {
         gameOutput.append(message + "\n");
         gameOutput.setCaretPosition(gameOutput.getDocument().getLength());
     }
 
-    // Handle user input
-    private void handleUserInput(String input) {
-        Controller.handleInput(input, this, player);
+    public void updateStats() {
+        healthLabel.setText("Health: " + player.getHealth());
     }
 }
