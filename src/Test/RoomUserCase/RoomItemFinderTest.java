@@ -8,6 +8,8 @@ import User_case.RoomUserCase.RoomItemAdder;
 import User_case.RoomUserCase.RoomItemFinder;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class RoomItemFinderTest {
 
     @Test
@@ -19,6 +21,6 @@ class RoomItemFinderTest {
         adder.addItem(item);
         adder.addItem(key);
         RoomItemFinder finder = new RoomItemFinder(room);
-        assert (item, finder.findItem("exit"));
+        assertEquals(item, finder.findItem("exit"));
     }
 }
