@@ -2,6 +2,7 @@ package User_case.InventoryUseCase;
 
 import Entity.Inventory;
 import Entity.Item;
+import java.util.List;
 
 /**
  * The InventoryInputBoundary class implements inventory actions.
@@ -41,5 +42,11 @@ public class InventoryInputBoundary implements InventoryInputBoundaryInterface {
             System.out.println("Item " + itemName + " has been removed from the inventory.");
         }
     }
+
+    @Override
+    public List<Item> inspectBag() {
+        return inventory.getItemsInside();
+    }
 }
+
 
