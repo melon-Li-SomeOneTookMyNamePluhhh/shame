@@ -18,7 +18,6 @@ public class LevelInteractor{
         this.levelCompleteManager = new LevelCompleteManager(levels);
         this.levelBattleLauncher = new LevelBattleLauncher(levels);
     }
-
     public void addLevel(Room room){this.levelAdder.addLevel(room);}
 
     public void addPlayer(Player player){

@@ -4,6 +4,7 @@ import Entity.Equipment;
 import Entity.Key;
 import Entity.NPC;
 import Entity.Item;
+import User_case.GameLevelsUserCase.LevelInteractor;
 
 import java.util.Scanner;
 
@@ -35,7 +36,8 @@ public class ItemInputBoundary implements ItemInputBoundaryInterface {
                     exit.setLocked(false);  // Unlock the exit
                     keyInHand.setUsed(true);  // Mark the key as used
                     OutputBoundary.displayOutput("You unlocked the door! You walk through the doorway.");
-                    exit.getwhichRoom().leave();
+                    LevelInteractor level = new LevelInteractor(exit.getwhichRoom().getGameLevel());
+                    level.levelComplete(exit.getwhichRoom().getGameLevel().getPlayer());
                 }
             }
 
