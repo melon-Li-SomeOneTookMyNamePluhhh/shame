@@ -12,7 +12,7 @@ public class EnemyActionInteractor implements EnemyInputBoundary {
     }
 
     @Override
-    public void performAction() {
+    public int performAction() {
         // 使用 public getter 方法来调用之前的 protected 方法
         if (enemy.shouldUseSpecialAbilityPublic()) {
             enemy.useSpecialAbility();
@@ -25,21 +25,21 @@ public class EnemyActionInteractor implements EnemyInputBoundary {
                     damage = enemy.getAttackList().normalAttack();
                     outputBoundary.presentAttack(enemy.getName() +
                             " used a normal attack, dealing " + damage + " damage.");
-                    break;
+                    return damage;
                 case "critical":
                     damage = enemy.getAttackList().criticalStrike();
                     outputBoundary.presentAttack(enemy.getName() +
                             " used a critical strike, dealing " + damage + " damage.");
-                    break;
+                    return damage;
                 case "defense":
                     int absorbed = enemy.getAttackList().defense();
                     outputBoundary.presentAttack(enemy.getName() +
                             " used defense, absorbing " + absorbed + " damage.");
-                    break;
+                    return enemy.getDamage();
                 default:
                     outputBoundary.presentAttack(enemy.getName() +
                             " used an unknown attack type.");
-                    break;
+                    return enemy.getDamage();
             }
         }
     }

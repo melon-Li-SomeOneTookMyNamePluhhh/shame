@@ -10,6 +10,7 @@ public abstract class Enemy {
     protected Random random;
     protected final String type; // 固定的类型属性
     protected boolean usedSpecialAbility = false;
+    protected int damage; // Damage dealt in the latest attack
 
     // 构造函数
     public Enemy(String name, String description, String type) {
@@ -58,6 +59,8 @@ public abstract class Enemy {
     public AttackList getAttackList() {
         return attackList;
     }
+
+    public int getDamage() { return damage; }
 }
 
 
