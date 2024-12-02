@@ -1,13 +1,17 @@
 package User_case.EnemyUseCase;
 
 import Entity.Enemy;
+import User_case.EnemyUseCase.EnemyOutputBoundary;
 
-public class EnemyActionInteractor implements EnemyInputBoundary {
-    private final Enemy enemy;
+/**
+ * The EnemyActionInteractor class extends EnemyInputBoundary and provides concrete
+ * implementations of enemy actions.
+ */
+public class EnemyActionInteractor extends EnemyInputBoundary {
     private final EnemyOutputBoundary outputBoundary;
 
     public EnemyActionInteractor(Enemy enemy, EnemyOutputBoundary outputBoundary) {
-        this.enemy = enemy;
+        super(enemy); // 调用父类构造函数来初始化敌人
         this.outputBoundary = outputBoundary;
     }
 
@@ -16,13 +20,14 @@ public class EnemyActionInteractor implements EnemyInputBoundary {
         // 使用 public getter 方法来调用之前的 protected 方法
         if (enemy.shouldUseSpecialAbilityPublic()) {
             enemy.useSpecialAbility();
-            outputBoundary.presentAttack(enemy.getName() + " used its special ability.");
+            outputBoundary.presentAttack(getEnemyName() + " used its special ability.");
         } else {
-            String attackType = enemy.getRandomAttackPublic();
+            String attackType = getRandomAttack();
             int damage = 0;
             switch (attackType) {
                 case "normal":
                     damage = enemy.getAttackList().normalAttack();
+
                     outputBoundary.presentAttack(enemy.getName() +
                             " used a normal attack, dealing " + damage + " damage.");
                     return damage;
