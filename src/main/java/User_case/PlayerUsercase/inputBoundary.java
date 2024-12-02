@@ -13,7 +13,8 @@ import java.util.List;
  * The inputBoundary class implements player actions and interactions in the game.
  * It processes user commands and delegates display messages to the outputBoundary.
  */
-public class inputBoundary implements inputBoundaryInterface {
+public class
+inputBoundary implements inputBoundaryInterface {
     private Player player;
     private outputBoundaryInterface outputBoundary;
 
@@ -168,7 +169,7 @@ public class inputBoundary implements inputBoundaryInterface {
      * @param itemAtLocation The name of the item at the player's location.
      */
     @Override
-    public void interact(String holdingWhat, String itemAtLocation) {
+    public void interact() {
         if (player.getHolding() == null) {
             outputBoundary.displayMessage("You have nothing in your hand to interact with.");
             return;
