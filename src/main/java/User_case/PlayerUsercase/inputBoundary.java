@@ -2,6 +2,7 @@ package User_case.PlayerUsercase;
 
 import Entity.Player;
 import Entity.Item;
+import Entity.Room;
 import Entity.Inventory;
 import User_case.GameLevelsUserCase.LevelInteraction;
 import User_case.RoomUserCase.RoomInteraction;
@@ -197,5 +198,6 @@ public class inputBoundary implements inputBoundaryInterface {
         player.getHolding().interact(player.getLocation());
         player.getLocation().interact(player.getHolding());
     }
+
 }
 

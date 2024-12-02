@@ -51,5 +51,6 @@ public interface inputBoundaryInterface {
      * @param itemAtLocation The name of the item at the player's location.
      */
     void interact(String holdingWhat, String itemAtLocation);
+
 }
 

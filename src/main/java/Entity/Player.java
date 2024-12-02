@@ -23,9 +23,9 @@ public class Player {
         return location;
     }
 
-    public Inventory getInventory() {
-        return inventory;
-    }
+    public Inventory getInventory(){
+        return inventory;}
+
 
     public void setLocation(Item location) {
         this.location = location;
