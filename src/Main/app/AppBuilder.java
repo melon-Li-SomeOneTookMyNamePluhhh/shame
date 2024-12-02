@@ -134,9 +134,7 @@ public class AppBuilder {
         Grass Clover = new Grass ("Clover","is a sly manipulator who thrives on deception, using charm " +
                 "and lies to exploit others for personal gain. Marked by a twisted four-leaf clover, they leave " +
                 "betrayal and chaos wherever they go.");
-        Exit spiderweb = new Exit("spiderweb", "",
-                "The exit of the room is blocked by a spider web. Better get rid of it before passing.",
-                "regular");
+        NPC forest_exit = new NPC ("forest_exit", "", "", "");
 
 
         Room room2 = new Room("This is the training forest for beginners!.");
@@ -147,7 +145,7 @@ public class AppBuilder {
         roomInteractor.addBattle(Oldman, GhostRider);
         roomInteractor.addItem(wandofwater);
         roomInteractor.addBattle(wandofwater, Clover);
-        roomInteractor.addItem(spiderweb);
+        roomInteractor.addItem(forest_exit);
         LevelInteractor levelInteractor = new LevelInteractor(dungen);
         levelInteractor.addLevel(room2);
         Room trainningroom = dungen.getLevels().get(1);
@@ -165,37 +163,21 @@ public class AppBuilder {
                 actionRepositor.getValidActions());
         actionRepository.handleAction(action1);
         // trigger battle skip
+        String action2 = guiUtility.getValidInput("After a hard-fought victory, you catch your breath and look" +
+                " at the old man.(type 'interact' to talk to the old man)", actionRepositor.getValidActions());
+        actionRepository.handleAction(action2);
         // API skip
         guiUtility.displayOutput("After solving it, you feel a strange sensation and decide to move forward.");
-        String action2 = guiUtility.getValidInput("Try getting your sword from your bag by entering 'dragon " +
-                "fang sword'", actionRepositor.getValidActions());
-        actionRepository.handleAction(action2);
-        String action3 = guiUtility.getValidInput("There are too many things in your hands, try putting what " +
-                "you are holding in your bag by entering 'put it in bag'.", actionRepositor.getValidActions());
+
+        String action3 = guiUtility.getValidInput("In the distance, you see a glimmer of light. As you get " +
+                "closer, you discover it's a Wand of Water. Quickly, type 'walk to wand of water' to take a " +
+                "closer look!", actionRepositor.getValidActions());
         actionRepository.handleAction(action3);
-        String action4 = guiUtility.getValidInput("There is a mail-box in the center of the room. Enter 'walk " +
-                "to the mailbox' to move towards the mail-box", actionRepositor.getValidActions());
-        actionRepository.handleAction(action4);
-        String action5 = guiUtility.getValidInput("There is a key in the mail-box. Enter 'pick up key' to " +
-                "grab the key", actionRepositor.getValidActions());
-        actionRepository.handleAction(action5);
-        String action6 = guiUtility.getValidInput("Look ahead! It seems to be a door, but it's completely " +
-                "shrouded in a massive spiderweb that glistens ominously in the dim light. Try to walk to there by " +
-                "entering walk to the spider", actionRepositor.getValidActions());
-        actionRepository.handleAction(action6);
-
-        String action7 = guiUtility.getValidInput( "You feel an eerie chill as you step closer. Now, you have" +
-                " three choices:\n\n"
-                + "1. clean the spiderweb – Carefully remove the sticky threads, hoping to uncover what lies beneath.\n"
-                + "2. attack it with your sword – Strike the web with all your might, ready for whatever might emerge.\n"
-                + "3. use the key in your hand – Perhaps this key is meant for the door hidden beyond the web.\n\n"
-                + "What will you do?", actionRepositor.getValidActions());
-
-        actionRepository.handleAction(action7);
-
-
-
-
+        //triger battle
+        guiUtility.displayOutput("You rid the land of evil, deeply moving the Spirit of the Forest. In gratitude, it " +
+                "decides to grant you an additional 10 health points to help you face the final trial. Health +10");
+        int health = player.getHealth() + 10;
+        player.setHealth(health);
         return this;
     }
 
