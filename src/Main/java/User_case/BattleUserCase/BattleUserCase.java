@@ -1,33 +1,22 @@
-package Battle;
+package User_case.BattleUserCase;
 
-import Player.Player;
-import Item.Item;
-import Item.Equipment;
-import Enemy.Enemy;
-import GUI.GUIUtility;
+import Entity.Battle;
+import Entity.Enemy;
+import User_case.EnemyUseCase.EnemyActionInteractor;
+import Frameworks_and_drivers.GUIUtility;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
 
-public class Battle {
-    private Player player;
-    private Enemy enemy;
-    private boolean specialUsed;
+public class BattleUserCase {
+    private Battle battle;
 
-    public Battle(Player player, Enemy enemy) {
-        this.player = player;
-        this.enemy = enemy;
-        this.specialUsed = false;
+    public BattleUserCase(Battle battle) {
+        this.battle = battle;
     }
 
-    /**
-     * Asks the user to choose an item from the player's inventory
-     * and adds its damage to the player's total damage.
-     */
     public void askForEquipment() {
-        List<Item> itemsInBag = player.getInventory().getItemsInside();
+        List<Item> itemsInBag = battle.getPlayer().getInventory().getItemsInside();
         if (itemsInBag.isEmpty()) {
             GUIUtility.displayOutput("Your bag is empty! No equipment to choose.");
             return;
@@ -50,7 +39,7 @@ public class Battle {
         // Find the selected item and add its damage to the player's damage
         for (Item item : itemsInBag) {
             if (item.getName().equalsIgnoreCase(chosenItemName)) {
-                player.setDamage(player.getDamage() + item.getDamage());
+                battle.getPlayer().setDamage(battle.getPlayer().getDamage() + item.getDamage());
                 GUIUtility.displayOutput("You chose: " + chosenItemName + ". Your new damage is: " + player.getDamage());
                 return;
             }
@@ -82,8 +71,8 @@ public class Battle {
         }
 
         // Update player's damage and ensure it's rounded up to the nearest integer
-        int newDamage = (int) Math.ceil(player.getDamage() * multiplier);
-        player.setDamage(newDamage);
+        int newDamage = (int) Math.ceil(battle.getPlayer().getDamage() * multiplier);
+        battle.getPlayer().setDamage(newDamage);
 
         // Display the result to the user
         GUIUtility.displayOutput("Element comparison: " +
@@ -99,23 +88,23 @@ public class Battle {
      */
     public void battleRound() {
         // Loop while both player and enemy are alive
-        while (player.getHealth() > 0 && enemy.getHealth() > 0) {
+        while (battle.getPlayer().getHealth() > 0 && battle.getEnemy().getHealth() > 0) {
             // Enemy attacks player
-            int enemyDamage = enemy.performAction();
-            player.setHealth(player.getHealth() - enemyDamage);
+            int enemyDamage = new EnemyActionInteractor(battle.getEnemy(), new ).performAction();
+            battle.getEnemy().setHealth(battle.getPlayer().getHealth() - enemyDamage);
 
             // Player attacks enemy
-            enemy.setHealth(enemy.getHealth() - player.getDamage());
+            battle.getEnemy().setHealth(battle.getEnemy().getHealth() - battle.getPlayer().getDamage());
 
             // Display updated health
-            GUIUtility.displayOutput("Your remaining health: " + player.getHealth());
-            GUIUtility.displayOutput(enemy.getName() + "'s remaining health: " + enemy.getHealth());
+            GUIUtility.displayOutput("Your remaining health: " + battle.getPlayer().getHealth());
+            GUIUtility.displayOutput(battle.getEnemy().getName() + "'s remaining health: " + battle.getEnemy().getHealth());
 
             // Check if anyone is defeated
-            if (player.getHealth() <= 0) {
+            if (battle.getPlayer().getHealth() <= 0) {
                 GUIUtility.displayOutput("You have been defeated!");
                 return;
-            } else if (enemy.getHealth() <= 0) {
+            } else if (battle.getEnemy().getHealth() <= 0) {
                 GUIUtility.displayOutput("You have defeated the enemy!");
                 return;
             }
