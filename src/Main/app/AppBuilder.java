@@ -82,21 +82,29 @@ public class AppBuilder {
         //room start
         Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
         guiUtility.displayOutput("As a gift for beginner, we decide to give you a Flame Dragon Bow to you!");
-        String action1 = guiUtility.getValidInput("Try to inspect your bag by entering 'inspectbag' to inspect the bag!", actionRepositor.getValidActions());
+        String action1 = guiUtility.getValidInput("Try to inspect your bag by entering 'inspectbag' to inspect" +
+                " the bag!", actionRepositor.getValidActions());
         actionRepository.handleAction(action1);
         // Step 1: Get user input for each action
-        String action2 = guiUtility.getValidInput("Try getting your sword from your bag by entering 'dragon fang sword'", actionRepositor.getValidActions());
+        String action2 = guiUtility.getValidInput("Try getting your sword from your bag by entering 'dragon " +
+                "fang sword'", actionRepositor.getValidActions());
         actionRepository.handleAction(action2);
-        String action3 = guiUtility.getValidInput("There are too many things in your hands, try putting what you are holding in your bag by entering 'put it in bag'.", actionRepositor.getValidActions());
+        String action3 = guiUtility.getValidInput("There are too many things in your hands, try putting what " +
+                "you are holding in your bag by entering 'put it in bag'.", actionRepositor.getValidActions());
         actionRepository.handleAction(action3);
-        String action4 = guiUtility.getValidInput("There is a mail-box in the center of the room. Enter 'walk to the mailbox' to move towards the mail-box", actionRepositor.getValidActions());
+        String action4 = guiUtility.getValidInput("There is a mail-box in the center of the room. Enter 'walk " +
+                "to the mailbox' to move towards the mail-box", actionRepositor.getValidActions());
         actionRepository.handleAction(action4);
-        String action5 = guiUtility.getValidInput("There is a key in the mail-box. Enter 'pick up key' to grab the key", actionRepositor.getValidActions());
+        String action5 = guiUtility.getValidInput("There is a key in the mail-box. Enter 'pick up key' to " +
+                "grab the key", actionRepositor.getValidActions());
         actionRepository.handleAction(action5);
-        String action6 = guiUtility.getValidInput("Look ahead! It seems to be a door, but it's completely shrouded in a massive spiderweb that glistens ominously in the dim light. Try to walk to there by entering walk to the spider", actionRepositor.getValidActions());
+        String action6 = guiUtility.getValidInput("Look ahead! It seems to be a door, but it's completely " +
+                "shrouded in a massive spiderweb that glistens ominously in the dim light. Try to walk to there by " +
+                "entering walk to the spider", actionRepositor.getValidActions());
         actionRepository.handleAction(action6);
 
-        String action7 = guiUtility.getValidInput( "You feel an eerie chill as you step closer. Now, you have three choices:\n\n"
+        String action7 = guiUtility.getValidInput( "You feel an eerie chill as you step closer. Now, you have" +
+                " three choices:\n\n"
                 + "1. clean the spiderweb – Carefully remove the sticky threads, hoping to uncover what lies beneath.\n"
                 + "2. attack it with your sword – Strike the web with all your might, ready for whatever might emerge.\n"
                 + "3. use the key in your hand – Perhaps this key is meant for the door hidden beyond the web.\n\n"
@@ -118,7 +126,7 @@ public class AppBuilder {
         Equipment FlameDragonBow = new Equipment("Flame Dragon Bow","A legendary weapon bestowed by the Flame Dragon " +
                 "itself, each bow is engulfed in roaring flames. When fired, it burns as fiercely as the dragon's " +
                 "breath.","on the floor",3,"fire");
-        NPC Jack = new NPC("Jack","An elderly scavenger","by the side of the forest",
+        NPC Oldman = new NPC("Oldman","An elderly scavenger","by the side of the forest",
                 "One man’s scrap is another’s treasure. What will your story leave behind, traveler?");
         Equipment wandofwater = new Equipment("Wand of Water","A crystal wand etched with glowing " +
                 "blue runes, it channels the tranquil yet powerful essence of water, controlling tides and unleashing " +
@@ -135,14 +143,57 @@ public class AppBuilder {
 
 
         RoomInteraction roomInteractor = new RoomInteraction(room2);
-        roomInteractor.addItem(FlameDragonBow);
-        roomInteractor.addItem(Jack);
-        roomInteractor.addBattle(FlameDragonBow, GhostRider);
+        roomInteractor.addItem(Oldman);
+        roomInteractor.addBattle(Oldman, GhostRider);
         roomInteractor.addItem(wandofwater);
         roomInteractor.addBattle(wandofwater, Clover);
         roomInteractor.addItem(spiderweb);
         LevelInteractor levelInteractor = new LevelInteractor(dungen);
         levelInteractor.addLevel(room2);
+        Room trainningroom = dungen.getLevels().get(1);
+
+        PlayerOutBoundary outputBoundary = new PlayerOutBoundary();
+        PlayerInputBoundary inputBoundary = new PlayerInputBoundary(player, outputBoundary);
+        actionRepositor actionRepository = new actionRepositor(inputBoundary);
+
+        //room start
+        Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+        guiUtility.displayOutput("now, you are already get familiar with the actions that you can make. Let’s go to the" +
+                " training valley to practice your battle skills!\n");
+        String action1 = guiUtility.getValidInput("Entering the forest, you see an old man not far away. You " +
+                "prepare to ask him for directions (type 'walktooldman' to talk to the old man). ",
+                actionRepositor.getValidActions());
+        actionRepository.handleAction(action1);
+        // trigger battle skip
+        // API skip
+        String action2 = guiUtility.getValidInput("Try getting your sword from your bag by entering 'dragon " +
+                "fang sword'", actionRepositor.getValidActions());
+        actionRepository.handleAction(action2);
+        String action3 = guiUtility.getValidInput("There are too many things in your hands, try putting what " +
+                "you are holding in your bag by entering 'put it in bag'.", actionRepositor.getValidActions());
+        actionRepository.handleAction(action3);
+        String action4 = guiUtility.getValidInput("There is a mail-box in the center of the room. Enter 'walk " +
+                "to the mailbox' to move towards the mail-box", actionRepositor.getValidActions());
+        actionRepository.handleAction(action4);
+        String action5 = guiUtility.getValidInput("There is a key in the mail-box. Enter 'pick up key' to " +
+                "grab the key", actionRepositor.getValidActions());
+        actionRepository.handleAction(action5);
+        String action6 = guiUtility.getValidInput("Look ahead! It seems to be a door, but it's completely " +
+                "shrouded in a massive spiderweb that glistens ominously in the dim light. Try to walk to there by " +
+                "entering walk to the spider", actionRepositor.getValidActions());
+        actionRepository.handleAction(action6);
+
+        String action7 = guiUtility.getValidInput( "You feel an eerie chill as you step closer. Now, you have" +
+                " three choices:\n\n"
+                + "1. clean the spiderweb – Carefully remove the sticky threads, hoping to uncover what lies beneath.\n"
+                + "2. attack it with your sword – Strike the web with all your might, ready for whatever might emerge.\n"
+                + "3. use the key in your hand – Perhaps this key is meant for the door hidden beyond the web.\n\n"
+                + "What will you do?", actionRepositor.getValidActions());
+
+        actionRepository.handleAction(action7);
+
+
+
 
         return this;
     }
