@@ -2,112 +2,84 @@ package User_case.BattleUserCase;
 
 import Entity.Battle;
 import Entity.Enemy;
-import User_case.EnemyUseCase.EnemyActionInteractor;
+import Entity.Player;
 import Frameworks_and_drivers.GUIUtility;
+import User_case.EnemyUseCase.EnemyInputBoundary;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class BattleUserCase {
+public class BattleUserCase implements BattleInputBoundaryInterface{
     private Battle battle;
+    private final BattleOutputBoundary outputBoundary;
 
-    public BattleUserCase(Battle battle) {
+    public BattleUserCase(Battle battle, BattleOutputBoundary outputBoundary) {
         this.battle = battle;
+        this.outputBoundary = outputBoundary;
     }
 
-    public void askForEquipment() {
-        List<Item> itemsInBag = battle.getPlayer().getInventory().getItemsInside();
+    @Override
+    public void askForEquipment(Player player) {
+        List<Item> itemsInBag = player.getInventory().getItemsInside();
         if (itemsInBag.isEmpty()) {
-            GUIUtility.displayOutput("Your bag is empty! No equipment to choose.");
+            outputBoundary.displayMessage("Your bag is empty! No equipment to choose.");
             return;
         }
 
-        // Create a list of item names for the GUI
-        List<String> itemNames = new ArrayList<>();
-        for (Item item : itemsInBag) {
-            itemNames.add(item.getName());
-        }
-        String[] options = itemNames.toArray(new String[0]);
-
-        // Ask the user to choose an item
+        String[] options = itemsInBag.stream().map(Item::getName).toArray(String[]::new);
         String chosenItemName = (String) GUIUtility.getInput("Choose an item from your bag:", options);
+
         if (chosenItemName == null) {
-            GUIUtility.displayOutput("No item selected.");
+            outputBoundary.displayMessage("No item selected.");
             return;
         }
 
-        // Find the selected item and add its damage to the player's damage
-        for (Item item : itemsInBag) {
-            if (item.getName().equalsIgnoreCase(chosenItemName)) {
-                battle.getPlayer().setDamage(battle.getPlayer().getDamage() + item.getDamage());
-                GUIUtility.displayOutput("You chose: " + chosenItemName + ". Your new damage is: " + player.getDamage());
-                return;
-            }
-        }
-
-        GUIUtility.displayOutput("Invalid selection. No damage added.");
+        itemsInBag.stream()
+                .filter(item -> item.getName().equalsIgnoreCase(chosenItemName))
+                .findFirst()
+                .ifPresentOrElse(item -> {
+                    player.setDamage(player.getDamage() + item.getDamage());
+                    outputBoundary.displayMessage("Equipped: " + item.getName() + ". New damage: " + player.getDamage());
+                }, () -> outputBoundary.displayMessage("Invalid selection."));
     }
 
-    /**
-     * Compares the element of the player's item with the enemy's element
-     * and adjusts the player's damage accordingly.
-     * @param item  The player's chosen item.
-     * @param enemy The enemy being fought.
-     */
-    public void compareElement(Equipment item, Enemy enemy) {
-        String playerElement = item.getElement().toLowerCase();
+    @Override
+    public void compareElement(Player player, Equipment equipment, Enemy enemy) {
+        if (equipment == null || enemy == null) {
+            outputBoundary.displayMessage("Element comparison failed.");
+            return;
+        }
+
+        String playerElement = equipment.getElement().toLowerCase();
         String enemyElement = enemy.getType().toLowerCase();
+        double multiplier = switch (playerElement) {
+            case "fire" -> enemyElement.equals("grass") ? 1.2 : enemyElement.equals("water") ? 0.8 : 1.0;
+            case "grass" -> enemyElement.equals("water") ? 1.2 : enemyElement.equals("fire") ? 0.8 : 1.0;
+            case "water" -> enemyElement.equals("fire") ? 1.2 : enemyElement.equals("grass") ? 0.8 : 1.0;
+            default -> 1.0;
+        };
+        int newDamage = (int) Math.ceil(player.getDamage() * multiplier);
+        player.setDamage(newDamage);
 
-        // Calculate damage multiplier based on element comparison
-        double multiplier = 1.0;
-        if (playerElement.equals("fire") && enemyElement.equals("grass") ||
-                playerElement.equals("grass") && enemyElement.equals("water") ||
-                playerElement.equals("water") && enemyElement.equals("fire")) {
-            multiplier = 1.2; // Player has an advantage
-        } else if (playerElement.equals("fire") && enemyElement.equals("water") ||
-                playerElement.equals("grass") && enemyElement.equals("fire") ||
-                playerElement.equals("water") && enemyElement.equals("grass")) {
-            multiplier = 0.8; // Player is at a disadvantage
-        }
-
-        // Update player's damage and ensure it's rounded up to the nearest integer
-        int newDamage = (int) Math.ceil(battle.getPlayer().getDamage() * multiplier);
-        battle.getPlayer().setDamage(newDamage);
-
-        // Display the result to the user
-        GUIUtility.displayOutput("Element comparison: " +
-                "\nPlayer's element: " + playerElement +
-                "\nEnemy's element: " + enemyElement +
-                "\nYour damage is now: " + newDamage);
+        outputBoundary.displayMessage("Element comparison complete. New damage: " + newDamage);
     }
 
+    @Override
+    public void battleRound(Player player, Enemy enemy, EnemyInputBoundary boundary) {
+        while (player.getHealth() > 0 && enemy.getHealth() > 0) {
+            int enemyDamage = boundary.performAction();
+            player.setHealth(player.getHealth() - enemyDamage);
+            enemy.setHealth(enemy.getHealth() - player.getDamage());
 
-    /**
-     * Executes a single round of battle between the player and the enemy.
-     * Each round updates health and checks for the end of the battle.
-     */
-    public void battleRound() {
-        // Loop while both player and enemy are alive
-        while (battle.getPlayer().getHealth() > 0 && battle.getEnemy().getHealth() > 0) {
-            // Enemy attacks player
-            int enemyDamage = new EnemyActionInteractor(battle.getEnemy(), new ).performAction();
-            battle.getEnemy().setHealth(battle.getPlayer().getHealth() - enemyDamage);
+            outputBoundary.displayMessage("Player health: " + player.getHealth());
+            outputBoundary.displayMessage("Enemy health: " + enemy.getHealth());
 
-            // Player attacks enemy
-            battle.getEnemy().setHealth(battle.getEnemy().getHealth() - battle.getPlayer().getDamage());
-
-            // Display updated health
-            GUIUtility.displayOutput("Your remaining health: " + battle.getPlayer().getHealth());
-            GUIUtility.displayOutput(battle.getEnemy().getName() + "'s remaining health: " + battle.getEnemy().getHealth());
-
-            // Check if anyone is defeated
-            if (battle.getPlayer().getHealth() <= 0) {
-                GUIUtility.displayOutput("You have been defeated!");
+            if (player.getHealth() <= 0) {
+                outputBoundary.displayMessage("You were defeated!");
                 return;
-            } else if (battle.getEnemy().getHealth() <= 0) {
-                GUIUtility.displayOutput("You have defeated the enemy!");
+            } else if (enemy.getHealth() <= 0) {
+                outputBoundary.displayMessage("Enemy defeated!");
                 return;
             }
         }
     }
-}
+    }
