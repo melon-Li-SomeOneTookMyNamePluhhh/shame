@@ -1,4 +1,5 @@
 package User_case;
 
-public class EnemyOutputBoundary {
+public interface EnemyOutputBoundary {
+    void presentAttack(String message);
 }

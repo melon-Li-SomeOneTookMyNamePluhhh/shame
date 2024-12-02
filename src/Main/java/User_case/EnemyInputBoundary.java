@@ -1,4 +1,5 @@
 package User_case;
 
-public class EnemyInputBoundary {
+public interface EnemyInputBoundary {
+    void performAction();
 }
