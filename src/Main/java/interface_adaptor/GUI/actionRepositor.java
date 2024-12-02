@@ -28,7 +28,7 @@ public class actionRepositor {
         validActions.add("key");
         validActions.add("sword");
         validActions.add("torch");
-        validActions.add("DragonfangSword");
+        validActions.add("dragon fang sword");
     }
 
     // Instance method to return all valid actions
@@ -62,7 +62,7 @@ public class actionRepositor {
             case "use the key to open the door":
                 playerInputBoundary.interact("key", "exit");
                 break;
-            case "DragonfangSword":
+            case "dragon fang sword":
                 playerInputBoundary.getFromBag(in);
                 break;
             case "key":

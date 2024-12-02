@@ -50,13 +50,9 @@ public class AppBuilder {
         Key key = new Key("mail_box", "There is a key in the mail_box!", "a key lies on the floor", 1, "regular");
         Exit gate = new Exit("gate", "The exit is covered by a thick spider web", "There is a heavy gate in " +
                 "front of you.","regular");
-        Equipment sword = new Equipment("Dragon fang Sword",
+        Equipment sword = new Equipment("dragon fang sword",
                 "A weapon bestowed upon warriors chosen by the Dragon Clan. It holds the power of the dragon!",
                 "A sword is stuck on the wall", 4, null);
-        Inventory inventory = new Inventory(5);
-        InventoryOutputBoundary inventoryOutputBoundary = new InventoryOutputBoundary();
-        InventoryManagementInteractor InventoryManagementInteractor = new InventoryManagementInteractor(inventory, inventoryOutputBoundary);
-        InventoryManagementInteractor.addItem(sword);
 
         Room room1 = new Room("This is the training room for beginners!");
         RoomInteraction roomInteractor = new RoomInteraction(room1);
@@ -67,7 +63,14 @@ public class AppBuilder {
         LevelInteractor levelInteractor = new LevelInteractor(dungen);
         levelInteractor.addLevel(room1);
         Room startingRoom = dungen.getLevels().get(0);
-        Player player = new Player(5,15,2,startingRoom); // Assume Player is properly initialized
+
+        this.player = new Player(5,15,2,startingRoom);
+        Inventory inventory = this.player.getInventory();
+        InventoryOutputBoundary inventoryOutputBoundary = new InventoryOutputBoundary();
+        InventoryManagementInteractor InventoryManagementInteractor = new InventoryManagementInteractor(inventory, inventoryOutputBoundary);
+        InventoryManagementInteractor.addItem(sword);
+
+        // Player player = new Player(5,15,2,startingRoom); // Assume Player is properly initialized
         PlayerOutBoundary outputBoundary = new PlayerOutBoundary();
         PlayerInputBoundary inputBoundary = new PlayerInputBoundary(player, outputBoundary);
         actionRepositor actionRepository = new actionRepositor(inputBoundary);
@@ -174,7 +177,7 @@ public class AppBuilder {
         LevelInteractor levelInteracto = new LevelInteractor(dungen);
         Room startingRoom = dungen.getLevels().get(0);
 
-        Player player = new Player(5,15,2,startingRoom); // Assume Player is properly initialized
+        this.player = new Player(5,15,2,startingRoom); // Assume Player is properly initialized
         PlayerOutBoundary outputBoundary = new PlayerOutBoundary();
         PlayerInputBoundary inputBoundary = new PlayerInputBoundary(player, outputBoundary);
         actionRepositor actionRepository = new actionRepositor(inputBoundary);
