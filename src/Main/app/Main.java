@@ -1,17 +1,20 @@
-import DungenKeeper.DungenBuilder;
-import DungenKeeper.Room;
-import Enemy.Enemy;
-import Enemy.Grass;
-import Enemy.Water;
-import Enemy.Fire;
-import Item.Equipment;
-import Item.Exit;
-import Item.Key;
+import Entity.Enemy;
+import Entity.Grass;
+import Entity.Water;
+import Entity.Fire;
+import Entity.GameLevelList;
+import Entity.Player;
+import Entity.Room;
+
+
 import Frameworks_and_drivers.GUIUtility;
-import Player.Player;
+
 import interface_adaptor.GameGUI;
 import interface_adaptor.GUIPresenter;
 import User_case.GUI.UserActionInteractor;
+
+import User_case.GameLevelsUserCase.LevelInteraction;
+import User_case.RoomUserCase.RoomInteraction;
 
 
 public class Main {
@@ -27,16 +30,18 @@ public class Main {
         // Initialize the GUI architecture components
        //Initialize the rooms
         // training room
-        DungenBuilder dungen = new DungenBuilder();
+        GameLevelList dungen = new GameLevelList();
+        LevelInteraction levelInteractor = new LevelInteraction(dungen);
         Key key = new Key("mail_box", "There is a key in the mail_box!", "a key lies on the floor", 1, "regular");
         Exit gate = new Exit("gate", "The exist, but it is covered by the thick spider web", "there is a heavy gate in front of you");
         Equipment sword = new Equipment("Dragonfang Sword", "a weapon bestowed only upon warriors chosen by the Dragon Clan. Forged from the indestructible fangs of dragons, it holds the power of the dragon!",
                 "a sword is stuck on the wall", 4, null);
         Room room1 = new Room("This is the training room for beginner!");
-        room1.addItem(key);
-        room1.addItem(sword);
-        room1.addExit(gate);
-        dungen.addLevel(room1);
+        RoomInteraction roomInteractor = new RoomInteraction(room1);
+        roomInteractor.addItem(key);
+        roomInteractor.addItem(sword);
+        roomInteractor.addItem(gate);
+        levelInteractor.addLevel(room1);
 
         // training forest
         Key torch = new Key("torch", "this is a torch, it has the element of fire",

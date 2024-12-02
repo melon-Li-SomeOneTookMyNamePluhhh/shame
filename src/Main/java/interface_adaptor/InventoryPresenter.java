@@ -1,6 +1,6 @@
 package interface_adaptor;
 
-import User_case.InventoryOutputBoundary;
+import User_case.InventoryUseCase.InventoryOutputBoundary;
 
 public class InventoryPresenter implements InventoryOutputBoundary {
     @Override

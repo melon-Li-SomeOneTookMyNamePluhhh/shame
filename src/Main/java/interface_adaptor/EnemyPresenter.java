@@ -1,7 +1,7 @@
 package interface_adaptor;
 
-import User_case.EnemyOutputBoundary;
-import GUI.GUIUtility;
+import User_case.EnemyUseCase.EnemyOutputBoundary;
+import Frameworks_and_drivers.GUIUtility;
 
 public class EnemyPresenter implements EnemyOutputBoundary {
     @Override

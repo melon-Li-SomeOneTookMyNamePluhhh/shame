@@ -3,6 +3,7 @@ package User_case.GameLevelsUserCase;
 import Entity.GameLevelList;
 import Entity.Player;
 import Entity.Room;
+import Entity.Enemy;
 
 public class LevelInteraction {
     private GameLevelList levels;

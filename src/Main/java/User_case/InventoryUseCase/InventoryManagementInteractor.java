@@ -1,4 +1,4 @@
-package User_case;
+package User_case.InventoryUseCase;
 
 import Entity.Inventory;
 import Entity.Item;

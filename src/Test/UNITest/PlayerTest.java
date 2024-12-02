@@ -4,7 +4,7 @@ import Entity.Player;
 import Entity.Item;
 import Entity.Room;
 import Entity.Inventory;
-import User_case.PlayerUsercase.inputBoundary;
+import User_case.PlayerUsercase.PlayerInputBoundary;
 import User_case.PlayerUsercase.outputBoundaryInterface;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +25,7 @@ class PlayerTest{
     private Room room;
     private Inventory inventory;
     private TestOutputBoundary testOutputBoundary;
-    private inputBoundary inputBoundary;
+    private PlayerInputBoundary PlayerInputBoundary;
 
     /**
      * Sets up the environment and initializes the dependencies before each test.
@@ -36,7 +36,7 @@ class PlayerTest{
         inventory = new Inventory(10); // Player's bag with size 10
         player = new Player(10, 100, 10, room); // Create player with default health and damage
         testOutputBoundary = new TestOutputBoundary(); // Custom TestOutputBoundary to capture messages
-        inputBoundary = new inputBoundary(player, testOutputBoundary);
+        PlayerInputBoundary = new PlayerInputBoundary(player, testOutputBoundary);
     }
 
     // --- Tests for walkTo() ---
@@ -47,7 +47,7 @@ class PlayerTest{
         room.addItem(sword);
 
         // Act: Player walks to the item
-        inputBoundary.walkTo("Sword");
+        PlayerInputBoundary.walkTo("Sword");
 
         // Assert: Verify player's location is updated correctly
         assertNotNull(player.getLocation(), "Player's location should not be null after walking to a valid item.");
@@ -64,7 +64,7 @@ class PlayerTest{
     @Test
     void testWalkToInvalidItem() {
         // Act: Player attempts to walk to a non-existent item
-        inputBoundary.walkTo("NonExistentItem");
+        PlayerInputBoundary.walkTo("NonExistentItem");
 
         // Assert: Verify player's location remains null
         assertNull(player.getLocation(), "Player's location should remain null when walking to an invalid item.");
@@ -86,7 +86,7 @@ class PlayerTest{
         room.addItem(sword);
 
         // Act: Player picks up the item
-        inputBoundary.pickUp("Sword");
+        PlayerInputBoundary.pickUp("Sword");
 
         // Assert: Verify player is holding the item and location is cleared
         assertEquals(sword, player.getHolding(), "Player should be holding the Sword.");
@@ -100,7 +100,7 @@ class PlayerTest{
         player.setHolding(shield);
 
         // Act: Player attempts to pick up another item
-        inputBoundary.pickUp("Sword");
+        PlayerInputBoundary.pickUp("Sword");
 
         // Assert: Verify player still holds the original item
         assertEquals(shield, player.getHolding(), "Player should still be holding the Shield.");
@@ -113,7 +113,7 @@ class PlayerTest{
         player.setLocation(null);
 
         // Act: Player attempts to pick up an item
-        inputBoundary.pickUp("Sword");
+        PlayerInputBoundary.pickUp("Sword");
 
         // Assert: Verify player is still not holding any item
         assertNull(player.getHolding(), "Player should not be holding any item.");
@@ -127,7 +127,7 @@ class PlayerTest{
         player.setLocation(sword);
 
         // Act: Player attempts to pick up a different item
-        inputBoundary.pickUp("Potion");
+        PlayerInputBoundary.pickUp("Potion");
 
         // Assert: Verify player is still not holding any item
         assertNull(player.getHolding(), "Player should not be holding any item when mismatched item is specified.");
@@ -142,7 +142,7 @@ class PlayerTest{
         player.setHolding(sword);
 
         // Act: Player drops the item
-        inputBoundary.drop();
+        PlayerInputBoundary.drop();
 
         // Assert: Verify player's location is updated and holding is cleared
         assertEquals(sword, player.getLocation(), "Player's location should be updated to the dropped item.");
@@ -155,7 +155,7 @@ class PlayerTest{
         player.setHolding(null);
 
         // Act: Player attempts to drop an item
-        inputBoundary.drop();
+        PlayerInputBoundary.drop();
 
         // Assert: Verify no changes to player's state
         assertNull(player.getLocation(), "Player's location should remain null when no item is dropped.");
@@ -169,7 +169,7 @@ class PlayerTest{
         apple.setDamage(-10); // Healing effect
         player.setHolding(apple);
 
-        inputBoundary.interact("Apple");
+        PlayerInputBoundary.interact("Apple");
 
         assertEquals(110, player.getHealth());
         assertTrue(testOutputBoundary.getMessages().contains("Looking at the Apple, you decide to take a bite."));
@@ -182,7 +182,7 @@ class PlayerTest{
         poison.setDamage(20); // Damaging effect
         player.setHolding(poison);
 
-        inputBoundary.interact("Poison");
+        PlayerInputBoundary.interact("Poison");
 
         assertEquals(80, player.getHealth());
         assertTrue(testOutputBoundary.getMessages().contains("Looking at the Poison, you decide to take a bite."));
@@ -195,7 +195,7 @@ class PlayerTest{
         player.setHolding(null);
         player.setLocation(null);
 
-        inputBoundary.interact("NonExistentItem");
+        PlayerInputBoundary.interact("NonExistentItem");
 
         assertTrue(testOutputBoundary.getMessages().contains("You have nothing in your hand or standing beside anything to interact with."));
     }
@@ -209,7 +209,7 @@ class PlayerTest{
         player.setHolding(key);
         player.setLocation(exit);
 
-        inputBoundary.interact("key", "exit");
+        PlayerInputBoundary.interact("key", "exit");
 
         assertTrue(testOutputBoundary.getMessages().contains("Congratulations! You successfully unlocked the exit."));
     }
@@ -222,7 +222,7 @@ class PlayerTest{
         player.setHolding(sword);
         player.setLocation(exit);
 
-        inputBoundary.interact("key", "exit");
+        PlayerInputBoundary.interact("key", "exit");
 
         assertTrue(testOutputBoundary.getMessages().contains("You are holding Sword instead of key."));
     }
@@ -233,7 +233,7 @@ class PlayerTest{
         player.setHolding(key);
         player.setLocation(null);
 
-        inputBoundary.interact("key", "exit");
+        PlayerInputBoundary.interact("key", "exit");
 
         assertTrue(testOutputBoundary.getMessages().contains("You have nothing to interact with."));
     }
@@ -246,7 +246,7 @@ class PlayerTest{
         player.setHolding(key);
         player.setLocation(chest);
 
-        inputBoundary.interact("key", "exit");
+        PlayerInputBoundary.interact("key", "exit");
 
         assertTrue(testOutputBoundary.getMessages().contains("You are not next to exit."));
     }
@@ -257,7 +257,7 @@ class PlayerTest{
         player.setHolding(null);
         player.setLocation(exit);
 
-        inputBoundary.interact("key", "exit");
+        PlayerInputBoundary.interact("key", "exit");
 
         assertTrue(testOutputBoundary.getMessages().contains("You have nothing in your hand to interact with."));
     }
@@ -265,7 +265,7 @@ class PlayerTest{
     // --- Tests for inspectBag() ---
     @Test
     void testInspectBagEmpty() {
-        inputBoundary.inspectBag();
+        PlayerInputBoundary.inspectBag();
 
         assertTrue(testOutputBoundary.getMessages().contains("Your bag is empty."));
     }
@@ -277,7 +277,7 @@ class PlayerTest{
         inventory.addItem(sword);
         inventory.addItem(potion);
 
-        inputBoundary.inspectBag();
+        PlayerInputBoundary.inspectBag();
 
         assertTrue(testOutputBoundary.getMessages().contains("Items in your bag:"));
         assertTrue(testOutputBoundary.getMessages().contains("- Sword: A sharp blade"));

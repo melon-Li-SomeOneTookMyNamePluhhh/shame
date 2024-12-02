@@ -1,6 +1,8 @@
 package User_case.GameLevelsUserCase;
 
 import Entity.GameLevelList;
+import Entity.Battle;
+import Entity.Enemy;
 
 public class LevelBattleLauncher {
     private GameLevelList gameLevel;

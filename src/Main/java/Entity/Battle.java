@@ -15,5 +15,5 @@ public class Battle {
     public Enemy getEnemy(){return this.enemy;}
     public void setEnemy(Enemy enemy) {this.enemy = enemy;}
     public boolean getSpecialUsed() { return this.specialUsed;}
-    public void setSpecialUsed() { this.specialUsed = True;}
+    public void setSpecialUsed() { this.specialUsed = true;}
 }
