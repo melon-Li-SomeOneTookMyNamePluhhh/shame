@@ -1,7 +1,7 @@
 package User_case.RoomUserCase;
 
 import Entity.Room;
-
+import Entity.Item;
 
 //
 public class RoomBattleChecker {

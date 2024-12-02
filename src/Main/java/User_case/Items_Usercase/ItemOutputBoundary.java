@@ -1,7 +1,5 @@
 package User_case.Items_Usercase;
 
-import Entity.Item.Item;
-
 public class ItemOutputBoundary implements ItemOutputBoundaryInterface {
 
     /**

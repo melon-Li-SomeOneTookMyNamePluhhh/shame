@@ -1,7 +1,7 @@
 package User_case.BattleUserCase;
 
 import Entity.Player;
-import Entity.Item.Equipment;
+import Entity.Equipment;
 import Entity.Enemy;
 import User_case.EnemyUseCase.EnemyInputBoundary;
 

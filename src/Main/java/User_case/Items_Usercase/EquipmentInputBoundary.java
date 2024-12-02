@@ -1,7 +1,7 @@
 package User_case.Items_Usercase;
 
-import Entity.Item.Item;
-import Entity.Item.Equipment;
+import Entity.Item;
+import Entity.Equipment;
 
 public class EquipmentInputBoundary implements EquipmentInputBoundaryInterface {
 

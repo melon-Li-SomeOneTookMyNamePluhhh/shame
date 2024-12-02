@@ -1,6 +1,6 @@
 package User_case.Items_Usercase;
 
-import Entity.Item.Item;
+import Entity.Item;
 
 public interface KeyInputBoundaryInterface {
 

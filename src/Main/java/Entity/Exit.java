@@ -1,6 +1,4 @@
-package Entity.Item;
-
-import DungenKeeper.Room;
+package Entity;
 
 public class Exit extends Item{
     private Boolean locked = true;

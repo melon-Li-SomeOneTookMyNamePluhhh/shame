@@ -1,4 +1,4 @@
-package Entity.Item;
+package Entity;
 
 public abstract class Item {
     private String name;
@@ -17,9 +17,7 @@ public abstract class Item {
         this.type = type;
     }
     // Abstract method to interact with the item
-    public abstract void interact(Item location);
 
-    public abstract Item pickup();
 
     public String getName() {
         return name;

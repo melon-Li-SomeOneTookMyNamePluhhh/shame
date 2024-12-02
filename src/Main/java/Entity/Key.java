@@ -1,4 +1,4 @@
-package Entity.Item;
+package Entity;
 
 public class Key extends Item {
     int damage = 1;

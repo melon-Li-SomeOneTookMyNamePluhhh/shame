@@ -1,6 +1,6 @@
 package User_case.Items_Usercase;
 
-import Entity.Item.Item;
+import Entity.Item;
 
 public class ItemInputBoundary implements ItemInputBoundaryInterface {
 
@@ -19,6 +19,7 @@ public class ItemInputBoundary implements ItemInputBoundaryInterface {
     }
     // Regular method to pick up the item
     // this method should to regularly overrided such that awkward moment of you picked up exit will not happen
+
 
 }
 

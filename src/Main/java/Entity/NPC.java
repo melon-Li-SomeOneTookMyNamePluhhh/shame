@@ -1,7 +1,6 @@
-package Entity.Item;
+package Entity;
 
 import Frameworks_and_drivers.RiddleFetcher;
-import java.util.Scanner;
 
 public class NPC extends Item {
     String Riddle;

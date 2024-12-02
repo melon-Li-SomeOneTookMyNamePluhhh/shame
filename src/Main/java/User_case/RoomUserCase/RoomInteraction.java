@@ -1,9 +1,11 @@
 package User_case.RoomUserCase;
 
 import Entity.Room;
+import Entity.Enemy;
+import Entity.Item;
 
 
-public class RoomInteraction {
+public class RoomInteraction{
     private Room room;
     private RoomItemAdder roomItemAdder;
     private RoomItemRemover roomItemRemover;
@@ -31,13 +33,13 @@ public class RoomInteraction {
 
     public void addBattle(Item item, Enemy enemy){roomBattleAdder.addBattle(item, enemy);}
 
-    public void removeItem(Item item){roomItemRemover.removeItem(item);}
+    public void removeItem(String itemName){roomItemRemover.removeItem(itemName);}
 
-    public Item findItem(String itemName){roomItemFinder.findItem(itemName);}
+    public Item findItem(String itemName){return roomItemFinder.findItem(itemName);}
 
-    public Enemy removeBattle(Item item){roomBattleRemover.removeBattle(item);}
+    public Enemy removeBattle(Item item){return roomBattleRemover.removeBattle(item);}
 
-    public boolean checkBattle(Item item){roomBattleAdder.checkBattle(item);}
+    public boolean checkBattle(Item item){return roomBattleChecker.checkBattle(item);}
     
     public void viewRoom(){roomViewer.viewRoom();}
     

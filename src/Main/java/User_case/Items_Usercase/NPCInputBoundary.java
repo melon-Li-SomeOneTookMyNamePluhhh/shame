@@ -1,7 +1,7 @@
 package User_case.Items_Usercase;
 
-import Entity.Item.Item;
-import Entity.Item.NPC;
+import Entity.Item;
+import Entity.NPC;
 import java.util.Scanner;
 
 public class NPCInputBoundary implements NPCInputBoundaryInterface {

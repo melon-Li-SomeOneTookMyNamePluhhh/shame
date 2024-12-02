@@ -1,7 +1,7 @@
 package User_case.Items_Usercase;
 
-import Entity.Item.Item;
-import Entity.Item.Key;
+import Entity.Item;
+import Entity.Key;
 
 public class KeyInputBoundary implements KeyInputBoundaryInterface {
 

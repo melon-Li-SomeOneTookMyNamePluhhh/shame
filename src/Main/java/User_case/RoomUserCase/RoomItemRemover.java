@@ -1,6 +1,7 @@
 package User_case.RoomUserCase;
 
 import Entity.Room;
+import Entity.Item;
 
 public class RoomItemRemover {
     private Room room;
@@ -9,9 +10,9 @@ public class RoomItemRemover {
         this.room = room;
     }
 
-    public Item removeItem(Item item){
+    public Item removeItem(String itemName){
         for (Item item: this.room.getItems()){
-            if (item.getName().equals(itemName) && item.pickup() != null){
+            if (item.getName().equals(itemName)){
                 this.room.getItems().remove(item);
                 return item;
             }

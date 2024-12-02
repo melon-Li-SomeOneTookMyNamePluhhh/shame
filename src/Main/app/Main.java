@@ -13,7 +13,7 @@ import interface_adaptor.GameGUI;
 import interface_adaptor.GUIPresenter;
 import User_case.GUI.UserActionInteractor;
 
-import User_case.GameLevelsUserCase.LevelInteraction;
+import User_case.GameLevelsUserCase.LevelInteractor;
 import User_case.RoomUserCase.RoomInteraction;
 
 
@@ -31,7 +31,7 @@ public class Main {
        //Initialize the rooms
         // training room
         GameLevelList dungen = new GameLevelList();
-        LevelInteraction levelInteractor = new LevelInteraction(dungen);
+        LevelInteractor levelInteractor = new LevelInteractor(dungen);
         Key key = new Key("mail_box", "There is a key in the mail_box!", "a key lies on the floor", 1, "regular");
         Exit gate = new Exit("gate", "The exist, but it is covered by the thick spider web", "there is a heavy gate in front of you");
         Equipment sword = new Equipment("Dragonfang Sword", "a weapon bestowed only upon warriors chosen by the Dragon Clan. Forged from the indestructible fangs of dragons, it holds the power of the dragon!",

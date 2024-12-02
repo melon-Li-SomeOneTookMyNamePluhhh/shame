@@ -1,7 +1,7 @@
 package User_case.Items_Usercase;
-import Entity.Item.Item;
-import Entity.Item.Exit;
-import Entity.Item.Key;
+import Entity.Item;
+import Entity.Exit;
+import Entity.Key;
 
 public class ExitInputBoundary implements ExitInputBoundaryInterface{
 

@@ -2,7 +2,7 @@ package User_case.PlayerUsercase;
 
 import Entity.Player;
 import Entity.Item;
-import User_case.GameLevelsUserCase.LevelInteraction;
+import User_case.GameLevelsUserCase.LevelInteractor;
 import User_case.RoomUserCase.RoomInteraction;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
     @Override
     public void walkTo(String itemName) {
         RoomInteraction roomInteractor = new RoomInteraction(this.player.getCurrRoom());
-        LevelInteraction levelInteractor = new LevelInteraction(this.player.getCurrRoom().getGameLevel());
+        LevelInteractor levelInteractor = new LevelInteractor(this.player.getCurrRoom().getGameLevel());
         if ( roomInteractor.findItem(itemName) == null) {
             outputBoundary.displayMessage("You can't walk to that destination as it doesn't exist.");
             return;
