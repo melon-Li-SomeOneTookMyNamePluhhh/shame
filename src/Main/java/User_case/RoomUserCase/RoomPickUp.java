@@ -15,7 +15,7 @@ public class RoomPickUp {
 
     public Item pickUp(String itemName){
         for (Item item: this.room.getItems()){
-            if (item.getName().equals(itemName) && new ItemInputBoundary(item, new ItemOutputBoundary()).pickUp() != null){
+            if (item.getName().equals(itemName) && new ItemInputBoundary(item, new ItemOutputBoundary()).pickup() != null){
                 this.room.getItems().remove(item);
                 return item;
             }

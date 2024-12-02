@@ -139,6 +139,7 @@ public class ItemInputBoundary implements ItemInputBoundaryInterface {
     public void Inspect() {
         OutputBoundary.displayOutput("Inspecting the item: " + item.getName() + ": " + item.getDescription() + ".");
     }
+
     // Regular method to pick up the item
     // this method should to regularly overrided such that awkward moment of you picked up exit will not happen
 
