@@ -28,28 +28,33 @@ public class ActionRepository {
     // Method to handle each valid action and return a corresponding string
     public static String handleAction(String action)
     {
-        switch (action.toLowerCase()) {
+        String in = action.toLowerCase();
+        switch (in) {
             case "walk to":
-
+                User_case.PlayerUsercase.inputBoundaryInterface.walkTo(in);
                 return "You walk towards your destination.";
             case "pick up":
+                User_case.PlayerUsercase.inputBoundaryInterface.pickUp(in);
                 return "You picked up an item.";
             case "speech":
                 return "You started a conversation.";
             case "exit":
                 return "You exited the area.";
             case "drop":
+                User_case.PlayerUsercase.inputBoundaryInterface.drop();
                 return "You dropped an item.";
             case "put in bag":
+                User_case.PlayerUsercase.inputBoundaryInterface.putInBag();
                 return "You put an item into your bag.";
             case "get from bag":
+                User_case.PlayerUsercase.inputBoundaryInterface.getFromBag(in);
                 return "You retrieved an item from your bag.";
             case "inspect bag":
+                User_case.PlayerUsercase.inputBoundaryInterface.inspectBag();
                 return "You inspected your bag and found various items.";
-            case "interact":
+            case "use the key to open the door":
+                User_case.PlayerUsercase.inputBoundaryInterface.interact("key", "exit");
                 return "You interacted with the environment.";
-            case "exist":
-                return "You exist in this moment.";
             case "open":
                 return "You opened the object.";
             case "key":
