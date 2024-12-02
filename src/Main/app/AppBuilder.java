@@ -47,23 +47,19 @@ public class AppBuilder {
     public AppBuilder addTrainingRoom() {
         // initailize
 
-        Key key = new Key("mailbox", "There is a key in the mail_box!", "a key lies on the floor", 1, "regular");
-        Exit gate = new Exit("gate", "The exit is covered by a thick spider web", "There is a heavy gate in " +
+        Key key = new Key("key", "There is a key in the mail_box!", "a key lies on the floor", 1, "regular");
+        Exit exit = new Exit("exit", "The exit is covered by a thick spider web", "There is a heavy gate in " +
                 "front of you.","regular");
         Equipment sword = new Equipment("dragon fang sword",
                 "A weapon bestowed upon warriors chosen by the Dragon Clan. It holds the power of the dragon!",
                 "A sword is stuck on the wall", 4, null);
-        //可能这里有点问题
-        Equipment spiderweb = new Equipment("spiderweb",
-                "This is a poisonous spiderweb!",
-                "", 2, null);
+
 
         Room room1 = new Room("This is the training room for beginners!");
         RoomInteraction roomInteractor = new RoomInteraction(room1);
         roomInteractor.addItem(key);
         roomInteractor.addItem(sword);
-        roomInteractor.addItem(gate);
-        roomInteractor.addItem(spiderweb);
+        roomInteractor.addItem(exit);
 
         LevelInteractor levelInteractor = new LevelInteractor(dungen);
         levelInteractor.addLevel(room1);
@@ -89,11 +85,11 @@ public class AppBuilder {
         actionRepository.handleAction(action2);
         String action3 = guiUtility.getValidInput("There are too many things in your hands, try putting what you are holding in your bag by entering 'put it in bag'.", actionRepositor.getValidActions());
         actionRepository.handleAction(action3);
-        String action4 = guiUtility.getValidInput("There is a mail-box in the center of the room. Enter 'walk to the mailbox' to move towards the mail-box", actionRepositor.getValidActions());
+        String action4 = guiUtility.getValidInput("There is a mail-box in the center of the room and there is a key in it. Enter 'walk to the mailbox' to move towards the mail-box", actionRepositor.getValidActions());
         actionRepository.handleAction(action4);
-        String action5 = guiUtility.getValidInput("There is a key in the mail-box. Enter 'pick up key' to grab the key", actionRepositor.getValidActions());
+        String action5 = guiUtility.getValidInput("Enter 'pick up key' to grab the key", actionRepositor.getValidActions());
         actionRepository.handleAction(action5);
-        String action6 = guiUtility.getValidInput("Look ahead! It seems to be a door, but it's completely shrouded in a massive spiderweb that glistens ominously in the dim light. Try to walk to there by entering walk to the spider", actionRepositor.getValidActions());
+        String action6 = guiUtility.getValidInput("Look ahead! It seems to be a door, but it's completely shrouded in a massive spiderweb that glistens ominously in the dim light. Try to walk to there by entering walk to the spiderweb", actionRepositor.getValidActions());
         actionRepository.handleAction(action6);
 
         String action7 = guiUtility.getValidInput( "You feel an eerie chill as you step closer. Now, you have three choices:\n\n"
@@ -106,6 +102,7 @@ public class AppBuilder {
             String action8 = guiUtility.getValidInput("Try opening the door by entering 'use key to open the door'", actionRepositor.getValidActions());
             actionRepository.handleAction(action8);
         } else if ("attack it with your sword".equals(action7)) {
+            guiUtility.displayOutput("You swing your sword with determination, slicing through the thick webbing. The web starts to break apart, but the force of your attack leaves your sword slightly dull. The way forward is now open. But the door is still locked");
             String action9 = guiUtility.getValidInput("Try opening the door by entering 'use key to open the door'", actionRepositor.getValidActions());
             actionRepository.handleAction(action9);
         }
