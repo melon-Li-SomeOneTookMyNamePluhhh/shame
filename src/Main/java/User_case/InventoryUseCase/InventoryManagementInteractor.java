@@ -3,12 +3,15 @@ package User_case.InventoryUseCase;
 import Entity.Inventory;
 import Entity.Item;
 
-public class InventoryManagementInteractor implements InventoryInputBoundary {
-    private final Inventory inventory;
-    private final InventoryOutputBoundary outputBoundary;
+/**
+ * The InventoryManagementInteractor class extends InventoryInputBoundary and
+ * provides concrete implementations of inventory operations with user feedback.
+ */
+public class InventoryManagementInteractor extends InventoryInputBoundary {
+    private final InventoryOutputBoundaryInterface outputBoundary;
 
-    public InventoryManagementInteractor(Inventory inventory, InventoryOutputBoundary outputBoundary) {
-        this.inventory = inventory;
+    public InventoryManagementInteractor(Inventory inventory, InventoryOutputBoundaryInterface outputBoundary) {
+        super(inventory); // 调用父类构造函数来初始化库存
         this.outputBoundary = outputBoundary;
     }
 
@@ -16,28 +19,31 @@ public class InventoryManagementInteractor implements InventoryInputBoundary {
     public void addItem(Item item) {
         if (inventory.getNumItemsInside() < inventory.getBagSize()) {
             inventory.addItemInternal(item);
-            outputBoundary.presentAddItem(item.getName() + " has been added to your inventory.");
+            outputBoundary.presentAddItem("The item " + item.getName() + " has been added to your inventory.");
         } else {
-            outputBoundary.presentAddItem("Your bag is full, you can't add " + item.getName() + ".");
+            outputBoundary.presentAddItem("Cannot add item. Inventory is full.");
         }
     }
 
     @Override
     public void removeItem(String itemName) {
         if (inventory.getNumItemsInside() == 0) {
-            outputBoundary.presentRemoveItem("You have nothing in your bag!");
+            outputBoundary.presentRemoveItem("Cannot remove item. Inventory is empty.");
             return;
         }
 
-        for (Item item : inventory.getItemsInside()) {
-            if (item.getName().equals(itemName)) {
-                inventory.removeItemInternal(item);
-                outputBoundary.presentRemoveItem(item.getName() + " has been removed from your inventory.");
-                return;
-            }
+        Item removedItem = inventory.removeItemInternal(itemName);
+        if (removedItem == null) {
+            outputBoundary.presentRemoveItem("Item " + itemName + " not found in the inventory.");
+        } else {
+            outputBoundary.presentRemoveItem("Item " + itemName + " has been removed from the inventory.");
         }
+    }
 
-        outputBoundary.presentRemoveItem(itemName + " was not found in your inventory.");
+    public void inspectBag() {
+        List<Item> items = inventory.getItemsInside();
+        outputBoundary.presentInventoryContents(items);
     }
 }
+
 

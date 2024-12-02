@@ -1,8 +1,8 @@
 package interface_adaptor;
 
-import User_case.InventoryUseCase.InventoryOutputBoundary;
+import User_case.InventoryUseCase.InventoryOutputBoundaryInterface;
 
-public class InventoryPresenter implements InventoryOutputBoundary {
+public class InventoryPresenterInterface implements InventoryOutputBoundaryInterface {
     @Override
     public void presentAddItem(String message) {
         System.out.println(message);
