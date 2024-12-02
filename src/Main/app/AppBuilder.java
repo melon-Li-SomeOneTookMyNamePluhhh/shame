@@ -108,6 +108,17 @@ public class AppBuilder {
         Equipment ElfStaff = new Equipment("Elf Staff","A treasured artifact of the Elf Tribe, it wields the power to " +
                 "command all flora in the world and unleashes immense vitality.",5,"grass");
         NPC Hobbit = new NPC();
+        Water FrostWyrm = new Water ("Frost Wyrm", "Possesses immense power to control aquatic " +
+                "creatures, and has long terrorized these waters, harming many innocent fishermen as well as brave" +
+                " warriors seeking the magic ring.");
+        Item magic_ring = new magic_ring ("Magic Ring", "");
+
+        Room room3 = new Room("Now let’s go to the final adventure to the last horizon valley to chase your " +
+                "magic ring!");
+        room3.addItem(magic_ring);
+        room3.addBattleTrigger(magic_ring, FrostWyrm);
+
+        dungen.addLevel(room3);
 
         return this;
     }
