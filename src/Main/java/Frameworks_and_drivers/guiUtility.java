@@ -3,17 +3,16 @@ package Frameworks_and_drivers;
 import javax.swing.*;
 import java.util.Set;
 
-public class GUIUtility {
-
-    public static void displayOutput(String message) {
+public class guiUtility {
+    public void displayOutput(String message) {
         JOptionPane.showMessageDialog(null, message, "Output", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public static String getInput(String prompt) {
+    public String getInput(String prompt) {
         return JOptionPane.showInputDialog(null, prompt, "Input", JOptionPane.QUESTION_MESSAGE);
     }
 
-    public static String getValidInput(String prompt, Set<String> validOptions) {
+    public String getValidInput(String prompt, Set<String> validOptions) {
         String input;
         do {
             input = JOptionPane.showInputDialog(null, prompt, "Input", JOptionPane.QUESTION_MESSAGE);

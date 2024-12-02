@@ -11,7 +11,8 @@ public class EnemyOutputBoundary implements EnemyOutputBoundaryInterface {
     @Override
     public void presentAttack(String message) {
         // In a real application, this could send the message to a GUI or other output medium.
-        System.out.println(message);
+        Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+        guiUtility.displayOutput(message);
     }
 }
 

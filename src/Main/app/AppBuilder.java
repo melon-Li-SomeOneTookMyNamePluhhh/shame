@@ -3,19 +3,22 @@ package src.Main.app;
 import Entity.*;
 import Entity.TicTacToe.TicTacToeBoard;
 
-import Frameworks_and_drivers.GUIUtility;
+import Frameworks_and_drivers.guiUtility;
 
 import Frameworks_and_drivers.Tictactoe.TicTacToeCLIView;
 import Frameworks_and_drivers.Tictactoe.TicTacToeView;
 import Entity.NPC;
+import User_case.GUI.GUIActionPresenter;
+import User_case.GUI.GUIController;
 import User_case.InventoryUseCase.InventoryManagementInteractor;
 import User_case.InventoryUseCase.InventoryOutputBoundary;
+import User_case.PlayerUsercase.PlayerInputBoundary;
+import User_case.PlayerUsercase.PlayerOutBoundary;
 import User_case.TicTacToe.BotMoveUseCase;
 import User_case.TicTacToe.PlayerMoveUseCase;
-import interface_adaptor.ActionRepository;
-import interface_adaptor.GameGUI;
-import interface_adaptor.GUIPresenter;
-import User_case.GUI.UserActionInteractor;
+import interface_adaptor.GUI.actionRepositor;
+import interface_adaptor.GUI.GameGUI;
+import interface_adaptor.GUI.GUIPresenter;
 import User_case.GameLevelsUserCase.LevelInteractor;
 import User_case.RoomUserCase.RoomInteraction;
 import interface_adaptor.Tictactoe.TicTacToeController;
@@ -29,7 +32,7 @@ public class AppBuilder {
     private Player player;
     private GameGUI gameGUI;
     private GUIPresenter presenter;
-    private UserActionInteractor interactor;
+    //private UserActionInteractor interactor;
 
     public AppBuilder() {
         // Initialize core components
@@ -43,6 +46,7 @@ public class AppBuilder {
      */
     public AppBuilder addTrainingRoom() {
         // initailize
+
         Key key = new Key("mail_box", "There is a key in the mail_box!", "a key lies on the floor", 1, "regular");
         Exit gate = new Exit("gate", "The exit is covered by a thick spider web", "There is a heavy gate in " +
                 "front of you.","regular");
@@ -62,10 +66,26 @@ public class AppBuilder {
 
         LevelInteractor levelInteractor = new LevelInteractor(dungen);
         levelInteractor.addLevel(room1);
-
+        Room startingRoom = dungen.getLevels().get(0);
+        Player player = new Player(5,15,2,startingRoom); // Assume Player is properly initialized
+        PlayerOutBoundary outputBoundary = new PlayerOutBoundary();
+        PlayerInputBoundary inputBoundary = new PlayerInputBoundary(player, outputBoundary);
+        actionRepositor actionRepository = new actionRepositor(inputBoundary);
         //room start
-        GUIUtility.displayOutput("As a gift for beginner, we decide to give you a Flame Dragon Bow to you!");
-        GUIUtility.displayOutput(ActionRepository.handleAction(GUIUtility.getValidInput("Try to inspect your bag to look up the bag!",ActionRepository.getValidActions())));
+        Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+        guiUtility.displayOutput("As a gift for beginner, we decide to give you a Flame Dragon Bow to you!");
+        String action1 = guiUtility.getValidInput("Try to inspect your bag by entering 'inspectbag' to inspect the bag!", actionRepositor.getValidActions());
+        actionRepository.handleAction(action1);
+        // Step 1: Get user input for each action
+        String action2 = guiUtility.getValidInput("Try getting your sword from your bag by entering 'Dragon fang Sword'", actionRepositor.getValidActions());
+        actionRepository.handleAction(action2);
+        String action3 = guiUtility.getValidInput("There are too many things in your hands, try putting what you are holding in your bag by entering 'putinbag'.", actionRepositor.getValidActions());
+        actionRepository.handleAction(action3);
+        String action4 = guiUtility.getValidInput("There is a mail-box in the center of the room. Enter 'walkto' to move towards the mail-box", actionRepositor.getValidActions());
+        actionRepository.handleAction(action4);
+        String action5 = guiUtility.getValidInput("There is a key in the mail-box. Enter 'pickup' to grab the key", actionRepositor.getValidActions());
+        actionRepository.handleAction(action5);
+
         return this;
     }
 
@@ -151,19 +171,19 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder setupPlayerAndGUI() {
-        LevelInteractor levelInteractor = new LevelInteractor(dungen);
+        LevelInteractor levelInteracto = new LevelInteractor(dungen);
         Room startingRoom = dungen.getLevels().get(0);
 
-        // Initialize the player
-        player = new Player(5, 15, 2, startingRoom);
+        Player player = new Player(5,15,2,startingRoom); // Assume Player is properly initialized
+        PlayerOutBoundary outputBoundary = new PlayerOutBoundary();
+        PlayerInputBoundary inputBoundary = new PlayerInputBoundary(player, outputBoundary);
+        actionRepositor actionRepository = new actionRepositor(inputBoundary);
+        guiUtility guiUtility = new guiUtility();
+        GUIActionPresenter actionPresenter = new GUIActionPresenter(guiUtility);
+        GUIController controller = new GUIController(inputBoundary);
 
-        // Initialize the GUI components
-        gameGUI = new GameGUI(player, null); // GUI with no interactor initially
-        presenter = new GUIPresenter(gameGUI);
-        interactor = new UserActionInteractor(presenter, player);
-
-        // Connect the interactor to the GUI
-        gameGUI.setInputBoundary(interactor);
+        GameGUI gameGUI = new GameGUI(controller);
+        gameGUI.setVisible(true);
 
         return this;
     }
@@ -174,13 +194,15 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder startGame() {
-        GUIUtility.displayOutput("Hey, Frodo, you are inside the adventure to chase your magic ring!");
-        GUIUtility.displayOutput("Now, let's enter a training room to get used to this adventure!");
+        Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+        guiUtility.displayOutput("Hey, Frodo, you are inside the adventure to chase your magic ring!");
+        guiUtility.displayOutput("Now, let's enter a training room to get used to this adventure!");
         return this;
     }
 
     private void ticTacToeRule(){
-        GUIUtility.displayOutput("Players take turns placing their symbol (X or O) in an empty cell, aiming to align " +
+        Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+        guiUtility.displayOutput("Players take turns placing their symbol (X or O) in an empty cell, aiming to align " +
                 "three of their symbols in a row, column, or diagonal to win. The game starts with X and alternates " +
                 "turns."+'\n'+" Moves must be within the grid and cannot overwrite existing symbols. The game ends " +
                 "when a player achieves three in a row or the grid is full. "+'\n'+"If no one wins, the result is a " +
@@ -189,7 +211,8 @@ public class AppBuilder {
 
     public void run() {
         // Game logic starts from here; GUI handles further user inputs
-        GUIUtility.displayOutput("The game is ready. Begin your adventure!");
+        Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+        guiUtility.displayOutput("The game is ready. Begin your adventure!");
     }
 
     private void startTicTacToeGame() {
@@ -203,12 +226,13 @@ public class AppBuilder {
         Scanner scanner = new Scanner(System.in);
 
         // Start the Tic Tac Toe game
-        System.out.println("To exit the game at any time, type '9'. To start, type any other number.");
+        Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+        guiUtility.displayOutput("To exit the game at any time, type '9'. To start, type any other number.");
         int userCommand = scanner.nextInt();
 
         while (userCommand != 9) {
             view.displayBoard(board.getBoard());
-            System.out.println("Player " + board.getCurrentPlayer() + ", enter your move by typing the row then a space then column number. Your options are 0, 1, or 2.");
+            guiUtility.displayOutput("Player " + board.getCurrentPlayer() + ", enter your move by typing the row then a space then column number. Your options are 0, 1, or 2.");
             int row = scanner.nextInt();
             int col = scanner.nextInt();
             controller.makeMove(row, col);

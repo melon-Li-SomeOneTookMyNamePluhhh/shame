@@ -1,9 +1,9 @@
 package User_case.BattleUserCase;
 
 import Entity.*;
-import Frameworks_and_drivers.GUIUtility;
+import Frameworks_and_drivers.guiUtility;
 import User_case.EnemyUseCase.EnemyInputBoundary;
-import interface_adaptor.ActionRepository;
+import interface_adaptor.GUI.actionRepositor;
 
 import java.util.List;
 
@@ -26,7 +26,8 @@ public class BattleUserCase implements BattleInputBoundaryInterface{
         }
 
         String[] options = itemsInBag.stream().map(Item::getName).toArray(String[]::new);
-        String chosenItemName = (String) GUIUtility.getValidInput("Choose an item from your bag:", ActionRepository.getValidActions()); // this method only takes in
+        guiUtility guiUtility = new guiUtility();
+        String chosenItemName = guiUtility.getValidInput("Choose an item from your bag:", actionRepositor.getValidActions()); // this method only takes in
         // a string, not a string and a String[] (options). If you want to include options you will have to change the
         // function so that it also takes a String[].
 

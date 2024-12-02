@@ -10,7 +10,8 @@ public class Water extends Enemy {
     @Override
     public void useSpecialAbility() {
         if (health < 5 && !usedSpecialAbility) {
-            System.out.println(name + " activates its water shield!");
+            Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+            guiUtility.displayOutput(name + " activates its water shield!");
             usedSpecialAbility = true;
             damageReduced = true;
         }

@@ -2,7 +2,7 @@ package User_case.PlayerUsercase;
 
 import java.util.List;
 import Entity.Item;
-import Frameworks_and_drivers.GUIUtility;
+import Frameworks_and_drivers.guiUtility;
 
 /**
  * The outBoundary class implements the outputBoundaryInterface.
@@ -16,7 +16,8 @@ public class PlayerOutBoundary implements outputBoundaryInterface {
      */
     @Override
     public void displayMessage(String message) {
-        System.out.println(message);
+        Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+        guiUtility.displayOutput(message);
     }
 
     /**
@@ -25,9 +26,10 @@ public class PlayerOutBoundary implements outputBoundaryInterface {
      */
     @Override
     public void displayBagContents(List<Item> items) {
-        GUIUtility.displayOutput("Items in your bag:");
+        Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+        guiUtility.displayOutput("Items in your bag:");
         for (Item item : items) {
-            GUIUtility.displayOutput("- " + item.getName() + ": " + item.getDescription());
+            guiUtility.displayOutput("- " + item.getName() + ": " + item.getDescription());
         }
     }
 }

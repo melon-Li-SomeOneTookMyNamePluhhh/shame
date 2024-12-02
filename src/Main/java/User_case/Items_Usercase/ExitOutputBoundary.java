@@ -6,7 +6,8 @@ public class ExitOutputBoundary implements ExitOutputBoundaryInterface {
      * @param message The message to be displayed.
      */
     public void displayOutput(String message){
-        System.out.println(message);
+        Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+        guiUtility.displayOutput(message);
     }
 
 }

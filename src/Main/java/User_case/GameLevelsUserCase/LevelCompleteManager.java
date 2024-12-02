@@ -13,7 +13,8 @@ public class LevelCompleteManager {
     public void nextLevel(Player player) {
         int whichLevel = this.level.getCurrentLevel() + 1;
         if (whichLevel >= level.getLevels().size()) {
-            System.out.println("No more levels!");
+            Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+            guiUtility.displayOutput("No more levels!");
             return;
         }
         this.level.setCurrentLevel(whichLevel);

@@ -10,7 +10,8 @@ public class Grass extends Enemy {
     public void useSpecialAbility() {
         if (!usedSpecialAbility && health < 5) {
             health += 3;
-            System.out.println(name + " heals itself! Gains 3 health. Current health: " + health);
+            Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+            guiUtility.displayOutput(name + " heals itself! Gains 3 health. Current health: " + health);
             usedSpecialAbility = true;
         }
     }

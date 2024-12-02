@@ -1,4 +1,4 @@
-package interface_adaptor;
+package interface_adaptor.GUI;
 
 import User_case.GUI.GUIInputBoundry;
 

@@ -1,6 +1,5 @@
-package interface_adaptor;
+package interface_adaptor.GUI;
 
-import Frameworks_and_drivers.GUIUtility;
 import User_case.GUI.GUIOutputBoundry;
 
 public class GUIPresenter implements GUIOutputBoundry {

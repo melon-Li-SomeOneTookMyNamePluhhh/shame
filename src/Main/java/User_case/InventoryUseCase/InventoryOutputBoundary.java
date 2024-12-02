@@ -22,11 +22,13 @@ public class InventoryOutputBoundary implements InventoryOutputBoundaryInterface
     @Override
     public void presentInventoryContents(List<Item> items) {
         if (items.isEmpty()) {
-            System.out.println("Your inventory is empty.");
+            Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+            guiUtility.displayOutput("Your inventory is empty.");
         } else {
-            System.out.println("Items in your inventory:");
+            Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+            guiUtility.displayOutput("Items in your inventory:");
             for (Item item : items) {
-                System.out.println("- " + item.getName());
+                guiUtility.displayOutput("- " + item.getName());
             }
         }
     }

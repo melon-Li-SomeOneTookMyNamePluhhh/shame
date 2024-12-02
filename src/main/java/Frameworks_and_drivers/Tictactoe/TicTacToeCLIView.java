@@ -5,20 +5,25 @@ public class TicTacToeCLIView implements TicTacToeView {
     public void displayBoard(char[][] board) {
         for (char[] row : board) {
             for (char cell : row) {
-                System.out.print(cell + " ");
+                Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+                guiUtility.displayOutput(cell + " ");
             }
-            System.out.println();
+            Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+            guiUtility.displayOutput("");
         }
     }
 
     @Override
     public void displayWinner(char winner) {
         if (winner == 'D') {
-            System.out.println("The game is a draw, you need to restart it or you can choose to quit!");
+            Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+            guiUtility.displayOutput("The game is a draw, you need to restart it or you can choose to quit!");
         } else if(winner == 'O'){
-            System.out.println("You were defeated by this TicTacToe enemy.");
+            Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+            guiUtility.displayOutput("You were defeated by this TicTacToe enemy.");
         } else {
-            System.out.println("You defeated this TicTacToe enemy!");
+            Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+            guiUtility.displayOutput("You defeated this TicTacToe enemy!");
         }
     }
 

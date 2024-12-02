@@ -1,20 +1,14 @@
 package User_case.GUI;
 
-import interface_adaptor.GameGUI;
-
-/**
- * GUIActionPresenter connects the Use Case logic to the GUI layer.
- */
 public class GUIActionPresenter implements GUIOutputBoundry {
-    private final GameGUI gameGUI;
+    private final Frameworks_and_drivers.guiUtility guiUtility;
 
-    public GUIActionPresenter(GameGUI gameGUI) {
-        this.gameGUI = gameGUI;
+    public GUIActionPresenter(Frameworks_and_drivers.guiUtility guiUtility) {
+        this.guiUtility = guiUtility;
     }
 
     @Override
     public void displayResult(String message) {
-        // Forward the message to the GUI for display
-        gameGUI.displayResult(message);
+        guiUtility.displayOutput(message);
     }
 }

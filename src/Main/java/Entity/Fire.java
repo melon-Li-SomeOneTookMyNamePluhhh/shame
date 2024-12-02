@@ -11,7 +11,9 @@ public class Fire extends Enemy {
     @Override
     public void useSpecialAbility() {
         if (health < 3 && !usedSpecialAbility) {
-            System.out.println(name + " activates its special ability! All normal attacks become critical strikes.");
+
+            Frameworks_and_drivers.guiUtility guiUtility = new Frameworks_and_drivers.guiUtility();
+            guiUtility.displayOutput(name + " activates its special ability! All normal attacks become critical strikes.");
             usedSpecialAbility = true;
             convertedToCritical = true;
         }
