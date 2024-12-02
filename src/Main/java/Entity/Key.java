@@ -13,10 +13,6 @@ public class Key extends Item {
     @Override
     public int getDamage() {return damage;}
 
-    public String getElement() {
-        return element;
-    }
-
     public boolean isUsed() {return used;}
 
     public void setUsed(boolean used) {this.used = used;}

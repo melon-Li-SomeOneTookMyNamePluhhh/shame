@@ -1,6 +1,5 @@
-package Entity;
+package interface_adaptor;
 
-import User_case.PlayerUsercase.inputBoundaryInterface;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,9 +39,6 @@ public class ActionRepository {
                 return "You started a conversation.";
             case "exit":
                 return "You exited the area.";
-            case "drop":
-                User_case.PlayerUsercase.inputBoundaryInterface.drop();
-                return "You dropped an item.";
             case "putinbag":
                 User_case.PlayerUsercase.inputBoundaryInterface.putInBag();
                 return "You put an item into your bag.";
@@ -51,7 +47,7 @@ public class ActionRepository {
                 return "You retrieved an item from your bag.";
             case "inspectbag":
                 User_case.PlayerUsercase.inputBoundaryInterface.inspectBag();
-                return "You inspected your bag and found various items.";
+                break;
             case "use the key to open the door":
                 User_case.PlayerUsercase.inputBoundaryInterface.interact("key", "exit");
                 return "You interacted with the environment.";

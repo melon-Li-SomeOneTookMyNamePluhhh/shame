@@ -33,7 +33,6 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
      * Moves the player to the specified item's location within the current room.
      * @param itemName The name of the item the player wishes to walk to.
      */
-    @Override
     public void walkTo(String itemName) {
         RoomInteraction roomInteractor = new RoomInteraction(this.player.getCurrRoom());
         LevelInteractor levelInteractor = new LevelInteractor(this.player.getCurrRoom().getGameLevel());
@@ -52,7 +51,6 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
      * Picks up the specified item if the player's hands are free and the item is nearby.
      * @param itemName The name of the item the player wishes to pick up.
      */
-    @Override
     public void pickUp(String itemName) {
         if (player.getHolding() != null) {
             outputBoundary.displayMessage("You can't pick up an item when you are holding something.");
@@ -100,7 +98,6 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
     /**
      * Inspects the player's bag and lists the contents.
      */
-    @Override
     public void inspectBag() {
         List<Item> items = player.getInventory().getItemsInside();
         if (items.isEmpty()) {
@@ -114,7 +111,6 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
      * Retrieves an item from the player's bag and places it in their hand.
      * @param itemName The name of the item to retrieve from the bag.
      */
-    @Override
     public void getFromBag(String itemName) {
         if (player.getHolding() != null) {
             outputBoundary.displayMessage("You are already holding something. Put it in your bag or drop it first.");
@@ -151,7 +147,6 @@ public class PlayerInputBoundary implements inputBoundaryInterface {
      * @param holdingWhat The name of the item the player is holding.
      * @param itemAtLocation The name of the item at the player's location.
      */
-    @Override
     public void interact(String holdingWhat, String itemAtLocation) {
         if (player.getHolding() == null) {
             outputBoundary.displayMessage("You have nothing in your hand to interact with.");

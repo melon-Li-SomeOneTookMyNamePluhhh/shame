@@ -1,7 +1,6 @@
 package User_case.GUI;
 
-import Entity.ActionRepository;
-import java.util.Set;
+import interface_adaptor.ActionRepository;
 import Entity.Player;
 
 public class UserActionInteractor implements GUIInputBoundry {

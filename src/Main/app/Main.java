@@ -9,11 +9,12 @@ public class Main {
 
         // Use the builder to initialize and start the game
         appBuilder
+
+                .startGame()
                 .addTrainingRoom()
                 .addTrainingForest()
                 .lastHorizonValley()
                 .setupPlayerAndGUI()
-                .startGame()
                 .run();
     }
 }

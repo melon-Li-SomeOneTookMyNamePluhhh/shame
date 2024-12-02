@@ -1,24 +1,18 @@
 package src.Main.app;
 
-import Entity.Fire;
-import Entity.Grass;
-import Entity.Water;
-import Entity.GameLevelList;
-import Entity.Player;
-import Entity.Room;
-import Entity.Equipment;
-import Entity.Exit;
-import Entity.Key;
-import Entity.NPC;
+import Entity.*;
+import Entity.TicTacToe.TicTacToeBoard;
 
 import Frameworks_and_drivers.GUIUtility;
 
 import Frameworks_and_drivers.Tictactoe.TicTacToeCLIView;
 import Frameworks_and_drivers.Tictactoe.TicTacToeView;
 import Entity.NPC;
+import User_case.InventoryUseCase.InventoryManagementInteractor;
+import User_case.InventoryUseCase.InventoryOutputBoundary;
 import User_case.TicTacToe.BotMoveUseCase;
-import User_case.TicTacToe.PlayerMoveInputBoundary;
 import User_case.TicTacToe.PlayerMoveUseCase;
+import interface_adaptor.ActionRepository;
 import interface_adaptor.GameGUI;
 import interface_adaptor.GUIPresenter;
 import User_case.GUI.UserActionInteractor;
@@ -48,12 +42,17 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder addTrainingRoom() {
+        // initailize
         Key key = new Key("mail_box", "There is a key in the mail_box!", "a key lies on the floor", 1, "regular");
         Exit gate = new Exit("gate", "The exit is covered by a thick spider web", "There is a heavy gate in " +
                 "front of you.","regular");
-        Equipment sword = new Equipment("Dragonfang Sword",
+        Equipment sword = new Equipment("Dragon fang Sword",
                 "A weapon bestowed upon warriors chosen by the Dragon Clan. It holds the power of the dragon!",
                 "A sword is stuck on the wall", 4, null);
+        Inventory inventory = new Inventory(5);
+        InventoryOutputBoundary inventoryOutputBoundary = new InventoryOutputBoundary();
+        InventoryManagementInteractor InventoryManagementInteractor = new InventoryManagementInteractor(inventory, inventoryOutputBoundary);
+        InventoryManagementInteractor.addItem(sword);
 
         Room room1 = new Room("This is the training room for beginners!");
         RoomInteraction roomInteractor = new RoomInteraction(room1);
@@ -64,6 +63,9 @@ public class AppBuilder {
         LevelInteractor levelInteractor = new LevelInteractor(dungen);
         levelInteractor.addLevel(room1);
 
+        //room start
+        GUIUtility.displayOutput("As a gift for beginner, we decide to give you a Flame Dragon Bow to you!");
+        GUIUtility.displayOutput(ActionRepository.handleAction(GUIUtility.getValidInput("Try to inspect your bag to look up the bag!",ActionRepository.getValidActions())));
         return this;
     }
 
@@ -92,6 +94,8 @@ public class AppBuilder {
 
 
         Room room2 = new Room("This is the training forest for beginners!.");
+
+
         RoomInteraction roomInteractor = new RoomInteraction(room2);
         roomInteractor.addItem(FlameDragonBow);
         roomInteractor.addItem(Jack);
@@ -112,7 +116,7 @@ public class AppBuilder {
      */
     public AppBuilder lastHorizonValley() {
         ticTacToeRule();
-        //startTicTacToeGame();
+        startTicTacToeGame();
         Equipment ElfStaff = new Equipment("Elf Staff","A treasured artifact of the Elf Tribe, it " +
                 "wields the power to " + "command all flora in the world and unleashes immense vitality.",
                 "on the floor",5,"grass");
@@ -170,8 +174,8 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder startGame() {
-        presenter.displayResult("Hey, Frodo, you are inside the adventure to chase your magic ring!");
-        presenter.displayResult("Now, let's enter a training room to get used to this adventure!");
+        GUIUtility.displayOutput("Hey, Frodo, you are inside the adventure to chase your magic ring!");
+        GUIUtility.displayOutput("Now, let's enter a training room to get used to this adventure!");
         return this;
     }
 
@@ -188,38 +192,38 @@ public class AppBuilder {
         GUIUtility.displayOutput("The game is ready. Begin your adventure!");
     }
 
-//    private void startTicTacToeGame() {
-//        // Initialize the Tic Tac Toe game components
-//        TicTacToeBoard board = new TicTacToeBoard();
-//        TicTacToeView view = new TicTacToeCLIView();
-//        TicTacToePresenter presenter = new TicTacToePresenter(view);
-//        PlayerMoveUseCase useCase = new PlayerMoveUseCase(board, presenter);
-//        BotMoveUseCase botUseCase = new BotMoveUseCase(board, presenter);
-//        TicTacToeController controller = new TicTacToeController(useCase, botUseCase);
-//        Scanner scanner = new Scanner(System.in);
-//
-//        // Start the Tic Tac Toe game
-//        System.out.println("To exit the game at any time, type '9'. To start, type any other number.");
-//        int userCommand = scanner.nextInt();
-//
-//        while (userCommand != 9) {
-//            view.displayBoard(board.getBoard());
-//            System.out.println("Player " + board.getCurrentPlayer() + ", enter your move by typing the row then a space then column number. Your options are 0, 1, or 2.");
-//            int row = scanner.nextInt();
-//            int col = scanner.nextInt();
-//            controller.makeMove(row, col);
-//            if (board.checkWin() != '-' || board.isFull()) {
-//                break;
-//            }
-//            userCommand = row;
-//        }
-//
-//        view.displayBoard(board.getBoard());
-//        char winner = board.checkWin();
-//        if (winner != '-') {
-//            view.displayWinner(winner);
-//        } else {
-//            view.displayWinner('D'); // Draw
-//        }
-//    }
+    private void startTicTacToeGame() {
+        // Initialize the Tic Tac Toe game components
+        TicTacToeBoard board = new TicTacToeBoard();
+        TicTacToeView view = new TicTacToeCLIView();
+        TicTacToePresenter presenter = new TicTacToePresenter(view);
+        PlayerMoveUseCase useCase = new PlayerMoveUseCase(board, presenter);
+        BotMoveUseCase botUseCase = new BotMoveUseCase(board, presenter);
+        TicTacToeController controller = new TicTacToeController(useCase, botUseCase);
+        Scanner scanner = new Scanner(System.in);
+
+        // Start the Tic Tac Toe game
+        System.out.println("To exit the game at any time, type '9'. To start, type any other number.");
+        int userCommand = scanner.nextInt();
+
+        while (userCommand != 9) {
+            view.displayBoard(board.getBoard());
+            System.out.println("Player " + board.getCurrentPlayer() + ", enter your move by typing the row then a space then column number. Your options are 0, 1, or 2.");
+            int row = scanner.nextInt();
+            int col = scanner.nextInt();
+            controller.makeMove(row, col);
+            if (board.checkWin() != '-' || board.isFull()) {
+                break;
+            }
+            userCommand = row;
+        }
+
+        view.displayBoard(board.getBoard());
+        char winner = board.checkWin();
+        if (winner != '-') {
+            view.displayWinner(winner);
+        } else {
+            view.displayWinner('D'); // Draw
+        }
+    }
 }

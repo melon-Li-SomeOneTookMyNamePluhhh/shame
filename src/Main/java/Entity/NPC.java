@@ -10,7 +10,7 @@ public class NPC extends Item {
     // Constructor for Item.NPC that calls the Item.Item constructor
     public NPC(String name, String description, String floorDescription, String Riddle, String Answer, String Speech) {
         // Call the constructor of Item.Item class with parameters
-        super(name, description, floorDescription,"NPC"); // Pass values to the superclass constructor
+        super(name, description, floorDescription,"NPC", "regular"); // Pass values to the superclass constructor
         this.Riddle = Riddle;
         this.Answer = Answer;
         this.Speech = Speech;
@@ -18,7 +18,7 @@ public class NPC extends Item {
     // Overloaded constructor that gets the riddle directly from the api call
     public NPC(String name, String description, String floorDescription, String Speech) {
         // Call the constructor of Item.Item class with parameters
-        super(name, description, floorDescription,"NPC"); // Pass values to the superclass constructor
+        super(name, description, floorDescription,"NPC", "regular" ); // Pass values to the superclass constructor
 
         // Get the riddle and answer from RiddleFetcher
         String[] riddleData = RiddleFetcher.fetchRiddleAndAnswer();
