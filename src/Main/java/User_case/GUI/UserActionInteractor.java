@@ -2,12 +2,15 @@ package User_case.GUI;
 
 import Entity.ActionRepository;
 import java.util.Set;
+import Entity.Player;
 
 public class UserActionInteractor implements GUIInputBoundry {
     private final GUIOutputBoundry outputBoundary;
+    private final Player player;
 
-    public UserActionInteractor(GUIOutputBoundry outputBoundary) {
+    public UserActionInteractor(GUIOutputBoundry outputBoundary, Player player) {
         this.outputBoundary = outputBoundary;
+        this.player = player;
     }
 
     @Override
