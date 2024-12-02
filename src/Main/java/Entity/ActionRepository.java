@@ -8,14 +8,14 @@ public class ActionRepository {
     // Method to return all valid actions
     public static Set<String> getValidActions() {
         Set<String> validActions = new HashSet<>();
-        validActions.add("walk to");
-        validActions.add("pick up");
+        validActions.add("walkto");
+        validActions.add("pickup");
         validActions.add("speech");
         validActions.add("exit");
         validActions.add("drop");
-        validActions.add("put in bag");
-        validActions.add("get from bag");
-        validActions.add("inspect bag");
+        validActions.add("putinbag");
+        validActions.add("getfrombag");
+        validActions.add("inspectbag");
         validActions.add("interact");
         validActions.add("exist");
         validActions.add("open");
@@ -28,28 +28,33 @@ public class ActionRepository {
     // Method to handle each valid action and return a corresponding string
     public static String handleAction(String action)
     {
-        switch (action.toLowerCase()) {
-            case "walk to":
-
+        String in = action.toLowerCase();
+        switch (in) {
+            case "walkto":
+                User_case.PlayerUsercase.inputBoundaryInterface.walkTo(in);
                 return "You walk towards your destination.";
-            case "pick up":
+            case "pickup":
+                User_case.PlayerUsercase.inputBoundaryInterface.pickUp(in);
                 return "You picked up an item.";
             case "speech":
                 return "You started a conversation.";
             case "exit":
                 return "You exited the area.";
             case "drop":
+                User_case.PlayerUsercase.inputBoundaryInterface.drop();
                 return "You dropped an item.";
-            case "put in bag":
+            case "putinbag":
+                User_case.PlayerUsercase.inputBoundaryInterface.putInBag();
                 return "You put an item into your bag.";
-            case "get from bag":
+            case "getfrombag":
+                User_case.PlayerUsercase.inputBoundaryInterface.getFromBag(in);
                 return "You retrieved an item from your bag.";
-            case "inspect bag":
+            case "inspectbag":
+                User_case.PlayerUsercase.inputBoundaryInterface.inspectBag();
                 return "You inspected your bag and found various items.";
-            case "interact":
+            case "use the key to open the door":
+                User_case.PlayerUsercase.inputBoundaryInterface.interact("key", "exit");
                 return "You interacted with the environment.";
-            case "exist":
-                return "You exist in this moment.";
             case "open":
                 return "You opened the object.";
             case "key":
