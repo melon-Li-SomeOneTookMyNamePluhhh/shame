@@ -1,0 +1,25 @@
+Principle1: Equitable Use
+	. This principle does not apply to this project as its a text based adventure game and disabled people like blind people are unable to play at all as they cannot see. However, if with enough resource and a feature of reading the displayed text can be implemented. This principle could be adhered.
+
+Principle2: Flexibility in Use
+	. Since all user need to do to play this game is to input text, the game does not test user's reaction and thus user can play the game by their own pace. The game also allows the user to do a flexible operation, such as attempting to lift the NPC or hitting enemy with a key.
+
+Principle 3: Simple and Intuitive Use
+	. The game provides hint for player if they input an invalid action. Since all player needs to do is to input text commands, the game adhere this principle well.
+
+Principle 4: Perceptible Information
+	. Since the game is a text based adventure game and cannot display image, it cannot adhere this feature.  Nor is this principle able to be adhered in future as that would completely change the purpose of the game.
+
+Principle 5: Tolerance for Error
+	. The GUI of this game can filter mistake operations very well and will show player hint when error happens. The game will not crash when a weird command is inputted.
+
+Principle 6: Low Physical Effort
+	. Since the core of this game is to interpret and execute commands input by player. It cannot adhere this principle as making mistakes and learning proper command is one of the feature of this game to bring "fun" to those who enjoyed it this way.
+
+Principle 7: Size and Space for Approach and Use
+	. This principle is well adhered since the GUI only has one textbox to input command and one button to confirm the command.
+
+
+The program is targeted to people who enjoys video game, especially those who likes text based adventure game as it replicates the old classic text based adventure game experience.
+
+The program is less likely to be used by people who enjoys game with better visual feature.Or those who are unable to read due to health or other issues.
