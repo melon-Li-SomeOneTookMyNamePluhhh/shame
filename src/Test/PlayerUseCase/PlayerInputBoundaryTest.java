@@ -11,19 +11,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PlayerInputBoundaryTest {
-    @BeforeEach
-    void setUp() {
-        Item item = new Exit("exit", "", "this is exit", "regular");
-        Enemy enemy = new Fire("enemy", "this is enemy");
-        Room room = new Room("room");
-        GameLevelList levels = new GameLevelList();
-        Player player = new Player(10, 10, 5, room);
-        RoomItemAdder adder = new RoomItemAdder(room);
-        adder.addItem(item);
-        LevelAdder levelAdder = new LevelAdder(levels);
-        PlayerInputBoundary playerActions = new PlayerInputBoundary(player, new PlayerOutBoundary());
-
-    }
 
     @Test
     void walkTo() {
@@ -44,22 +31,24 @@ class PlayerInputBoundaryTest {
 
     @Test
     void pickUp() {
-    }
-
-    @Test
-    void interact() {
-    }
-
-    @Test
-    void inspectBag() {
-    }
-
-    @Test
-    void getFromBag() {
-    }
-
-    @Test
-    void putInBag() {
+        Item item = new Exit("exit", "", "this is exit", "regular");
+        Item item1 = new Key("key", "this key", "ground key", 1, "regular");
+        Enemy enemy = new Fire("enemy", "this is enemy");
+        Room room = new Room("room");
+        GameLevelList levels = new GameLevelList();
+        RoomItemAdder adder = new RoomItemAdder(room);
+        adder.addItem(item);
+        adder.addItem(item1);
+        Player player = new Player(10, 10, 5, room);
+        LevelAdder levelAdder = new LevelAdder(levels);
+        levelAdder.addLevel(room);
+        levelAdder.addPlayer(player);
+        PlayerInputBoundary playerActions = new PlayerInputBoundary(player, new PlayerOutBoundary());
+        playerActions.walkTo("key");
+        assertEquals(item1, levels.getPlayer().getLocation());
+        playerActions.pickUp("key");
+        assertEquals(null, levels.getPlayer().getLocation());
+        assertEquals(item1, levels.getPlayer().getHolding());
     }
 
     @Test
