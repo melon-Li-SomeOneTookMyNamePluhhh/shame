@@ -13,7 +13,7 @@ public class Main {
                 .startGame()
                 .addTrainingRoom()
                 .addTrainingForest()
-                .lastHorizonValley()
+                //.lastHorizonValley()
                 .setupPlayerAndGUI()
                 .run();
     }
