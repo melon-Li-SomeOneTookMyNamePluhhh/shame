@@ -34,6 +34,9 @@ public class actionRepositor {
         validActions.add("dragon fang sword");
         validActions.add("use the key in your hand");
         validActions.add("walk to the spiderweb");
+        validActions.add("walk to the old man");
+        validActions.add("interact the old man");
+        validActions.add("walk to wand of water");
     }
 
     // Instance method to return all valid actions
@@ -48,6 +51,9 @@ public class actionRepositor {
             // case "walk to":
                 // playerInputBoundary.walkTo(in);
                 // break;
+            case "interact the old man":
+                break;
+
             case "walk to the mailbox":
                 playerInputBoundary.walkTo("mailbox");
                 break;
@@ -57,6 +63,12 @@ public class actionRepositor {
             //case "pickup":
                 //playerInputBoundary.pickUp(in);
                 //break;
+            case "walk to the old man":
+                playerInputBoundary.walkTo("NPC");
+                break;
+            case "walk to wand of water":
+                playerInputBoundary.walkTo("Equipment");
+                break;
             case "speech":
                 break;
             case "exit":

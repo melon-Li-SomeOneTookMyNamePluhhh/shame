@@ -126,9 +126,9 @@ public class AppBuilder {
         Equipment FlameDragonBow = new Equipment("Flame Dragon Bow","A legendary weapon bestowed by the Flame Dragon " +
                 "itself, each bow is engulfed in roaring flames. When fired, it burns as fiercely as the dragon's " +
                 "breath.","on the floor",3,"fire");
-        NPC Oldman = new NPC("Oldman","An elderly scavenger","by the side of the forest",
+        Item Oldman = new NPC("NPC","An elderly scavenger","by the side of the forest",
                 "One man’s scrap is another’s treasure. What will your story leave behind, traveler?");
-        Equipment wandofwater = new Equipment("Wand of Water","A crystal wand etched with glowing " +
+        Equipment wandofwater = new Equipment("Equipment","A crystal wand etched with glowing " +
                 "blue runes, it channels the tranquil yet powerful essence of water, controlling tides and unleashing " +
                 "elemental waves.","on the grass",4,"water");
         Grass Clover = new Grass ("Clover","is a sly manipulator who thrives on deception, using charm " +
@@ -149,6 +149,7 @@ public class AppBuilder {
         LevelInteractor levelInteractor = new LevelInteractor(dungen);
         levelInteractor.addLevel(room2);
         Room trainningroom = dungen.getLevels().get(1);
+        player.setCurrRoom(trainningroom);
 
         PlayerOutBoundary outputBoundary = new PlayerOutBoundary();
         PlayerInputBoundary inputBoundary = new PlayerInputBoundary(player, outputBoundary);
@@ -173,6 +174,7 @@ public class AppBuilder {
                 "closer, you discover it's a Wand of Water. Quickly, type 'walk to wand of water' to take a " +
                 "closer look!", actionRepositor.getValidActions());
         actionRepository.handleAction(action3);
+
         //triger battle
         guiUtility.displayOutput("You rid the land of evil, deeply moving the Spirit of the Forest. In gratitude, it " +
                 "decides to grant you an additional 10 health points to help you face the final trial. Health +10");
