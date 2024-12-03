@@ -22,6 +22,7 @@ public class RoomInteraction{
         roomBattleAdder = new RoomBattleAdder(room);
         roomBattleRemover = new RoomBattleRemover(room);
         roomBattleChecker = new RoomBattleChecker(room);
+        roomBattleRemover = new RoomBattleRemover(room);
         roomViewer = new RoomViewer(room);
         roomPickUp = new RoomPickUp(room);
     }
